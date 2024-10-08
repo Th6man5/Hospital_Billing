@@ -38,7 +38,7 @@
     <div class="p-4 sm:ml-64">
         <div class="p-4 mt-14">
             <div class="flex items-center justify-between">
-                <h1>Dokter</h1>
+                <h1>Daftar Layanan</h1>
                 <a href="/grancy/src/admin/adminrooms_create.php" class="bg-blues opacity-95 text-white btn hover:bg-blues hover:opacity-100">Add Room</a>
             </div>
             <div class="overflow-x-auto">
@@ -47,26 +47,18 @@
                     <thead>
                         <tr class="bg-blues2">
                             <th>No</th>
-                            <th>Nama</th>
-                            <th>Jenis Kelamin</th>
-                            <th>Tanggal Lahir</th>
-                            <th>No Telepon</th>
-                            <th>Email</th>
-                            <th>Alamat</th>
-                            <th>Spesialis</th>
+                            <th>Nama Layanan</th>
+                            <th>Harga</th>
+                            <th>Nama Dokter</th>
                             <th class="text-center">Action</th>
                         </tr>
                     </thead>
                     <tbody>
                         <tr>
                             <th>1</th>
-                            <td>Cristiano</td>
-                            <td>Pria</td>
-                            <td>17-08-1945</td>
-                            <td>087762728242</td>
-                            <td>cristiano@gmail.com</td>
-                            <td>Jl. Melati No. 123, Keputih</td>
-                            <td>Penyakit Dalam</td>
+                            <td>Pemeriksaan Lab</td>
+                            <td>200.000</td>
+                            <td>Yanti</td>
                             <td class="flex gap-x-4 justify-center">
                                 <a href="/grancy/src/admin/adminrooms_edit.php?id=' . $row['room_id'] . '" class="btn bg-yellow hover:shadow-md hover:bg-yellow group">
                                     <i class="bi bi-pencil-square  transition-all"></i>
@@ -78,13 +70,9 @@
                         </tr>
                         <tr>
                             <th>2</th>
+                            <td>Pemeriksaan Radiologi</td>
+                            <td>250.000</td>
                             <td>Yanti</td>
-                            <td>Wanita</td>
-                            <td>17-08-1946</td>
-                            <td>0848984958</td>
-                            <td>Yanti@gmail.com</td>
-                            <td>Jl. Melati No. 124, Keputih</td>
-                            <td>Lab & Radiologi</td>
                             <td class="flex gap-x-4 justify-center">
                                 <a href="/grancy/src/admin/adminrooms_edit.php?id=' . $row['room_id'] . '" class="btn bg-yellow hover:shadow-md hover:bg-yellow group">
                                     <i class="bi bi-pencil-square  transition-all"></i>
