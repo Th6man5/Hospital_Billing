@@ -1290,12 +1290,17 @@ html {
 
 .bg-nav {
   --tw-bg-opacity: 1;
-  background-color: rgb(242 240 226 / var(--tw-bg-opacity));
+  background-color: rgb(145 216 228 / var(--tw-bg-opacity));
 }
 
 .bg-red {
   --tw-bg-opacity: 1;
   background-color: rgb(255 0 0 / var(--tw-bg-opacity));
+}
+
+.bg-sidenav {
+  --tw-bg-opacity: 1;
+  background-color: rgb(145 216 228 / var(--tw-bg-opacity));
 }
 
 .bg-yellow {
@@ -1358,7 +1363,7 @@ html {
 
 .text-white {
   --tw-text-opacity: 1;
-  color: rgb(255 255 255 / var(--tw-text-opacity));
+  color: rgb(250 255 175 / var(--tw-text-opacity));
 }
 
 .opacity-95 {
@@ -1411,7 +1416,7 @@ html {
 
 .hover\:text-white:hover {
   --tw-text-opacity: 1;
-  color: rgb(255 255 255 / var(--tw-text-opacity));
+  color: rgb(250 255 175 / var(--tw-text-opacity));
 }
 
 .hover\:opacity-100:hover {
@@ -1464,6 +1469,6 @@ html {
 @media (prefers-color-scheme: dark) {
   .group:hover .dark\:group-hover\:text-nav {
     --tw-text-opacity: 1;
-    color: rgb(242 240 226 / var(--tw-text-opacity));
+    color: rgb(145 216 228 / var(--tw-text-opacity));
   }
 }

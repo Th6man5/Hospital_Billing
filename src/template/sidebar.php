@@ -1,17 +1,17 @@
- <nav class="fixed top-0 z-50 w-full bg-nav border-b border-gray-200 dark:bg-gray-800 dark:border-gray-700">
+ <nav class="fixed top-0 z-50 w-full bg bg-nav border-b border-gray-200 dark:bg-gray-800 dark:border-gray-700">
      <div class="px-3 py-3 lg:px-5 lg:pl-3">
          <div class="flex items-center justify-between">
              <div class="flex items-center justify-start rtl:justify-end">
                  <a href="http://localhost/hospital_billing/src/main.php" class="flex ms-2 md:me-24">
-                     <span class="self-center text-xl font-semibold sm:text-2xl whitespace-nowrap text-black">GRANCY HOTEL</span>
+                     <span class="self-center text-xl font-semibold sm:text-2xl whitespace-nowrap text-black">Hospital Admin</span>
                  </a>
              </div>
          </div>
      </div>
  </nav>
 
- <aside id="logo-sidebar" class="fixed top-0 left-0 z-40 w-64 h-screen pt-20 transition-transform -translate-x-full bg-nav border-r border-gray-200 sm:translate-x-0 dark:bg-gray-800 dark:border-gray-700" aria-label="Sidebar">
-     <div class="h-full px-3 pb-4 overflow-y-auto bg-nav dark:bg-gray-800">
+ <aside id="logo-sidebar" class="fixed top-0 left-0 z-40 w-64 h-screen pt-20 transition-transform -translate-x-full bg bg-sidenav border-r border-gray-200 sm:translate-x-0 dark:bg-gray-800 dark:border-gray-700" aria-label="Sidebar">
+     <div class="h-full px-3 pb-4 overflow-y-auto bg bg-sidenav dark:bg-gray-800">
          <ul class="space-y-2 font-medium">
              <li>
                  <a href="http://localhost/hospital_billing/src/dokter/dokter.php" class="flex items-center p-2 text-gray-900 rounded-lg text-black hover:bg-black hover:text-white group">
