@@ -57,7 +57,7 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <tr>
+                        <!-- <tr>
                             <th>1</th>
                             <td>Mulyono</td>
                             <td>08989898922</td>
@@ -73,7 +73,34 @@
                                     <i class="bi bi-trash-fill  transition-all"></i>
                                 </a>
                             </td>
-                        </tr>
+                        </tr> -->
+                        <?php
+                        include('../database/database.php');
+                        $sql = "SELECT p.id_pasien, p.nama, p.no_telpon, p.jenis_kelamin, p.tempat_lahir, p.tanggal_lahir, i.id_insuransi
+                                    FROM pasien p LEFT JOIN insuransi i ON p.id_insuransi = i.id_insuransi";
+                        $result = mysqli_query($conn, $sql);
+                        if (mysqli_num_rows($result) > 0) {
+                            while ($row = mysqli_fetch_assoc($result)) {
+                                echo '<tr>
+                                <th>' . $row['id_pasien'] . '</th>
+                                <td>' . $row['nama'] . '</td>
+                                <td>' . $row['no_telpon'] . '</td>
+                                <td>' . $row['jenis_kelamin'] . '</td>
+                                <td>' . $row['tempat_lahir'] . '</td>
+                                <td>' . $row['tanggal_lahir'] . '</td>
+                                <td>' . (!empty($row['id_insuransi']) ? 'ada' : '') . '</td>
+                                <td class="flex gap-x-4 justify-center">
+                                    <a href="/grancy/src/pasien/pasien_edit.php?id=' . $row['id_pasien'] . '" class="btn bg-yellow hover:shadow-md hover:bg-yellow group">
+                                        <i class="bi bi-pencil-square  transition-all"></i>
+                                    </a>
+                                    <a onclick="return confirm(\'Are you sure you want to delete this room type?\');" href="/grancy/src/pasien/pasien_delete.php?id=' . $row['id_pasien'] . '" class="btn bg-red hover:shadow-md hover:bg-red group">
+                                        <i class="bi bi-trash-fill  transition-all"></i>
+                                    </a>
+                                </td>
+                                </tr>';
+                            }
+                        }
+                        ?>
                     </tbody>
                 </table>
             </div>
