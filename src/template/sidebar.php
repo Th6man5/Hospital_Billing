@@ -2,7 +2,7 @@
      <div class="px-3 py-3 lg:px-5 lg:pl-3">
          <div class="flex items-center justify-between">
              <div class="flex items-center justify-start rtl:justify-end">
-                 <a href="" class="flex ms-2 md:me-24">
+                 <a href="http://localhost/hospital_billing/src/main.php" class="flex ms-2 md:me-24">
                      <span class="self-center text-xl font-semibold sm:text-2xl whitespace-nowrap text-black">GRANCY HOTEL</span>
                  </a>
              </div>
@@ -23,7 +23,7 @@
                  </a>
              </li>
              <li>
-                 <a href="http://localhost/grancy/src/admin/adminusers.php" class="flex items-center p-2 text-gray-900 rounded-lg text-black hover:bg-black hover:text-white group">
+                 <a href="http://localhost/hospital_billing/src/pasien/pasien.php" class="flex items-center p-2 text-gray-900 rounded-lg text-black hover:bg-black hover:text-white group">
                      <svg class="flex-shrink-0 w-5 h-5 text-gray-500 transition duration-75 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-nav" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 18">
                          <path d="M14 2a3.963 3.963 0 0 0-1.4.267 6.439 6.439 0 0 1-1.331 6.638A4 4 0 1 0 14 2Zm1 9h-1.264A6.957 6.957 0 0 1 15 15v2a2.97 2.97 0 0 1-.184 1H19a1 1 0 0 0 1-1v-1a5.006 5.006 0 0 0-5-5ZM6.5 9a4.5 4.5 0 1 0 0-9 4.5 4.5 0 0 0 0 9ZM8 10H5a5.006 5.006 0 0 0-5 5v2a1 1 0 0 0 1 1h11a1 1 0 0 0 1-1v-2a5.006 5.006 0 0 0-5-5Z" />
                      </svg>
