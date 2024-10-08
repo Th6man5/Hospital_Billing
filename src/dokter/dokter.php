@@ -38,7 +38,7 @@
     <div class="p-4 sm:ml-64">
         <div class="p-4 mt-14">
             <div class="flex items-center justify-between">
-                <h1>Pasien</h1>
+                <h1>Dokter</h1>
                 <a href="/grancy/src/admin/adminrooms_create.php" class="bg-blues opacity-95 text-white btn hover:bg-blues hover:opacity-100">Add Room</a>
             </div>
             <div class="overflow-x-auto">
@@ -48,23 +48,25 @@
                         <tr class="bg-blues2">
                             <th>No</th>
                             <th>Nama</th>
-                            <th>No Telepon</th>
                             <th>Jenis Kelamin</th>
-                            <th>Tempat Lahir</th>
                             <th>Tanggal Lahir</th>
-                            <th>Insuransi</th>
+                            <th>No Telepon</th>
+                            <th>Email</th>
+                            <th>Alamat</th>
+                            <th>Spesialis</th>
                             <th class="text-center">Action</th>
                         </tr>
                     </thead>
                     <tbody>
                         <tr>
                             <th>1</th>
-                            <td>Mulyono</td>
-                            <td>08989898922</td>
+                            <td>Cristiano</td>
                             <td>Pria</td>
-                            <td>Jakarta</td>
                             <td>17-08-1945</td>
-                            <td>Ada</td>
+                            <td>087762728242</td>
+                            <td>cristiano@gmail.com</td>
+                            <td>Jl. Melati No. 123, Keputih</td>
+                            <td>Penyakit Dalam</td>
                             <td class="flex gap-x-4 justify-center">
                                 <a href="/grancy/src/admin/adminrooms_edit.php?id=' . $row['room_id'] . '" class="btn bg-yellow hover:shadow-md hover:bg-yellow group">
                                     <i class="bi bi-pencil-square  transition-all"></i>
