@@ -23,14 +23,14 @@ module.exports = {
       green: "#00B01C",
     },
   },
-  // daisyui: {
-  //   themes: [
-  //     {
-  //       mytheme: {
-  //         primary: "#00113D",
-  //       },
-  //     },
-  //   ],
-  // },
+  daisyui: {
+    themes: [
+      {
+        mytheme: {
+          primary: "#00113D",
+        },
+      },
+    ],
+  },
   plugins: [require("daisyui")],
 };
