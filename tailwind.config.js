@@ -12,15 +12,17 @@ module.exports = {
       },
     },
     colors: {
-      nav: "#F2F0E2",
+      nav: "#91D8E4",
+      sidenav: "#91D8E4",
       blues: "#00113D",
       blues2: "#4BBCC7",
       yellow: "#FFD700",
-      grey: "#EBEBEB",
+      grey: "#FAFFAF",
       black: "#000000",
-      white: "#FFFFFF",
+      white: "#FAFFAF",
       red: "#FF0000",
       green: "#00B01C",
+
     },
   },
   daisyui: {
