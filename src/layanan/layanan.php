@@ -54,34 +54,30 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <tr>
-                            <th>1</th>
-                            <td>Pemeriksaan Lab</td>
-                            <td>200.000</td>
-                            <td>Yanti</td>
-                            <td class="flex gap-x-4 justify-center">
-                                <a href="/grancy/src/admin/adminrooms_edit.php?id=' . $row['room_id'] . '" class="btn bg-yellow hover:shadow-md hover:bg-yellow group">
-                                    <i class="bi bi-pencil-square  transition-all"></i>
-                                </a>
-                                <a class="btn bg-red hover:shadow-md hover:bg-red group">
-                                    <i class="bi bi-trash-fill  transition-all"></i>
-                                </a>
-                            </td>
-                        </tr>
-                        <tr>
-                            <th>2</th>
-                            <td>Pemeriksaan Radiologi</td>
-                            <td>250.000</td>
-                            <td>Yanti</td>
-                            <td class="flex gap-x-4 justify-center">
-                                <a href="/grancy/src/admin/adminrooms_edit.php?id=' . $row['room_id'] . '" class="btn bg-yellow hover:shadow-md hover:bg-yellow group">
-                                    <i class="bi bi-pencil-square  transition-all"></i>
-                                </a>
-                                <a class="btn bg-red hover:shadow-md hover:bg-red group">
-                                    <i class="bi bi-trash-fill  transition-all"></i>
-                                </a>
-                            </td>
-                        </tr>
+                        <?php
+                        include('../database/database.php');
+                        $sql = "SELECT l.id_layanan, l.nama_layanan, l.harga, d.nama AS nama_dokter
+                                    FROM layanan l JOIN dokter d ON l.id_dokter = d.id_dokter";
+                        $result = mysqli_query($conn, $sql);
+                        if (mysqli_num_rows($result) > 0) {
+                            while ($row = mysqli_fetch_assoc($result)) {
+                                echo '<tr>
+                                <th>' . $row['id_layanan'] . '</th>
+                                <td>' . $row['nama_layanan'] . '</td>
+                                <td>' . number_format($row['harga']) . '</td>
+                                <td>' . $row['nama_dokter'] . '</td>
+                                <td class="flex gap-x-4 justify-center">
+                                    <a href="/grancy/src/layanan/layanan_edit.php?id=' . $row['id_layanan'] . '" class="btn bg-yellow hover:shadow-md hover:bg-yellow group">
+                                        <i class="bi bi-pencil-square  transition-all"></i>
+                                    </a>
+                                    <a onclick="return confirm(\'Are you sure you want to delete this room type?\');" href="/grancy/src/layanan/layanan_delete.php?id=' . $row['id_layanan'] . '" class="btn bg-red hover:shadow-md hover:bg-red group">
+                                        <i class="bi bi-trash-fill  transition-all"></i>
+                                    </a>
+                                </td>
+                                </tr>';
+                            }
+                        }
+                        ?>
                     </tbody>
                 </table>
             </div>
