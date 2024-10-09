@@ -13,6 +13,7 @@ module.exports = {
     },
     colors: {
       nav: "#91D8E4",
+      click: "#374151",
       sidenav: "#91D8E4",
       blues: "#00113D",
       blues2: "#4BBCC7",
@@ -22,7 +23,6 @@ module.exports = {
       white: "#FAFFAF",
       red: "#FF0000",
       green: "#00B01C",
-
     },
   },
   daisyui: {
