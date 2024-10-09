@@ -39,7 +39,7 @@
         <div class="p-4 mt-14">
             <div class="flex items-center justify-between">
                 <h1>Dokter</h1>
-                <a href="/hospital_billing/src/admin/adminrooms_create.php" class="bg-blues opacity-95 text-white btn hover:bg-blues hover:opacity-100">Tambah Dokter</a>
+                <a href="/hospital_billing/src/dokter/dokter_create.php" class="bg-blues opacity-95 text-white btn hover:bg-blues hover:opacity-100">Tambah Dokter</a>
             </div>
             <div class="overflow-x-auto">
                 <table class="table">
