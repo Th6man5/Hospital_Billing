@@ -59,6 +59,40 @@
                         </tr>
                     </thead>
                     <tbody>
+                        <?php
+                        include('../database/database.php');
+                        $sql = "SELECT transaksi.id_transaksi, pasien.nama AS nama_pasien,layanan.nama_layanan,
+                                        dokter.nama AS nama_dokter, transaksi.jenis_pembayaran, transaksi.biaya_layanan,
+                                        transaksi.potongan_harga, transaksi.tanggal, transaksi.waktu
+                                        FROM transaksi
+                                        JOIN pasien ON transaksi.id_pasien = pasien.id_pasien
+                                        JOIN layanan ON transaksi.id_layanan = layanan.id_layanan
+                                        JOIN dokter ON layanan.id_dokter = dokter.id_dokter;";
+                        $result = mysqli_query($conn, $sql);
+                        if (mysqli_num_rows($result) > 0) {
+                            while ($row = mysqli_fetch_assoc($result)) {
+                                echo '<tr>
+                                 <th>' . $row['id_transaksi'] . '</th>
+                                    <td>' . $row['nama_pasien'] . '</td>
+                                    <td>' . $row['nama_dokter'] . '</td>
+                                    <td>' . $row['nama_layanan'] . '</td>
+                                    <td>' . $row['jenis_pembayaran'] . '</td>
+                                    <td>' . number_format($row['biaya_layanan']) . '</td> 
+                                    <td>' . $row['potongan_harga'] . '</td>
+                                    <td>' . $row['tanggal'] . '</td>
+                                    <td>' . $row['waktu'] . '</td>
+                                <td class="flex gap-x-4 justify-center">
+                                    <a href="/grancy/src/transaksi/transaksi_edit.php?id=' . $row['id_transaksi'] . '" class="btn bg-yellow hover:shadow-md hover:bg-yellow group">
+                                        <i class="bi bi-pencil-square  transition-all"></i>
+                                    </a>
+                                    <a onclick="return confirm(\'Are you sure you want to delete this room type?\');" href="/grancy/src/transaksi/transaksi_delete.php?id=' . $row['id_transaksi'] . '" class="btn bg-red hover:shadow-md hover:bg-red group">
+                                        <i class="bi bi-trash-fill  transition-all"></i>
+                                    </a>
+                                </td>
+                                </tr>';
+                            }
+                        }
+                        ?>
                         <tr>
                             <th>1</th>
                             <td>Mulyono</td>

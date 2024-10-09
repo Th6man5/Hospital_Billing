@@ -1,14 +1,17 @@
 CREATE DATABASE hospital_billing;
 
 CREATE TABLE pasien (
-	id_pasien  INT AUTO_INCREMENT,
+    id_pasien INT AUTO_INCREMENT,
     nama VARCHAR(255) NOT NULL,
     no_telpon VARCHAR(11) NOT NULL,
-    jenis_kelamin ENUM('L', 'P', 'U') NOT NULL,
+    jenis_kelamin VARCHAR(255),
     tempat_lahir VARCHAR(255),
     tanggal_lahir DATE,
-    CONSTRAINT pk_pasien PRIMARY KEY (id_pasien)
+    id_insuransi INT,
+    CONSTRAINT pk_pasien PRIMARY KEY (id_pasien),
+    CONSTRAINT fk_insuransi FOREIGN KEY (id_insuransi) REFERENCES insuransi(id_insuransi)
 );
+
 
 CREATE TABLE insuransi (
 	id_insuransi INT AUTO_INCREMENT,
@@ -34,6 +37,28 @@ CREATE TABLE dokter (
     spesialis VARCHAR(100)
 );
 
+CREATE TABLE layanan (
+    id_layanan INT PRIMARY KEY AUTO_INCREMENT,
+    nama_layanan VARCHAR(255) NOT NULL,
+    harga DECIMAL(10, 2) NOT NULL,
+    id_dokter INT,
+    FOREIGN KEY (id_dokter) REFERENCES dokter(id_dokter) ON DELETE SET NULL
+);
+
+CREATE TABLE transaksi (
+    id_transaksi INT PRIMARY KEY AUTO_INCREMENT,
+    id_pasien INT NOT NULL,
+    id_layanan INT NOT NULL,
+    jenis_pembayaran VARCHAR(50) NOT NULL,
+    biaya_layanan DECIMAL(10, 2) NOT NULL,
+    potongan_harga DECIMAL(5, 2),
+    tanggal DATE NOT NULL,
+    waktu TIME NOT NULL,
+    FOREIGN KEY (id_pasien) REFERENCES pasien(id_pasien) ON DELETE CASCADE,
+    FOREIGN KEY (id_layanan) REFERENCES layanan(id_layanan) ON DELETE CASCADE
+);
+
+
 
 --ISI TABEL INSURANSI
 INSERT INTO insuransi (no_polis, nama_perusahaan, alamat_perusahaan, tanggal_polis, no_telepon_perusahaan, tanggal_polis_awal, tanggal_polis_akhir, jenis_pertanggungan) VALUES
@@ -58,3 +83,20 @@ INSERT INTO dokter (nama, jenis_kelamin, tanggal_lahir, no_telepon, email, alama
 ('Dr. Budi Santoso', 'L', '1978-10-10', '082233445566', 'budi.santoso@gmail.com', 'Jl. Kenanga No. 7, Surabaya', 'Kardiologi'),
 ('Dr. Dewi Lestari', 'P', '1990-12-05', '087654321009', 'dewi.lestari@gmail.com', 'Jl. Kamboja No. 9, Medan', 'Dermatologi'),
 ('Dr. Rudi Prasetyo', 'L', '1987-08-25', '081122334455', 'rudi.prasetyo@gmail.com', 'Jl. Anggrek No. 3, Semarang', 'Ortopedi');
+
+--ISI TABEL LAYANAN
+INSERT INTO layanan (nama_layanan, harga, id_dokter) VALUES
+('Konsultasi Umum', 150000.00, 1),
+('Operasi Bedah Umum', 5000000.00, 1),
+('Pemeriksaan Jantung', 300000.00, 3),
+('Perawatan Kulit', 250000.00, 4),
+('Pemeriksaan Anak', 200000.00, 2);
+
+--ISI TABEL TRANSAKSI
+INSERT INTO transaksi (id_pasien, id_layanan, jenis_pembayaran, biaya_layanan, potongan_harga, tanggal, waktu) 
+VALUES
+(1, 1, 'Qris', 150000.00, 10, '2024-10-01', '10:30:00'),
+(2, 2, 'Tunai', 200000.00, 10, '2024-10-02', '14:45:00'),
+(3, 3, 'Tunai', 300000.00, 10, '2024-10-03', '09:15:00'),
+(4, 1, 'Tunai', 150000.00, 10, '2024-10-04', '11:00:00'),
+(5, 4, 'Qris', 500000.00, 10, '2024-10-05', '16:30:00');
