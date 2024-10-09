@@ -653,6 +653,12 @@ html {
     --tw-bg-opacity: 1;
     background-color: var(--fallback-b2,oklch(var(--b2)/var(--tw-bg-opacity)));
   }
+
+  .table-zebra tr.hover:hover,
+  .table-zebra tr.hover:nth-child(even):hover {
+    --tw-bg-opacity: 1;
+    background-color: var(--fallback-b3,oklch(var(--b3)/var(--tw-bg-opacity)));
+  }
 }
 
 .btn {
@@ -1308,6 +1314,14 @@ html {
   background-color: rgb(255 215 0 / var(--tw-bg-opacity));
 }
 
+.fill-black {
+  fill: #000000;
+}
+
+.fill-white {
+  fill: #FAFFAF;
+}
+
 .p-2 {
   padding: 0.5rem;
 }
@@ -1412,6 +1426,14 @@ html {
 .hover\:bg-yellow:hover {
   --tw-bg-opacity: 1;
   background-color: rgb(255 215 0 / var(--tw-bg-opacity));
+}
+
+.hover\:fill-grey:hover {
+  fill: #FAFFAF;
+}
+
+.hover\:fill-white:hover {
+  fill: #FAFFAF;
 }
 
 .hover\:text-white:hover {
