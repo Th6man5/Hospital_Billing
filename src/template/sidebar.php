@@ -15,9 +15,8 @@
          <ul class="space-y-2 font-medium">
              <li>
                  <a href="http://localhost/hospital_billing/src/dokter/dokter.php" class="flex items-center p-2 text-gray-900 rounded-lg text-black hover:bg-black hover:text-white group">
-                     <svg class="w-5 h-5 text-gray-500 transition duration-75 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-nav" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 22 21">
-                         <path d="M16.975 11H10V4.025a1 1 0 0 0-1.066-.998 8.5 8.5 0 1 0 9.039 9.039.999.999 0 0 0-1-1.066h.002Z" />
-                         <path d="M12.5 0c-.15  7 0-.311.01-.565.027A1 1 0 0 0 11 1.02V10h8.975a1 1 0 0 0 1-.935c.013-.188.028-.374.028-.565A8.51 8.51 0 0 0 12.5 0Z" />
+                     <svg class="w-5 h-5 text-black transition duration-75 dark:text-black group-hover:text-black dark:group-hover:text-nav" xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="black">
+                         <path d="M540-80q-108 0-184-76t-76-184v-23q-86-14-143-80.5T80-600v-240h120v-40h80v160h-80v-40h-40v160q0 66 47 113t113 47q66 0 113-47t47-113v-160h-40v40h-80v-160h80v40h120v240q0 90-57 156.5T360-363v23q0 75 52.5 127.5T540-160q75 0 127.5-52.5T720-340v-67q-35-12-57.5-43T640-520q0-50 35-85t85-35q50 0 85 35t35 85q0 39-22.5 70T800-407v67q0 108-76 184T540-80Zm220-400q17 0 28.5-11.5T800-520q0-17-11.5-28.5T760-560q-17 0-28.5 11.5T720-520q0 17 11.5 28.5T760-480Zm0-40Z" />
                      </svg>
                      <span class="ms-3">Dokter</span>
                  </a>
@@ -49,13 +48,13 @@
              </li>
              <li>
                  <a href="http://localhost/hospital_billing/src/layanan/layanan.php" class="flex items-center p-2 text-gray-900 rounded-lg text-black hover:bg-black hover:text-white group">
-                     <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" aria-hidden="true" viewBox="0 0 24 24" class="flex-shrink-0 w-5 h-5 text-gray-500 transition duration-75 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-nav">
-                         <path d="M8,0A5.006,5.006,0,0,0,3,5V23a1,1,0,0,0,1.564.825L6.67,22.386l2.106,1.439a1,1,0,0,0,1.13,0l2.1-1.439,2.1,1.439a1,1,0,0,0,1.131,0l2.1-1.438,2.1,1.437A1,1,0,0,0,21,23V5a5.006,5.006,0,0,0-5-5Zm6,14H8a1,1,0,0,1,0-2h6a1,1,0,0,1,0,2Zm3-5a1,1,0,0,1-1,1H8A1,1,0,0,1,8,8h8A1,1,0,0,1,17,9Z" />
+                     <svg class="w-5 h-5 text-black transition duration-75 dark:text-black group-hover:text-black dark:group-hover:text-nav" xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="black">
+                         <path d="M160-80q-33 0-56.5-23.5T80-160v-480q0-33 23.5-56.5T160-720h160v-80q0-33 23.5-56.5T400-880h160q33 0 56.5 23.5T640-800v80h160q33 0 56.5 23.5T880-640v480q0 33-23.5 56.5T800-80H160Zm0-80h640v-480H160v480Zm240-560h160v-80H400v80ZM160-160v-480 480Zm280-200v120h80v-120h120v-80H520v-120h-80v120H320v80h120Z" />
                      </svg>
                      <span class="flex-1 ms-3 whitespace-nowrap">Daftar Layanan</span>
                  </a>
              </li>
-            
+
 
          </ul>
      </div>

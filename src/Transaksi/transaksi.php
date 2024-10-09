@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Dashboard</title>
+    <title>Dashboard | Transaksi</title>
     <link href="../css/output.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
 
@@ -39,10 +39,10 @@
         <div class="p-4 mt-14">
             <div class="flex items-center justify-between">
                 <h1>Transaksi</h1>
-                <a href="/grancy/src/admin/adminrooms_create.php" class="bg-blues opacity-95 text-white btn hover:bg-blues hover:opacity-100">Add Room</a>
+                <a href="/grancy/src/admin/adminrooms_create.php" class="bg-blues opacity-95 text-white btn hover:bg-blues hover:opacity-100">Tambah Transaksi</a>
             </div>
             <div class="overflow-x-auto">
-                <table class="table">
+                <table class="table text-center">
                     <!-- head -->
                     <thead>
                         <tr class="bg-blues2">
@@ -94,24 +94,6 @@
                         }
                         ?>
                         <tr>
-                            <th>1</th>
-                            <td>Mulyono</td>
-                            <td>Prabowo</td>
-                            <td>Checkup dengan dokter</td>
-                            <td>Tunai</td>
-                            <td>150.000</td>
-                            <td>20%</td>
-                            <td>1945-01-12</td>
-                            <td>20:21</td>
-
-                            <td class="flex gap-x-4 justify-center">
-                                <a href="/grancy/src/admin/adminrooms_edit.php?id=' . $row['room_id'] . '" class="btn bg-yellow hover:shadow-md hover:bg-yellow group">
-                                    <i class="bi bi-pencil-square  transition-all"></i>
-                                </a>
-                                <a class="btn bg-red hover:shadow-md hover:bg-red group">
-                                    <i class="bi bi-trash-fill  transition-all"></i>
-                                </a>
-                            </td>
                         </tr>
                     </tbody>
                 </table>

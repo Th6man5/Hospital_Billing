@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Dashboard</title>
+    <title>Dashboard | Dokter</title>
     <link href="../css/output.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
 
@@ -39,7 +39,7 @@
         <div class="p-4 mt-14">
             <div class="flex items-center justify-between">
                 <h1>Dokter</h1>
-                <a href="/grancy/src/admin/adminrooms_create.php" class="bg-blues opacity-95 text-white btn hover:bg-blues hover:opacity-100">Add Room</a>
+                <a href="/grancy/src/admin/adminrooms_create.php" class="bg-blues opacity-95 text-white btn hover:bg-blues hover:opacity-100">Tambah Dokter</a>
             </div>
             <div class="overflow-x-auto">
                 <table class="table">

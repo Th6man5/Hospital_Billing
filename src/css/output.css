@@ -1429,6 +1429,11 @@ html {
   box-shadow: var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow);
 }
 
+.group:hover .group-hover\:text-black {
+  --tw-text-opacity: 1;
+  color: rgb(0 0 0 / var(--tw-text-opacity));
+}
+
 @media (min-width: 640px) {
   .sm\:ml-64 {
     margin-left: 16rem;
@@ -1467,6 +1472,11 @@ html {
 }
 
 @media (prefers-color-scheme: dark) {
+  .dark\:text-black {
+    --tw-text-opacity: 1;
+    color: rgb(0 0 0 / var(--tw-text-opacity));
+  }
+
   .group:hover .dark\:group-hover\:text-nav {
     --tw-text-opacity: 1;
     color: rgb(145 216 228 / var(--tw-text-opacity));
