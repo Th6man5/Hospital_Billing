@@ -36,57 +36,120 @@
     <div class="p-4 sm:ml-64">
         <div class="p-4 mt-14">
             <h1>Hospital Billing</h1>
-            <div class="grid grid-cols-4 gap-4 mb-4">
-                <div class="grid grid-rows-3 h-36 rounded bg-gray-50 dark:bg-gray-800 col-span-2 bg-blues2">
-                    <p class="flex justify-center items-center text-2xl text-gray-400 dark:text-gray-500  card-title">
-                        <svg class="flex-shrink-0 w-5 h-5 text-gray-500 transition duration-75 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-nav" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 18">
+            <div class="grid grid-cols-4 gap-4 mb-4 ">
+                <div class="grid grid-cols-2 h-36 rounded bg-gray-50 dark:bg-gray-800 col-span-2 bg-blues2">
+                    <div class="grid grid-rows-2">
+                        <h6 class="text-4xl text-gray-400 dark:text-gray-500 place-self-center mt-auto font-bold">
+                            <?php
+                            include('./database/database.php');
+                            $sql = "SELECT COUNT(*) as total FROM pasien;";
+                            $result = mysqli_query($conn, $sql);
+                            $row = mysqli_fetch_array($result);
+
+                            echo $row['total']
+                            ?>
+                        </h6>
+                        <h6 class="text-2xl text-gray-400 dark:text-gray-500 place-self-center mb-auto">
+                            Pasien
+                        </h6>
+                    </div>
+                    <div class="flex justify-center items-center">
+                        <svg class="flex-shrink-0 w-24 h-24 text-gray-500 transition duration-75 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-nav" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 18">
                             <path d="M14 2a3.963 3.963 0 0 0-1.4.267 6.439 6.439 0 0 1-1.331 6.638A4 4 0 1 0 14 2Zm1 9h-1.264A6.957 6.957 0 0 1 15 15v2a2.97 2.97 0 0 1-.184 1H19a1 1 0 0 0 1-1v-1a5.006 5.006 0 0 0-5-5ZM6.5 9a4.5 4.5 0 1 0 0-9 4.5 4.5 0 0 0 0 9ZM8 10H5a5.006 5.006 0 0 0-5 5v2a1 1 0 0 0 1 1h11a1 1 0 0 0 1-1v-2a5.006 5.006 0 0 0-5-5Z" />
                         </svg>
-                        New User
-                    </p>
-                    <h1 class="flex justify-center items-center"></h1>
-                    <div class="flex justify-end items-center">
-                        <button class="btn-xs rounded bg-blues2 hover:bg-blues hover:text-white mr-5">more info...</button>
                     </div>
                 </div>
-                <div class="grid grid-rows-3 h-36 rounded bg-gray-50 dark:bg-gray-800 col-span-2 bg-blues2">
-                    <p class="flex justify-center items-center text-2xl text-gray-400 dark:text-gray-500  card-title">
-                        <svg class="flex-shrink-0 w-5 h-5 text-gray-500 transition duration-75 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-nav" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 18 20">
-                            <path d="M17 5.923A1 1 0 0 0 16 5h-3V4a4 4 0 1 0-8 0v1H2a1 1 0 0 0-1 .923L.086 17.846A2 2 0 0 0 2.08 20h13.84a2 2 0 0 0 1.994-2.153L17 5.923ZM7 9a1 1 0 0 1-2 0V7h2v2Zm0-5a2 2 0 1 1 4 0v1H7V4Zm6 5a1 1 0 1 1-2 0V7h2v2Z" />
+                <div class="grid grid-cols-2 h-36 rounded bg-gray-50 dark:bg-gray-800 col-span-2 bg-blues2">
+                    <div class="grid grid-rows-2">
+                        <h6 class="text-4xl text-gray-400 dark:text-gray-500 place-self-center mt-auto font-bold">
+                            <?php
+                            include('./database/database.php');
+                            $sql = "SELECT COUNT(*) as total FROM dokter;";
+                            $result = mysqli_query($conn, $sql);
+                            $row = mysqli_fetch_array($result);
+
+                            echo $row['total']
+                            ?>
+                        </h6>
+                        <h6 class="text-2xl text-gray-400 dark:text-gray-500 place-self-center mb-auto">
+                            Dokter
+                        </h6>
+                    </div>
+                    <div class="flex justify-center items-center">
+                        <svg class="flex-shrink-0 w-24 h-24 text-gray-500 transition duration-75 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-nav" xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="currentColor">
+                            <path d="M540-80q-108 0-184-76t-76-184v-23q-86-14-143-80.5T80-600v-240h120v-40h80v160h-80v-40h-40v160q0 66 47 113t113 47q66 0 113-47t47-113v-160h-40v40h-80v-160h80v40h120v240q0 90-57 156.5T360-363v23q0 75 52.5 127.5T540-160q75 0 127.5-52.5T720-340v-67q-35-12-57.5-43T640-520q0-50 35-85t85-35q50 0 85 35t35 85q0 39-22.5 70T800-407v67q0 108-76 184T540-80Zm220-400q17 0 28.5-11.5T800-520q0-17-11.5-28.5T760-560q-17 0-28.5 11.5T720-520q0 17 11.5 28.5T760-480Zm0-40Z" />
                         </svg>
-                        New Orders
-                    </p>
-                    <h1 class="flex justify-center items-center"></h1>
-                    <div class="flex justify-end items-center">
-                        <button class="btn-xs rounded bg-blues2 hover:bg-blues hover:text-white mr-5">more info...</button>
                     </div>
                 </div>
-                <div class="grid grid-rows-3 h-36 rounded bg-gray-50 dark:bg-gray-800 col-span-2 bg-blues2">
-                    <p class="flex justify-center items-center text-2xl text-gray-400 dark:text-gray-500  card-title">
-                        <svg xmlns="http://www.w3.org/2000/svg" id="Layer_1" data-name="Layer 1" viewBox="0 0 24 24" class="w-5 h-5">
-                            <path d="M0,12V6C0,3.243,2.243,1,5,1h14c2.757,0,5,2.243,5,5v6h-3v-1c0-2.206-1.794-4-4-4h-2c-1.2,0-2.266,.542-3,1.382-.734-.84-1.8-1.382-3-1.382h-2c-2.206,0-4,1.794-4,4v1H0Zm9-3h-2c-1.103,0-2,.897-2,2v1h6v-1c0-1.103-.897-2-2-2Zm10,2c0-1.103-.897-2-2-2h-2c-1.103,0-2,.897-2,2v1h6v-1ZM0,14v6c0,.553,.448,1,1,1s1-.447,1-1v-2H22v2c0,.553,.447,1,1,1s1-.447,1-1v-6H0Z" />
+                <div class="grid grid-cols-2 h-36 rounded bg-gray-50 dark:bg-gray-800 col-span-2 bg-blues2">
+                    <div class="grid grid-rows-2">
+                        <h6 class="text-4xl text-gray-400 dark:text-gray-500 place-self-center mt-auto font-bold">
+                            <?php
+                            include('./database/database.php');
+                            $sql = "SELECT COUNT(*) as total FROM insuransi;";
+                            $result = mysqli_query($conn, $sql);
+                            $row = mysqli_fetch_array($result);
+
+                            echo $row['total']
+                            ?>
+                        </h6>
+                        <h6 class="text-2xl text-gray-400 dark:text-gray-500 place-self-center mb-auto">
+                            Insuransi
+                        </h6>
+                    </div>
+                    <div class="flex justify-center items-center">
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" class="bi bi-shield-shaded flex-shrink-0 w-24 h-24 text-gray-500 transition duration-75 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-nav" viewBox="0 0 16 16">
+                            <path fill-rule="evenodd" d="M8 14.933a1 1 0 0 0 .1-.025q.114-.034.294-.118c.24-.113.547-.29.893-.533a10.7 10.7 0 0 0 2.287-2.233c1.527-1.997 2.807-5.031 2.253-9.188a.48.48 0 0 0-.328-.39c-.651-.213-1.75-.56-2.837-.855C9.552 1.29 8.531 1.067 8 1.067zM5.072.56C6.157.265 7.31 0 8 0s1.843.265 2.928.56c1.11.3 2.229.655 2.887.87a1.54 1.54 0 0 1 1.044 1.262c.596 4.477-.787 7.795-2.465 9.99a11.8 11.8 0 0 1-2.517 2.453 7 7 0 0 1-1.048.625c-.28.132-.581.24-.829.24s-.548-.108-.829-.24a7 7 0 0 1-1.048-.625 11.8 11.8 0 0 1-2.517-2.453C1.928 10.487.545 7.169 1.141 2.692A1.54 1.54 0 0 1 2.185 1.43 63 63 0 0 1 5.072.56" />
                         </svg>
-                        Rooms
-                    </p>
-                    <h1 class="flex justify-center items-center"></h1>
-                    <div class="flex justify-end items-center">
-                        <button class="btn-xs rounded bg-blues2 hover:bg-blues hover:text-white mr-5">more info...</button>
                     </div>
                 </div>
-                <div class="grid grid-rows-3 h-36 rounded bg-gray-50 dark:bg-gray-800 col-span-2 bg-blues2">
-                    <p class="flex justify-center items-center text-2xl text-gray-400 dark:text-gray-500  card-title">
-                        <svg xmlns="http://www.w3.org/2000/svg" id="Layer_1" data-name="Layer 1" viewBox="0 0 24 24" class="w-5 h-5">
-                            <path d="m8,15.5c0,1.381-1.119,2.5-2.5,2.5s-2.5-1.119-2.5-2.5,1.119-2.5,2.5-2.5,2.5,1.119,2.5,2.5ZM24,4.5v18.5c0,.552-.448,1-1,1s-1-.448-1-1v-2H2v2c0,.552-.448,1-1,1s-1-.448-1-1V1C0,.448.448,0,1,0s1,.448,1,1v6h7v-2.5c0-2.481,2.019-4.5,4.5-4.5h6c2.481,0,4.5,2.019,4.5,4.5ZM2,19h7v-2.5c0-2.481,2.019-4.5,4.5-4.5h8.5v-3H2v10Zm3.5-13c1.381,0,2.5-1.119,2.5-2.5s-1.119-2.5-2.5-2.5-2.5,1.119-2.5,2.5,1.119,2.5,2.5,2.5Z" />
+                <div class="grid grid-cols-2 h-36 rounded bg-gray-50 dark:bg-gray-800 col-span-2 bg-blues2">
+                    <div class="grid grid-rows-2">
+                        <h6 class="text-4xl text-gray-400 dark:text-gray-500 place-self-center mt-auto font-bold">
+                            <?php
+                            include('./database/database.php');
+                            $sql = "SELECT COUNT(*) as total FROM transaksi;";
+                            $result = mysqli_query($conn, $sql);
+                            $row = mysqli_fetch_array($result);
+
+                            echo $row['total']
+                            ?>
+                        </h6>
+                        <h6 class="text-2xl text-gray-400 dark:text-gray-500 place-self-center mb-auto">
+                            Transaksi
+                        </h6>
+                    </div>
+                    <div class="flex justify-center items-center">
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" class="bi bi-cash-stack flex-shrink-0 w-24 h-24  text-gray-500 transition duration-75 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-nav" viewBox="0 0 16 16">
+                            <path d="M1 3a1 1 0 0 1 1-1h12a1 1 0 0 1 1 1zm7 8a2 2 0 1 0 0-4 2 2 0 0 0 0 4" />
+                            <path d="M0 5a1 1 0 0 1 1-1h14a1 1 0 0 1 1 1v8a1 1 0 0 1-1 1H1a1 1 0 0 1-1-1zm3 0a2 2 0 0 1-2 2v4a2 2 0 0 1 2 2h10a2 2 0 0 1 2-2V7a2 2 0 0 1-2-2z" />
                         </svg>
-                        Room Types
-                    </p>
-                    <h1 class="flex justify-center items-center"></h1>
-                    <div class="flex justify-end items-center">
-                        <button class="btn-xs rounded bg-blues2 hover:bg-blues hover:text-white mr-5">more info...</button>
+
+                    </div>
+                </div>
+                <div class="grid grid-cols-2 h-36 rounded bg-gray-50 dark:bg-gray-800 col-span-2 bg-blues2">
+                    <div class="grid grid-rows-2">
+                        <h6 class="text-4xl text-gray-400 dark:text-gray-500 place-self-center mt-auto font-bold">
+                            <?php
+                            include('./database/database.php');
+                            $sql = "SELECT COUNT(*) as total FROM layanan;";
+                            $result = mysqli_query($conn, $sql);
+                            $row = mysqli_fetch_array($result);
+
+                            echo $row['total']
+                            ?>
+                        </h6>
+                        <h6 class="text-2xl text-gray-400 dark:text-gray-500 place-self-center mb-auto">
+                            Daftar Layanan
+                        </h6>
+                    </div>
+                    <div class="flex justify-center items-center">
+                        <svg class="flex-shrink-0 w-24 h-24 text-gray-500 transition duration-75 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-nav" xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="currentColor">
+                            <path d="M160-80q-33 0-56.5-23.5T80-160v-480q0-33 23.5-56.5T160-720h160v-80q0-33 23.5-56.5T400-880h160q33 0 56.5 23.5T640-800v80h160q33 0 56.5 23.5T880-640v480q0 33-23.5 56.5T800-80H160Zm0-80h640v-480H160v480Zm240-560h160v-80H400v80ZM160-160v-480 480Zm280-200v120h80v-120h120v-80H520v-120h-80v120H320v80h120Z" />
+                        </svg>
                     </div>
                 </div>
             </div>
-
         </div>
     </div>
 
