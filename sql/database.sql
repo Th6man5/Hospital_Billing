@@ -1,5 +1,3 @@
-CREATE DATABASE hospital_billing;
-
 CREATE TABLE pasien (
     id_pasien INT AUTO_INCREMENT,
     nama VARCHAR(255) NOT NULL,
@@ -74,7 +72,7 @@ INSERT INTO pasien (id_pasien, nama, no_telpon, jenis_kelamin, tempat_lahir, tan
 (2, 'Siti Nurhaliza', '08987654321', 'Perempuan', 'Bandung', '1985-11-15', 2),
 (3, 'Budi Santoso', '08223344556', 'Laki-laki', 'Surabaya', '1992-02-20', 3),
 (4, 'Dewi Lestari', '08765432100', 'Perempuan', 'Medan', '1988-07-25', 4),
-(5, 'Rudi Prasetyo', '08112233445', 'Laki-laki', 'Semarang', '1995-03-30', 5)
+(5, 'Rudi Prasetyo', '08112233445', 'Laki-laki', 'Semarang', '1995-03-30', 5);
 
 --ISI TABEL DOKTER
 INSERT INTO dokter (nama, jenis_kelamin, tanggal_lahir, no_telepon, email, alamat, spesialis) VALUES

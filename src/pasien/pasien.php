@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Dashboard</title>
+    <title>Dashboard | Pasien</title>
     <link href="../css/output.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
 
@@ -39,7 +39,7 @@
         <div class="p-4 mt-14">
             <div class="flex items-center justify-between">
                 <h1>Pasien</h1>
-                <a href="/grancy/src/admin/adminrooms_create.php" class="bg-blues opacity-95 text-white btn hover:bg-blues hover:opacity-100">Add Room</a>
+                <a href="/hospital_billing/src/admin/adminrooms_create.php" class="bg-blues opacity-95 text-white btn hover:bg-blues hover:opacity-100">Tambah Pasien</a>
             </div>
             <div class="overflow-x-auto">
                 <table class="table">
@@ -73,10 +73,10 @@
                                 <td>' . $row['tanggal_lahir'] . '</td>
                                 <td>' . (!empty($row['id_insuransi']) ? 'ada' : '') . '</td>
                                 <td class="flex gap-x-4 justify-center">
-                                    <a href="/grancy/src/pasien/pasien_edit.php?id=' . $row['id_pasien'] . '" class="btn bg-yellow hover:shadow-md hover:bg-yellow group">
+                                    <a href="/hospital_billing/src/pasien/pasien_edit.php?id=' . $row['id_pasien'] . '" class="btn bg-yellow hover:shadow-md hover:bg-yellow group">
                                         <i class="bi bi-pencil-square  transition-all"></i>
                                     </a>
-                                    <a onclick="return confirm(\'Are you sure you want to delete this room type?\');" href="/grancy/src/pasien/pasien_delete.php?id=' . $row['id_pasien'] . '" class="btn bg-red hover:shadow-md hover:bg-red group">
+                                    <a onclick="return confirm(\'Are you sure you want to delete this room type?\');" href="/hospital_billing/src/pasien/pasien_delete.php?id=' . $row['id_pasien'] . '" class="btn bg-red hover:shadow-md hover:bg-red group">
                                         <i class="bi bi-trash-fill  transition-all"></i>
                                     </a>
                                 </td>

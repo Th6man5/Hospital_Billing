@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Dashboard</title>
+    <title>Dashboard | Insuransi</title>
     <link href="../css/output.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
 
@@ -39,7 +39,7 @@
         <div class="p-4 mt-14">
             <div class="flex items-center justify-between">
                 <h1>Insuransi</h1>
-                <a href="/grancy/src/admin/adminrooms_create.php" class="bg-blues opacity-95 text-white btn hover:bg-blues hover:opacity-100">Tambah Insuransi</a>
+                <a href="/hospital_billing/src/admin/adminrooms_create.php" class="bg-blues opacity-95 text-white btn hover:bg-blues hover:opacity-100">Tambah Insuransi</a>
             </div>
             <div class="overflow-x-auto">
                 <table class="table">
@@ -77,10 +77,10 @@
                                 <td>' . $row['tanggal_polis_akhir'] . '</td>
                                 <td>' . $row['jenis_pertanggungan'] . '</td>
                                 <td class="flex gap-x-4 justify-center">
-                                    <a href="/grancy/src/insuransi/insuransi_edit.php?id=' . $row['id_insuransi'] . '" class="btn bg-yellow hover:shadow-md hover:bg-yellow group">
+                                    <a href="/hospital_billing/src/insuransi/insuransi_edit.php?id=' . $row['id_insuransi'] . '" class="btn bg-yellow hover:shadow-md hover:bg-yellow group">
                                         <i class="bi bi-pencil-square  transition-all"></i>
                                     </a>
-                                    <a onclick="return confirm(\'Ingin menghapus Data Insuransi ini?\');" href="/grancy/src/insuransi/insuransi_delete.php?id=' . $row['id_insuransi'] . '" class="btn bg-red hover:shadow-md hover:bg-red group">
+                                    <a onclick="return confirm(\'Ingin menghapus Data Insuransi ini?\');" href="/hospital_billing/src/insuransi/insuransi_delete.php?id=' . $row['id_insuransi'] . '" class="btn bg-red hover:shadow-md hover:bg-red group">
                                         <i class="bi bi-trash-fill  transition-all"></i>
                                     </a>
                                 </td>
