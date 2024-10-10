@@ -1430,6 +1430,10 @@ html {
   display: grid;
 }
 
+.hidden {
+  display: none;
+}
+
 .h-24 {
   height: 6rem;
 }
@@ -1609,6 +1613,10 @@ html {
   --tw-bg-opacity: 0.5;
 }
 
+.bg-opacity-95 {
+  --tw-bg-opacity: 0.95;
+}
+
 .stroke-current {
   stroke: currentColor;
 }
@@ -1730,6 +1738,10 @@ html {
 .hover\:bg-yellow:hover {
   --tw-bg-opacity: 1;
   background-color: rgb(255 215 0 / var(--tw-bg-opacity));
+}
+
+.hover\:bg-opacity-100:hover {
+  --tw-bg-opacity: 1;
 }
 
 .hover\:text-white:hover {

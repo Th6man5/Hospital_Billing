@@ -1,6 +1,34 @@
 <?php
-if (isset($_POST['submit'])) {
-    include('../database/database.php');
+include('../database/database.php');
+
+$nama = $no_telpon = $jenis_kelamin = $tempat_lahir = $tanggal_lahir = $id_insuransi = '';
+
+$successMessage = '';
+if ($_SERVER['REQUEST_METHOD'] == 'GET') {
+    if (!isset($_GET['id'])) {
+        header('Location: /hospital_billing/src/pasien/pasien.php');
+        exit;
+    }
+
+    $id = $_GET['id'];
+
+    $sql = "SELECT * FROM pasien WHERE id_pasien = $id";
+    $result = mysqli_query($conn, $sql);
+    $row = mysqli_fetch_assoc($result);
+
+    if (!$row) {
+        header('Location: /hospital_billing/src/pasien/pasien.php');
+        exit;
+    }
+
+    $nama = $row['nama'];
+    $no_telpon = $row['no_telpon'];
+    $jenis_kelamin = $row['jenis_kelamin'];
+    $tempat_lahir = $row['tempat_lahir'];
+    $tanggal_lahir = $row['tanggal_lahir'];
+    $id_insuransi = $row['id_insuransi'];
+} else {
+    $id = $_POST['id_pasien'];
     $nama = $_POST['nama'];
     $no_telpon = $_POST['no_telpon'];
     $jenis_kelamin = $_POST['jenis_kelamin'];
@@ -12,15 +40,16 @@ if (isset($_POST['submit'])) {
         if (empty($nama) || empty($no_telpon) || empty($jenis_kelamin) || empty($tempat_lahir) || empty($tanggal_lahir) || empty($id_insuransi)) {
             echo "<script>alert('Please fill all the fields')</script>";
             break;
-        } else {
-            $sql = "INSERT INTO pasien (nama, no_telpon, jenis_kelamin, tempat_lahir, tanggal_lahir, id_insuransi) VALUES ('$nama', '$no_telpon', '$jenis_kelamin','$tempat_lahir','$tanggal_lahir','$id_insuransi' )";
-            if (mysqli_query($conn, $sql)) {
-                $successMessage = 'Pasien has been created successfully';
-            } else {
-                echo 'Error: ' . $sql . '<br>' . mysqli_error($conn);
-            }
-            mysqli_close($conn);
         }
+
+        $sql = "UPDATE pasien SET nama = '$nama', no_telpon = '$no_telpon', jenis_kelamin = '$jenis_kelamin', tempat_lahir = '$tempat_lahir', tanggal_lahir = '$tanggal_lahir', id_insuransi = '$id_insuransi' WHERE id_pasien = $id";
+
+        $result = mysqli_query($conn, $sql);
+        if (!$result) {
+            echo "<script>alert('Failed to update pasien')</script>";
+        }
+
+        $successMessage = 'pasien has been updated!';
     } while (false);
 }
 ?>
@@ -63,7 +92,7 @@ if (isset($_POST['submit'])) {
     <div class="p-4 sm:ml-64">
         <div class="p-4">
             <div class="flex items-center justify-between">
-                <h1>Tambah Pasien</h1>
+                <h1>Update Pasien</h1>
                 <a href="/hospital_billing/src/pasien/pasien.php" class="bg-blues opacity-95 text-white btn hover:bg-blues hover:opacity-100">Back</a>
             </div>
             <?php
@@ -81,36 +110,37 @@ if (isset($_POST['submit'])) {
             }
             ?>
             <form method="POST">
+                <input type="hidden" name="id_pasien" value="<?php echo $id; ?>">
                 <div class="p-10">
                     <label class="form-control w-full">
                         <div class="label">
                             <span class="label-text text-xl">Nama</span>
                         </div>
-                        <input type="text" name="nama" placeholder="Type here" class="input input-bordered w-full " required />
+                        <input type="text" name="nama" value="<?php echo $nama; ?>" placeholder="Type here" class="input input-bordered w-full " required />
                     </label>
                     <label class="form-control w-full">
                         <div class="label">
                             <span class="label-text text-xl">no_telpon</span>
                         </div>
-                        <input type="text" name="no_telpon" placeholder="Type here" class="input input-bordered w-full " required />
+                        <input type="text" name="no_telpon" value="<?php echo $no_telpon; ?>" placeholder="Type here" class="input input-bordered w-full " required />
                     </label>
                     <label class="form-control w-full">
                         <div class="label">
                             <span class="label-text text-xl">jenis_kelamin</span>
                         </div>
-                        <input type="text" name="jenis_kelamin" placeholder="Type here" class="input input-bordered w-full " required />
+                        <input type="text" name="jenis_kelamin" value="<?php echo $jenis_kelamin; ?>" placeholder="Type here" class="input input-bordered w-full " required />
                     </label>
                     <label class="form-control w-full">
                         <div class="label">
                             <span class="label-text text-xl">tempat_lahir</span>
                         </div>
-                        <input type="text" name="tempat_lahir" placeholder="Type here" class="input input-bordered w-full " required />
+                        <input type="text" name="tempat_lahir" value="<?php echo $tempat_lahir; ?>" placeholder="Type here" class="input input-bordered w-full " required />
                     </label>
                     <label class="form-control w-full">
                         <div class="label">
                             <span class="label-text text-xl">tanggal_lahir</span>
                         </div>
-                        <input type="date" name="tanggal_lahir" placeholder="Type here" class="input input-bordered w-full " required />
+                        <input type="date" name="tanggal_lahir" value="<?php echo $tanggal_lahir; ?>" placeholder="Type here" class="input input-bordered w-full " required />
                     </label>
                     <select name="id_insuransi" class="select select-bordered w-full">
                         <?php
@@ -125,7 +155,7 @@ if (isset($_POST['submit'])) {
                         ?>
                     </select>
                     <div class="mt-4">
-                        <button name="submit" type="submit" class="bg-blues opacity-95 text-white btn hover:bg-blues hover:opacity-100">Create</button>
+                        <button name="submit" type="submit" class="bg-blues opacity-95 text-white btn hover:bg-blues hover:opacity-100">Update</button>
                     </div>
                 </div>
             </form>
