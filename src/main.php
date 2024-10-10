@@ -61,7 +61,7 @@
                         </div>
                     </div>
                 </a>
-
+                <a href="/hospital_billing/src/dokter/dokter.php" class="col-span-2">
                 <div class="grid grid-cols-2 h-36 rounded bg-gray-50 dark:bg-gray-800 col-span-2 bg-blues2">
                     <div class="grid grid-rows-2">
                         <h6 class="text-4xl text-black dark:text-gray-500 place-self-center mt-auto font-bold">
@@ -84,6 +84,8 @@
                         </svg>
                     </div>
                 </div>
+                </a>
+                <a href="/hospital_billing/src/insuransi/insuransi.php" class="col-span-2">
                 <div class="grid grid-cols-2 h-36 rounded bg-gray-50 dark:bg-gray-800 col-span-2 bg-blues2">
                     <div class="grid grid-rows-2">
                         <h6 class="text-4xl text-black dark:text-gray-500 place-self-center mt-auto font-bold">
@@ -106,6 +108,8 @@
                         </svg>
                     </div>
                 </div>
+                </a>
+                <a href="/hospital_billing/src/transaksi/transaksi.php" class="col-span-2">
                 <div class="grid grid-cols-2 h-36 rounded bg-gray-50 dark:bg-gray-800 col-span-2 bg-blues2">
                     <div class="grid grid-rows-2">
                         <h6 class="text-4xl text-black dark:text-gray-500 place-self-center mt-auto font-bold">
@@ -130,6 +134,8 @@
 
                     </div>
                 </div>
+                </a>
+                <a href="/hospital_billing/src/layanan/layanan.php" class="col-span-2">
                 <div class="grid grid-cols-2 h-36 rounded bg-gray-50 dark:bg-gray-800 col-span-2 bg-blues2">
                     <div class="grid grid-rows-2">
                         <h6 class="text-4xl text-black dark:text-gray-500 place-self-center mt-auto font-bold">
