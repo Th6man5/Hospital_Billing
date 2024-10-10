@@ -1,6 +1,36 @@
 <?php
-if (isset($_POST['submit'])) {
-    include('../database/database.php');
+include('../database/database.php');
+
+$no_polis = $nama_perusahaan = $alamat_perusahaan = $tanggal_polis = $no_telepon_perusahaan = $tanggal_polis_awal = $tanggal_polis_akhir = $jenis_pertanggungan = '';
+
+$successMessage = '';
+if ($_SERVER['REQUEST_METHOD'] == 'GET') {
+    if (!isset($_GET['id'])) {
+        header('Location: /hospital_billing/src/insuransi/insuransi.php');
+        exit;
+    }
+
+    $id = $_GET['id'];
+
+    $sql = "SELECT * FROM insuransi WHERE id_insuransi = $id";
+    $result = mysqli_query($conn, $sql);
+    $row = mysqli_fetch_assoc($result);
+
+    if (!$row) {
+        header('Location: /hospital_billing/src/insuransi/insuransi.php');
+        exit;
+    }
+
+    $no_polis = $row['no_polis'];
+    $nama_perusahaan = $row['nama_perusahaan'];
+    $alamat_perusahaan = $row['alamat_perusahaan'];
+    $tanggal_polis = $row['tanggal_polis'];
+    $no_telepon_perusahaan = $row['no_telepon_perusahaan'];
+    $tanggal_polis_awal = $row['tanggal_polis_awal'];
+    $tanggal_polis_akhir = $row['tanggal_polis_akhir'];
+    $jenis_pertanggungan = $row['jenis_pertanggungan'];
+} else {
+    $id = $_POST['id_insuransi'];
     $no_polis = $_POST['no_polis'];
     $nama_perusahaan = $_POST['nama_perusahaan'];
     $alamat_perusahaan = $_POST['alamat_perusahaan'];
@@ -11,18 +41,19 @@ if (isset($_POST['submit'])) {
     $jenis_pertanggungan = $_POST['jenis_pertanggungan'];
 
     do {
-        if (empty($no_polis) || empty($nama_perusahaan) || empty($alamat_perusahaan) || empty($tanggal_polis) || empty($no_telepon_perusahaan) || empty($tanggal_polis_awal) || empty($tanggal_polis_awal) || empty($jenis_pertanggungan)) {
+        if (empty($no_polis) || empty($nama_perusahaan) || empty($alamat_perusahaan) || empty($tanggal_polis) || empty($no_telepon_perusahaan) || empty($tanggal_polis_awal) || empty($tanggal_polis_akhir) || empty($jenis_pertanggungan)) {
             echo "<script>alert('Please fill all the fields')</script>";
             break;
-        } else {
-            $sql = "INSERT INTO insuransi (no_polis, nama_perusahaan, alamat_perusahaan , tanggal_polis, no_telepon_perusahaan, tanggal_polis_awal , tanggal_polis_akhir, jenis_pertanggungan) VALUES ('$no_polis', '$nama_perusahaan', '$alamat_perusahaan', '$tanggal_polis', '$no_telepon_perusahaan', '$tanggal_polis_awal', '$tanggal_polis_akhir','$jenis_pertanggungan' )";
-            if (mysqli_query($conn, $sql)) {
-                $successMessage = 'Insuransi has been created successfully';
-            } else {
-                echo 'Error: ' . $sql . '<br>' . mysqli_error($conn);
-            }
-            mysqli_close($conn);
         }
+
+        $sql = "UPDATE insuransi SET no_polis = '$no_polis', nama_perusahaan = '$nama_perusahaan', alamat_perusahaan = '$alamat_perusahaan', tanggal_polis = '$tanggal_polis', no_telepon_perusahaan = '$no_telepon_perusahaan', tanggal_polis_awal = '$tanggal_polis_awal', tanggal_polis_akhir = '$tanggal_polis_akhir', jenis_pertanggungan = '$jenis_pertanggungan' WHERE id_insuransi = $id";
+
+        $result = mysqli_query($conn, $sql);
+        if (!$result) {
+            echo "<script>alert('Failed to update insuransi')</script>";
+        }
+
+        $successMessage = 'Insuransi has been updated!';
     } while (false);
 }
 ?>
@@ -65,7 +96,7 @@ if (isset($_POST['submit'])) {
     <div class="p-4 sm:ml-64">
         <div class="p-4">
             <div class="flex items-center justify-between">
-                <h1>Tambah Insuransi</h1>
+                <h1>Update Insuransi</h1>
                 <a href="/hospital_billing/src/insuransi/insuransi.php" class="bg-blues opacity-95 text-white btn hover:bg-blues hover:opacity-100">Back</a>
             </div>
             <?php
@@ -83,59 +114,60 @@ if (isset($_POST['submit'])) {
             }
             ?>
             <form method="POST">
+                <input type="hidden" name="id_insuransi" value="<?php echo $id; ?>">
                 <div class="p-10">
                     <label class="form-control w-full">
                         <div class="label">
                             <span class="label-text text-xl">No Polis</span>
                         </div>
-                        <input type="text" name="no_polis" placeholder="Type here" class="input input-bordered w-full " required />
+                        <input type="text" name="no_polis" value="<?php echo ($no_polis); ?>" placeholder="Type here" class="input input-bordered w-full " required />
                     </label>
                     <label class="form-control w-full">
                         <div class="label">
                             <span class="label-text text-xl">Nama Perusahaan</span>
                         </div>
-                        <input type="text" name="nama_perusahaan" placeholder="Type here" class="input input-bordered w-full " required />
+                        <input type="text" name="nama_perusahaan" value="<?php echo ($nama_perusahaan); ?>" placeholder="Type here" class="input input-bordered w-full " required />
                     </label>
                     <div class="w-full flex gap-x-4">
                         <label class="form-control w-full">
                             <div class="label">
                                 <span class="label-text text-xl">Alamat Perusahaan</span>
                             </div>
-                            <input type="text" name="alamat_perusahaan" placeholder="Type here" class="input input-bordered w-full " required />
+                            <input type="text" name="alamat_perusahaan" value="<?php echo ($alamat_perusahaan); ?>" placeholder="Type here" class="input input-bordered w-full " required />
                         </label>
                         <label class="form-control w-full">
                             <div class="label">
                                 <span class="label-text text-xl">Tanggal Polis</span>
                             </div>
-                            <input type="date" name="tanggal_polis" placeholder="Type here" class="input input-bordered w-full " required />
+                            <input type="date" name="tanggal_polis" value="<?php echo ($tanggal_polis); ?>" placeholder="Type here" class="input input-bordered w-full " required />
                         </label>
                         <label class="form-control w-full">
                             <div class="label">
                                 <span class="label-text text-xl">No Telepon Perusahaan</span>
                             </div>
-                            <input type="text" name="no_telepon_perusahaan" placeholder="Type here" class="input input-bordered w-full " required />
+                            <input type="text" name="no_telepon_perusahaan" value="<?php echo ($no_telepon_perusahaan); ?>" placeholder="Type here" class="input input-bordered w-full " required />
                         </label>
                         <label class="form-control w-full">
                             <div class="label">
                                 <span class="label-text text-xl">Tanggal Polis Awal</span>
                             </div>
-                            <input type="date" name="tanggal_polis_awal" placeholder="Type here" class="input input-bordered w-full " required />
+                            <input type="date" name="tanggal_polis_awal" value="<?php echo ($tanggal_polis_awal); ?>" placeholder="Type here" class="input input-bordered w-full " required />
                         </label>
                         <label class="form-control w-full">
                             <div class="label">
                                 <span class="label-text text-xl">Tanggal Polis Akhir</span>
                             </div>
-                            <input type="date" name="tanggal_polis_akhir" placeholder="Type here" class="input input-bordered w-full " required />
+                            <input type="date" name="tanggal_polis_akhir" value="<?php echo ($tanggal_polis_akhir); ?>" placeholder="Type here" class="input input-bordered w-full " required />
                         </label>
                         <label class="form-control w-full">
                             <div class="label">
                                 <span class="label-text text-xl">Jenis Pertanggungan</span>
                             </div>
-                            <input type="text" name="jenis_pertanggungan" placeholder="Type here" class="input input-bordered w-full " required />
+                            <input type="text" name="jenis_pertanggungan" value="<?php echo ($jenis_pertanggungan); ?>" placeholder="Type here" class="input input-bordered w-full " required />
                         </label>
                     </div>
                     <div class="mt-4">
-                        <button name="submit" type="submit" class="bg-blues opacity-95 text-white btn hover:bg-blues hover:opacity-100">Create</button>
+                        <button name="submit" type="submit" class="bg-blues opacity-95 text-white btn hover:bg-blues hover:opacity-100">Update</button>
                     </div>
                 </div>
             </form>

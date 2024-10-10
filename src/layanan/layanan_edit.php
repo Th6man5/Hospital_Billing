@@ -1,6 +1,31 @@
 <?php
-if (isset($_POST['submit'])) {
-    include('../database/database.php');
+include('../database/database.php');
+
+$no_polis = $nama_perusahaan = $alamat_perusahaan = $tanggal_polis = $no_telepon_perusahaan = $tanggal_polis_awal = $tanggal_polis_akhir = $jenis_pertanggungan = '';
+
+$successMessage = '';
+if ($_SERVER['REQUEST_METHOD'] == 'GET') {
+    if (!isset($_GET['id'])) {
+        header('Location: /hospital_billing/src/layanan/layanan.php');
+        exit;
+    }
+
+    $id = $_GET['id'];
+
+    $sql = "SELECT * FROM layanan WHERE id_layanan = $id";
+    $result = mysqli_query($conn, $sql);
+    $row = mysqli_fetch_assoc($result);
+
+    if (!$row) {
+        header('Location: /hospital_billing/src/layanan/layanan.php');
+        exit;
+    }
+
+    $nama_layanan = $row['nama_layanan'];
+    $harga = $row['harga'];
+    $id_dokter = $row['id_dokter'];
+} else {
+    $id = $_POST['id_layanan'];
     $nama_layanan = $_POST['nama_layanan'];
     $harga = $_POST['harga'];
     $id_dokter = $_POST['id_dokter'];
@@ -9,15 +34,16 @@ if (isset($_POST['submit'])) {
         if (empty($nama_layanan) || empty($harga) || empty($id_dokter)) {
             echo "<script>alert('Please fill all the fields')</script>";
             break;
-        } else {
-            $sql = "INSERT INTO layanan (nama_layanan, harga, id_dokter) VALUES ('$nama_layanan', '$harga', '$id_dokter' )";
-            if (mysqli_query($conn, $sql)) {
-                $successMessage = 'Layanan has been created successfully';
-            } else {
-                echo 'Error: ' . $sql . '<br>' . mysqli_error($conn);
-            }
-            mysqli_close($conn);
         }
+
+        $sql = "UPDATE layanan SET nama_layanan = '$nama_layanan', harga = '$harga', id_dokter = '$id_dokter' WHERE id_layanan = $id";
+
+        $result = mysqli_query($conn, $sql);
+        if (!$result) {
+            echo "<script>alert('Failed to update layanan')</script>";
+        }
+
+        $successMessage = 'layanan has been updated!';
     } while (false);
 }
 ?>
@@ -60,7 +86,7 @@ if (isset($_POST['submit'])) {
     <div class="p-4 sm:ml-64">
         <div class="p-4">
             <div class="flex items-center justify-between">
-                <h1>Tambah Insuransi</h1>
+                <h1>Update Insuransi</h1>
                 <a href="/hospital_billing/src/layanan/layanan.php" class="bg-blues opacity-95 text-white btn hover:bg-blues hover:opacity-100">Back</a>
             </div>
             <?php
@@ -78,18 +104,19 @@ if (isset($_POST['submit'])) {
             }
             ?>
             <form method="POST">
+                <input type="hidden" name="id_layanan" value="<?php echo $id; ?>">
                 <div class="p-10">
                     <label class="form-control w-full">
                         <div class="label">
                             <span class="label-text text-xl">Nama Layanan</span>
                         </div>
-                        <input type="text" name="nama_layanan" placeholder="Type here" class="input input-bordered w-full " required />
+                        <input type="text" name="nama_layanan" value="<?php echo $nama_layanan; ?>" placeholder=" Type here" class="input input-bordered w-full " required />
                     </label>
                     <label class="form-control w-full">
                         <div class="label">
                             <span class="label-text text-xl">Harga</span>
                         </div>
-                        <input type="text" name="harga" placeholder="Type here" class="input input-bordered w-full " required />
+                        <input type="text" name="harga" value="<?php echo $harga; ?>" placeholder=" Type here" class="input input-bordered w-full " required />
                     </label>
                     <select name="id_dokter" class="select select-bordered w-full">
                         <?php
@@ -104,7 +131,7 @@ if (isset($_POST['submit'])) {
                         ?>
                     </select>
                     <div class="mt-4">
-                        <button name="submit" type="submit" class="bg-blues opacity-95 text-white btn hover:bg-blues hover:opacity-100">Create</button>
+                        <button name="submit" type="submit" class="bg-blues opacity-95 text-white btn hover:bg-blues hover:opacity-100">Update</button>
                     </div>
                 </div>
             </form>

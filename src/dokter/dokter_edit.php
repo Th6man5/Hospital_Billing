@@ -1,8 +1,35 @@
 <?php
+include('../database/database.php');
+
 $nama = $jenis_kelamin = $tanggal_lahir = $no_telepon = $email = $alamat = $spesialis = '';
 
-if (isset($_POST['submit'])) {
-    include('../database/database.php');
+$successMessage = '';
+if ($_SERVER['REQUEST_METHOD'] == 'GET') {
+    if (!isset($_GET['id'])) {
+        header('Location: /hospital_billing/src/dokter/dokter.php');
+        exit;
+    }
+
+    $id = $_GET['id'];
+
+    $sql = "SELECT * FROM dokter WHERE id_dokter = $id";
+    $result = mysqli_query($conn, $sql);
+    $row = mysqli_fetch_assoc($result);
+
+    if (!$row) {
+        header('Location: /hospital_billing/src/dokter/dokter.php');
+        exit;
+    }
+
+    $nama = $row['nama'];
+    $jenis_kelamin = $row['jenis_kelamin'];
+    $tanggal_lahir = $row['tanggal_lahir'];
+    $no_telepon = $row['no_telepon'];
+    $email = $row['email'];
+    $alamat = $row['alamat'];
+    $spesialis = $row['spesialis'];
+} else {
+    $id = $_POST['id_dokter'];
     $nama = $_POST['nama'];
     $jenis_kelamin = $_POST['jenis_kelamin'];
     $tanggal_lahir = $_POST['tanggal_lahir'];
@@ -15,15 +42,16 @@ if (isset($_POST['submit'])) {
         if (empty($nama) || empty($jenis_kelamin) || empty($tanggal_lahir) || empty($no_telepon) || empty($email) || empty($alamat) || empty($spesialis)) {
             echo "<script>alert('Please fill all the fields')</script>";
             break;
-        } else {
-            $sql = "INSERT INTO dokter (nama, jenis_kelamin, tanggal_lahir, no_telepon, email, alamat, spesialis) VALUES ('$nama', '$jenis_kelamin', '$tanggal_lahir', '$no_telepon', '$email', '$alamat', '$spesialis')";
-            if (mysqli_query($conn, $sql)) {
-                $successMessage = 'Dokter data has been updated successfully';
-            } else {
-                echo 'Error: ' . $sql . '<br>' . mysqli_error($conn);
-            }
-            mysqli_close($conn);
         }
+
+        $sql = "UPDATE dokter SET nama = '$nama', jenis_kelamin = '$jenis_kelamin', tanggal_lahir = '$tanggal_lahir', no_telepon = '$no_telepon', email = '$email', alamat = '$alamat', spesialis = '$spesialis' WHERE id_dokter = $id";
+
+        $result = mysqli_query($conn, $sql);
+        if (!$result) {
+            echo "<script>alert('Failed to update insuransi')</script>";
+        }
+
+        $successMessage = 'Dokter has been updated!';
     } while (false);
 }
 ?>
@@ -85,53 +113,54 @@ if (isset($_POST['submit'])) {
             }
             ?>
             <form method="POST">
+                <input type="hidden" name="id_dokter" value="<?php echo $id; ?>">
                 <div class="p-10">
                     <label class="form-control w-full">
                         <div class="label">
                             <span class="label-text text-xl">Nama</span>
                         </div>
-                        <input type="text" name="nama" value="<?php echo htmlspecialchars($nama); ?>" placeholder="Type here" class="input input-bordered w-full " required />
+                        <input type="text" name="nama" value="<?php echo ($nama); ?>" placeholder="Type here" class="input input-bordered w-full " required />
                     </label>
                     <label class="form-control w-full">
                         <div class="label">
                             <span class="label-text text-xl">Jenis Kelamin</span>
                         </div>
-                        <input type="text" name="jenis_kelamin" placeholder="Type here" class="input input-bordered w-full " required />
+                        <input type="text" name="jenis_kelamin" placeholder="Type here" class="input input-bordered w-full " value="<?php echo ($jenis_kelamin); ?>" required />
                     </label>
                     <div class="w-full flex gap-x-4">
                         <label class="form-control w-full">
                             <div class="label">
                                 <span class="label-text text-xl">Tanggal Lahir</span>
                             </div>
-                            <input type="date" name="tanggal_lahir" placeholder="Type here" class="input input-bordered w-full " required />
+                            <input type="date" name="tanggal_lahir" placeholder="Type here" class="input input-bordered w-full " value="<?php echo ($tanggal_lahir); ?>" required />
                         </label>
                         <label class="form-control w-full">
                             <div class="label">
                                 <span class="label-text text-xl">No Telepon</span>
                             </div>
-                            <input type="text" name="no_telepon" placeholder="Type here" class="input input-bordered w-full " required />
+                            <input type="text" name="no_telepon" placeholder="Type here" class="input input-bordered w-full " value="<?php echo ($no_telepon); ?>" required />
                         </label>
                         <label class="form-control w-full">
                             <div class="label">
                                 <span class="label-text text-xl">Email</span>
                             </div>
-                            <input type="text" name="email" placeholder="Type here" class="input input-bordered w-full " required />
+                            <input type="text" name="email" value="<?php echo ($email); ?>" placeholder="Type here" class="input input-bordered w-full " required />
                         </label>
                         <label class="form-control w-full">
                             <div class="label">
                                 <span class="label-text text-xl">Alamat</span>
                             </div>
-                            <input type="text" name="alamat" placeholder="Type here" class="input input-bordered w-full " required />
+                            <input type="text" value="<?php echo ($alamat); ?>" name="alamat" placeholder="Type here" class="input input-bordered w-full " required />
                         </label>
                         <label class="form-control w-full">
                             <div class="label">
                                 <span class="label-text text-xl">Spesialis</span>
                             </div>
-                            <input type="text" name="spesialis" placeholder="Type here" class="input input-bordered w-full " required />
+                            <input type="text" value="<?php echo ($spesialis); ?>" name="spesialis" placeholder="Type here" class="input input-bordered w-full " required />
                         </label>
                     </div>
                     <div class="mt-4">
-                        <button name="submit" type="submit" class="bg-blues opacity-95 text-white btn hover:bg-blues hover:opacity-100">Create</button>
+                        <button name="submit" type="submit" class="bg-blues bg-opacity-95 text-white btn hover:bg-blues hover:bg-opacity-100">Update</button>
                     </div>
                 </div>
             </form>
