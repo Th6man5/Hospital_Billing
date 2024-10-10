@@ -7,7 +7,7 @@ if (isset($_POST['submit'])) {
     $tempat_lahir = $_POST['tempat_lahir'];
     $tanggal_lahir = $_POST['tanggal_lahir'];
     $id_insuransi = $_POST['id_insuransi'];
-    
+
     do {
         if (empty($nama) || empty($no_telpon) || empty($jenis_kelamin) || empty($tempat_lahir) || empty($tanggal_lahir) || empty($id_insuransi)) {
             echo "<script>alert('Please fill all the fields')</script>";
@@ -113,17 +113,17 @@ if (isset($_POST['submit'])) {
                         <input type="date" name="tanggal_lahir" placeholder="Type here" class="input input-bordered w-full " required />
                     </label>
                     <select name="id_insuransi" class="select select-bordered w-full">
-                                <?php
-                                include('../database/database.php');
-                                $sql = "SELECT * FROM insuransi";
-                                $result = mysqli_query($conn, $sql);
-                                if (mysqli_num_rows($result) > 0) {
-                                    while ($row = mysqli_fetch_assoc($result)) {
-                                        echo '<option value="' . $row['id_insuransi'] . '">' . $row['nama_perusahaan'] . '</option>';
-                                    }
-                                }
-                                ?>
-                            </select>
+                        <?php
+                        include('../database/database.php');
+                        $sql = "SELECT * FROM insuransi";
+                        $result = mysqli_query($conn, $sql);
+                        if (mysqli_num_rows($result) > 0) {
+                            while ($row = mysqli_fetch_assoc($result)) {
+                                echo '<option value="' . $row['id_insuransi'] . '">' . $row['nama_perusahaan'] . '</option>';
+                            }
+                        }
+                        ?>
+                    </select>
                     <div class="mt-4">
                         <button name="submit" type="submit" class="bg-blues opacity-95 text-white btn hover:bg-blues hover:opacity-100">Create</button>
                     </div>

@@ -4,7 +4,7 @@ if (isset($_POST['submit'])) {
     $nama_layanan = $_POST['nama_layanan'];
     $harga = $_POST['harga'];
     $id_dokter = $_POST['id_dokter'];
-    
+
     do {
         if (empty($nama_layanan) || empty($harga) || empty($id_dokter)) {
             echo "<script>alert('Please fill all the fields')</script>";
@@ -92,17 +92,17 @@ if (isset($_POST['submit'])) {
                         <input type="text" name="harga" placeholder="Type here" class="input input-bordered w-full " required />
                     </label>
                     <select name="id_dokter" class="select select-bordered w-full">
-                                <?php
-                                include('../database/database.php');
-                                $sql = "SELECT * FROM dokter";
-                                $result = mysqli_query($conn, $sql);
-                                if (mysqli_num_rows($result) > 0) {
-                                    while ($row = mysqli_fetch_assoc($result)) {
-                                        echo '<option value="' . $row['id_dokter'] . '">' . $row['nama'] . '</option>';
-                                    }
-                                }
-                                ?>
-                            </select>
+                        <?php
+                        include('../database/database.php');
+                        $sql = "SELECT * FROM dokter";
+                        $result = mysqli_query($conn, $sql);
+                        if (mysqli_num_rows($result) > 0) {
+                            while ($row = mysqli_fetch_assoc($result)) {
+                                echo '<option value="' . $row['id_dokter'] . '">' . $row['nama'] . '</option>';
+                            }
+                        }
+                        ?>
+                    </select>
                     <div class="mt-4">
                         <button name="submit" type="submit" class="bg-blues opacity-95 text-white btn hover:bg-blues hover:opacity-100">Create</button>
                     </div>

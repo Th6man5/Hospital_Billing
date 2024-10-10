@@ -31,11 +31,11 @@
         }
 
         .table tbody tr:nth-child(odd) {
-            background-color: #FFFFFF; 
+            background-color: #FFFFFF;
         }
 
         .table tbody tr:nth-child(even) {
-            background-color: #EEEEEE; 
+            background-color: #EEEEEE;
         }
     </style>
 </head>
