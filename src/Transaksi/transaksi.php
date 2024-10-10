@@ -29,6 +29,17 @@
             font-weight: 100;
             font-size: 16px;
         }
+
+        .table tbody tr:nth-child(odd) {
+            background-color: #FFFFFF; 
+        }
+
+        .table tbody tr:nth-child(even) {
+            background-color: #EEEEEE; 
+        }
+        
+    </style>
+
     </style>
 </head>
 
@@ -39,13 +50,13 @@
         <div class="p-4">
             <div class="flex items-center justify-between">
                 <h1>Transaksi</h1>
-                <a href="/grancy/src/admin/adminrooms_create.php" class="bg-blues opacity-95 text-white btn hover:bg-blues hover:opacity-100">Tambah Transaksi</a>
+                <a href="/grancy/src/admin/adminrooms_create.php" class="bg-blues opacity-95 text-black btn hover:bg-blues hover:opacity-100">Tambah Transaksi</a>
             </div>
             <div class="overflow-x-auto">
                 <table class="table text-center">
                     <!-- head -->
                     <thead>
-                        <tr class="bg-blues2">
+                        <tr class="bg-blues2 text-black">
                             <th>No</th>
                             <th>Pasien</th>
                             <th>Dokter</th>
