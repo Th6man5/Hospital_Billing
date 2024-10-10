@@ -1,4 +1,4 @@
- <nav class="fixed top-0 z-50 w-full bg bg-nav border-b border-gray-200 dark:bg-gray-800 dark:border-gray-700">
+ <!-- <nav class="fixed top-0 z-50 w-full bg bg-nav border-b border-gray-200 dark:bg-gray-800 dark:border-gray-700">
      <div class="px-3 py-3 lg:px-5 lg:pl-3">
          <div class="flex items-center justify-between">
              <div class="flex items-center justify-start rtl:justify-end">
@@ -8,10 +8,11 @@
              </div>
          </div>
      </div>
- </nav>
+ </nav> -->
 
- <aside id="logo-sidebar" class="fixed top-0 left-0 z-40 w-64 h-screen pt-20 transition-transform -translate-x-full bg bg-sidenav border-r border-gray-200 sm:translate-x-0 dark:bg-gray-800 dark:border-gray-700" aria-label="Sidebar">
-     <div class="h-full px-3 pb-4 overflow-y-auto bg bg-sidenav dark:bg-gray-800">
+ <aside id="logo-sidebar" class="fixed top-0 left-0 z-40 w-64 h-screen pt-5 transition-transform -translate-x-full bg bg-sidenav border-r border-gray-200 sm:translate-x-0 dark:bg-gray-800 dark:border-gray-700" aria-label="Sidebar">
+     <h1 class="text-2xl text-center font-bold mb-5">Admin</h1>
+     <div class=" h-full px-3 pb-4 overflow-y-auto bg bg-sidenav dark:bg-gray-800">
          <ul class="space-y-2 font-medium">
              <li>
                  <a href="http://localhost/hospital_billing/src/main.php" class="flex items-center p-2 rounded-lg text-black group hover:bg-black hover:text-white
