@@ -36,7 +36,7 @@
 
     <?php include '../template/sidebar.php'; ?>
     <div class="p-4 sm:ml-64">
-        <div class="p-4 mt-14">
+        <div class="p-4">
             <div class="flex items-center justify-between">
                 <h1>Pasien</h1>
                 <a href="/hospital_billing/src/admin/adminrooms_create.php" class="bg-blues opacity-95 text-white btn hover:bg-blues hover:opacity-100">Tambah Pasien</a>

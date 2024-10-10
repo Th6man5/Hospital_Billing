@@ -1308,6 +1308,10 @@ html {
   margin-bottom: 1rem;
 }
 
+.mb-5 {
+  margin-bottom: 1.25rem;
+}
+
 .mb-auto {
   margin-bottom: auto;
 }
@@ -1330,14 +1334,6 @@ html {
 
 .mt-auto {
   margin-top: auto;
-}
-
-.mb-10 {
-  margin-bottom: 2.5rem;
-}
-
-.mb-5 {
-  margin-bottom: 1.25rem;
 }
 
 .flex {
@@ -1559,14 +1555,6 @@ html {
 
 .pb-4 {
   padding-bottom: 1rem;
-}
-
-.pt-20 {
-  padding-top: 5rem;
-}
-
-.pt-10 {
-  padding-top: 2.5rem;
 }
 
 .pt-5 {

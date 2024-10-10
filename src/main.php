@@ -34,7 +34,7 @@
 
     <?php include 'template/sidebar.php'; ?>
     <div class="p-4 sm:ml-64">
-        <div class="p-4 mt-14">
+        <div class="p-4">
             <h1>Hospital Billing</h1>
             <div class="grid grid-cols-4 gap-4 mb-4 ">
                 <div class="grid grid-cols-2 h-36 rounded bg-gray-50 dark:bg-gray-800 col-span-2 bg-blues2">
