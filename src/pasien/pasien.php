@@ -49,7 +49,7 @@
         <div class="p-4">
             <div class="flex items-center justify-between">
                 <h1>Pasien</h1>
-                <a href="/hospital_billing/src/pasien/pasien_create.php" class="bg-blues opacity-95 text-white btn hover:bg-blues hover:opacity-100">Tambah Pasien</a>
+                <a href="/hospital_billing/src/pasien/pasien_create.php" class="bg-blues opacity-95 text-black btn hover:bg-blues hover:opacity-100">Tambah Pasien</a>
             </div>
             <div class="overflow-x-auto">
                 <table class="table">
