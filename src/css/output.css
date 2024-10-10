@@ -1789,4 +1789,9 @@ html {
     --tw-text-opacity: 1;
     color: rgb(145 216 228 / var(--tw-text-opacity));
   }
+
+  .group:hover .dark\:group-hover\:text-white {
+    --tw-text-opacity: 1;
+    color: rgb(36 54 66 / var(--tw-text-opacity));
+  }
 }
