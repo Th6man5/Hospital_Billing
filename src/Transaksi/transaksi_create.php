@@ -1,7 +1,6 @@
 <?php
 if (isset($_POST['submit'])) {
     include('../database/database.php');
-    $id_dokter = $_POST['id_dokter'];
     $id_pasien = $_POST['id_pasien'];
     $id_layanan = $_POST['id_layanan'];
     $jenis_pembayaran = $_POST['jenis_pembayaran'];
@@ -12,11 +11,11 @@ if (isset($_POST['submit'])) {
 
 
     do {
-        if (empty($id_dokter) || empty($id_pasien) || empty($id_layanan) || empty($jenis_pembayaran) || empty($biaya_layanan) || empty($potongan_harga) || empty($tanggal) || empty($waktu)) {
+        if (empty($id_pasien) || empty($id_layanan) || empty($jenis_pembayaran) || empty($biaya_layanan) || empty($potongan_harga) || empty($tanggal) || empty($waktu)) {
             echo "<script>alert('Please fill all the fields')</script>";
             break;
         } else {
-            $sql = "INSERT INTO transaksi (id_dokter, id_pasien, id_layanan , jenis_pembayaran, biaya_layanan, potongan_harga, tanggal, waktu) VALUES ('$id_dokter', '$id_pasien', '$id_layanan', '$jenis_pembayaran', '$biaya_layanan', '$potongan_harga', '$tanggal', '$waktu')";
+            $sql = "INSERT INTO transaksi ( id_pasien, id_layanan , jenis_pembayaran, biaya_layanan, potongan_harga, tanggal, waktu) VALUES ('$id_pasien', '$id_layanan', '$jenis_pembayaran', '$biaya_layanan', '$potongan_harga', '$tanggal', '$waktu')";
             if (mysqli_query($conn, $sql)) {
                 $successMessage = 'Transaksi has been created successfully';
             } else {
@@ -95,7 +94,7 @@ if (isset($_POST['submit'])) {
                         <div class="label" for="id_pasien">
                             <span class="label-text text-xl">Nama Pasien</span>
                         </div>
-                        <select name="id_pasien" class="id_pasien" id="id_pasien" style="width: 100%;">
+                        <select name="id_pasien" class="select select-bordered w-full">
                             <?php
                             include('../database/database.php');
                             $sql = "SELECT * FROM pasien";
@@ -109,41 +108,54 @@ if (isset($_POST['submit'])) {
                         </select>
                     </label>
                     <label class="form-control w-full">
-                        <div class="label">
-                            <span class="label-text text-xl">Jenis_Kelamin</span>
+                        <div class="label" for="id_pasien">
+                            <span class="label-text text-xl">Jenis Layanan</span>
                         </div>
-                        <input type="text" name="jenis_kelamin" placeholder="Type here" class="input input-bordered w-full " required />
+                        <select name="id_layanan" class="select select-bordered w-full">
+                            <?php
+                            include('../database/database.php');
+                            $sql = "SELECT * FROM layanan";
+                            $result = mysqli_query($conn, $sql);
+                            if (mysqli_num_rows($result) > 0) {
+                                while ($row = mysqli_fetch_assoc($result)) {
+                                    echo '<option value="' . $row['id_layanan'] . '">' . $row['nama_layanan'] . '</option>';
+                                }
+                            }
+                            ?>
+                        </select>
                     </label>
                     <div class="w-full flex gap-x-4">
                         <label class="form-control w-full">
                             <div class="label">
-                                <span class="label-text text-xl">Tanggal Lahir</span>
+                                <span class="label-text text-xl">Jenis Pembayaran</span>
                             </div>
-                            <input type="date" name="tanggal_lahir" placeholder="Type here" class="input input-bordered w-full " required />
+                            <input type="text" name="jenis_pembayaran" placeholder="Type here" class="input input-bordered w-full " required />
                         </label>
                         <label class="form-control w-full">
                             <div class="label">
-                                <span class="label-text text-xl">No Telepon</span>
+                                <span class="label-text text-xl">Biaya Layanan</span>
                             </div>
-                            <input type="text" name="no_telepon" placeholder="Type here" class="input input-bordered w-full " required />
+                            <input type="number" name="biaya_layanan" placeholder="Type here" class="input input-bordered w-full " required />
                         </label>
                         <label class="form-control w-full">
                             <div class="label">
-                                <span class="label-text text-xl">Email</span>
+                                <span class="label-text text-xl">Potongan Harga</span>
                             </div>
-                            <input type="text" name="email" placeholder="Type here" class="input input-bordered w-full " required />
+                            <input type="text" name="potongan_harga" placeholder="Type here" class="input input-bordered w-full " required />
+                        </label>
+                    </div>
+                    <div class="w-full flex gap-x-4">
+                        <label class="form-control w-full">
+                            <div class="label">
+                                <span class="label-text text-xl">Tanggal</span>
+                            </div>
+                            <input type="date" name="tanggal" placeholder="Type here" class="input input-bordered w-full " required />
                         </label>
                         <label class="form-control w-full">
                             <div class="label">
-                                <span class="label-text text-xl">Alamat</span>
+                                <span class="label-text text-xl">Waktu</span>
                             </div>
-                            <input type="text" name="alamat" placeholder="Type here" class="input input-bordered w-full " required />
-                        </label>
-                        <label class="form-control w-full">
-                            <div class="label">
-                                <span class="label-text text-xl">Spesialis</span>
-                            </div>
-                            <input type="text" name="spesialis" placeholder="Type here" class="input input-bordered w-full " required />
+                            <input type="time" name="waktu" placeholder="Type here" class="input input-bordered w-full " required />
                         </label>
                     </div>
                     <div class="mt-4">
