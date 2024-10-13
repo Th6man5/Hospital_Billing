@@ -49,7 +49,7 @@
         <div class="p-4 ">
             <div class="flex items-center justify-between">
                 <h1>Insuransi</h1>
-                <a href="/hospital_billing/src/insuransi/insuransi_create.php" class="bg-blues opacity-95 text-black btn hover:bg-blues hover:opacity-100">Tambah Insuransi</a>
+                <a href="insuransi_create.php" class="bg-blues opacity-95 text-black btn hover:bg-blues hover:opacity-100">Tambah Insuransi</a>
             </div>
             <div class="overflow-x-auto">
                 <table class="table">
@@ -87,10 +87,10 @@
                                 <td>' . $row['tanggal_polis_akhir'] . '</td>
                                 <td>' . $row['jenis_pertanggungan'] . '</td>
                                 <td class="flex gap-x-4 justify-center">
-                                    <a href="/hospital_billing/src/insuransi/insuransi_edit.php?id=' . $row['id_insuransi'] . '" class="btn bg-yellow hover:shadow-md hover:bg-yellow group">
+                                    <a href="insuransi_edit.php?id=' . $row['id_insuransi'] . '" class="btn bg-yellow hover:shadow-md hover:bg-yellow group">
                                         <i class="bi bi-pencil-square  transition-all"></i>
                                     </a>
-                                    <a onclick="return confirm(\'Ingin menghapus Data Insuransi ini?\');" href="/hospital_billing/src/insuransi/insuransi_delete.php?id=' . $row['id_insuransi'] . '" class="btn bg-red hover:shadow-md hover:bg-red group">
+                                    <a onclick="return confirm(\'Ingin menghapus Data Insuransi ini?\');" href="insuransi_delete.php?id=' . $row['id_insuransi'] . '" class="btn bg-red hover:shadow-md hover:bg-red group">
                                         <i class="bi bi-trash-fill  transition-all"></i>
                                     </a>
                                 </td>

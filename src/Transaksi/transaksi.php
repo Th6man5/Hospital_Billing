@@ -49,7 +49,7 @@
         <div class="p-4">
             <div class="flex items-center justify-between">
                 <h1>Transaksi</h1>
-                <a href="/grancy/src/admin/adminrooms_create.php" class="bg-blues opacity-95 text-black btn hover:bg-blues hover:opacity-100">Tambah Transaksi</a>
+                <a href="transaksi_create.php" class="bg-blues opacity-95 text-black btn hover:bg-blues hover:opacity-100">Tambah Transaksi</a>
             </div>
             <div class="overflow-x-auto">
                 <table class="table text-center">
@@ -92,10 +92,10 @@
                                     <td>' . $row['tanggal'] . '</td>
                                     <td>' . $row['waktu'] . '</td>
                                 <td class="flex gap-x-4 justify-center">
-                                    <a href="/grancy/src/transaksi/transaksi_edit.php?id=' . $row['id_transaksi'] . '" class="btn bg-yellow hover:shadow-md hover:bg-yellow group">
+                                    <a href="transaksi_edit.php?id=' . $row['id_transaksi'] . '" class="btn bg-yellow hover:shadow-md hover:bg-yellow group">
                                         <i class="bi bi-pencil-square  transition-all"></i>
                                     </a>
-                                    <a onclick="return confirm(\'Are you sure you want to delete this room type?\');" href="/grancy/src/transaksi/transaksi_delete.php?id=' . $row['id_transaksi'] . '" class="btn bg-red hover:shadow-md hover:bg-red group">
+                                    <a onclick="return confirm(\'Are you sure you want to delete this room type?\');" href="transaksi_delete.php?id=' . $row['id_transaksi'] . '" class="btn bg-red hover:shadow-md hover:bg-red group">
                                         <i class="bi bi-trash-fill  transition-all"></i>
                                     </a>
                                 </td>

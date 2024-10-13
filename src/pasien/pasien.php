@@ -49,7 +49,7 @@
         <div class="p-4">
             <div class="flex items-center justify-between">
                 <h1>Pasien</h1>
-                <a href="/hospital_billing/src/pasien/pasien_create.php" class="bg-blues opacity-95 text-black btn hover:bg-blues hover:opacity-100">Tambah Pasien</a>
+                <a href="pasien_create.php" class="bg-blues opacity-95 text-black btn hover:bg-blues hover:opacity-100">Tambah Pasien</a>
             </div>
             <div class="overflow-x-auto">
                 <table class="table">
@@ -83,10 +83,10 @@
                                 <td>' . $row['tanggal_lahir'] . '</td>
                                 <td>' . (!empty($row['id_insuransi']) ? 'ada' : '') . '</td>
                                 <td class="flex gap-x-4 justify-center">
-                                    <a href="/hospital_billing/src/pasien/pasien_edit.php?id=' . $row['id_pasien'] . '" class="btn bg-yellow hover:shadow-md hover:bg-yellow group">
+                                    <a href="pasien_edit.php?id=' . $row['id_pasien'] . '" class="btn bg-yellow hover:shadow-md hover:bg-yellow group">
                                         <i class="bi bi-pencil-square  transition-all"></i>
                                     </a>
-                                    <a onclick="return confirm(\'Are you sure you want to delete this room type?\');" href="/hospital_billing/src/pasien/pasien_delete.php?id=' . $row['id_pasien'] . '" class="btn bg-red hover:shadow-md hover:bg-red group">
+                                    <a onclick="return confirm(\'Are you sure you want to delete this room type?\');" href="pasien_delete.php?id=' . $row['id_pasien'] . '" class="btn bg-red hover:shadow-md hover:bg-red group">
                                         <i class="bi bi-trash-fill  transition-all"></i>
                                     </a>
                                 </td>

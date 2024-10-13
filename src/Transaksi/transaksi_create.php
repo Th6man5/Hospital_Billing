@@ -1,22 +1,24 @@
 <?php
 if (isset($_POST['submit'])) {
     include('../database/database.php');
-    $nama = $_POST['nama'];
-    $jenis_kelamin = $_POST['jenis_kelamin'];
-    $tanggal_lahir = $_POST['tanggal_lahir'];
-    $no_telepon = $_POST['no_telepon'];
-    $email = $_POST['email'];
-    $alamat = $_POST['alamat'];
-    $spesialis = $_POST['spesialis'];
+    $id_dokter = $_POST['id_dokter'];
+    $id_pasien = $_POST['id_pasien'];
+    $id_layanan = $_POST['id_layanan'];
+    $jenis_pembayaran = $_POST['jenis_pembayaran'];
+    $biaya_layanan = $_POST['biaya_layanan'];
+    $potongan_harga = $_POST['potongan_harga'];
+    $tanggal = $_POST['tanggal'];
+    $waktu = $_POST['waktu'];
+
 
     do {
-        if (empty($nama) || empty($jenis_kelamin) || empty($tanggal_lahir) || empty($no_telepon) || empty($email) || empty($alamat) || empty($spesialis)) {
+        if (empty($id_dokter) || empty($id_pasien) || empty($id_layanan) || empty($jenis_pembayaran) || empty($biaya_layanan) || empty($potongan_harga) || empty($tanggal) || empty($waktu)) {
             echo "<script>alert('Please fill all the fields')</script>";
             break;
         } else {
-            $sql = "INSERT INTO dokter (nama, jenis_kelamin, tanggal_lahir , no_telepon, email, alamat, spesialis) VALUES ('$nama', '$jenis_kelamin', '$tanggal_lahir', '$no_telepon', '$email', '$alamat', '$spesialis')";
+            $sql = "INSERT INTO transaksi (id_dokter, id_pasien, id_layanan , jenis_pembayaran, biaya_layanan, potongan_harga, tanggal, waktu) VALUES ('$id_dokter', '$id_pasien', '$id_layanan', '$jenis_pembayaran', '$biaya_layanan', '$potongan_harga', '$tanggal', '$waktu')";
             if (mysqli_query($conn, $sql)) {
-                $successMessage = 'Dokter has been created successfully';
+                $successMessage = 'Transaksi has been created successfully';
             } else {
                 echo 'Error: ' . $sql . '<br>' . mysqli_error($conn);
             }
@@ -31,7 +33,13 @@ if (isset($_POST['submit'])) {
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Dashboard | Insuransi</title>
+    <title>Dashboard | Transaksi</title>
+    <!-- Tambahkan Select2 CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
+
+    <!-- Tambahkan Select2 JS -->
+    <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+
     <link href="../css/output.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
 
@@ -62,10 +70,10 @@ if (isset($_POST['submit'])) {
 <body>
     <?php include '../template/sidebar.php'; ?>
     <div class="p-4 sm:ml-64">
-        <div class="p-4 mt-14">
+        <div class="p-4">
             <div class="flex items-center justify-between">
-                <h1>Tambah Dokter</h1>
-                <a href="/hospital_billing/src/dokter/dokter.php" class="bg-blues opacity-95 text-white btn hover:bg-blues hover:opacity-100">Back</a>
+                <h1>Tambah Transaksi</h1>
+                <a href="transaksi.php" class="bg-blues opacity-95 text-white btn hover:bg-blues hover:opacity-100">Back</a>
             </div>
             <?php
             if (!empty($successMessage)) {
@@ -84,10 +92,21 @@ if (isset($_POST['submit'])) {
             <form method="POST">
                 <div class="p-10">
                     <label class="form-control w-full">
-                        <div class="label">
-                            <span class="label-text text-xl">Nama</span>
+                        <div class="label" for="id_pasien">
+                            <span class="label-text text-xl">Nama Pasien</span>
                         </div>
-                        <input type="text" name="nama" placeholder="Type here" class="input input-bordered w-full " required />
+                        <select name="id_pasien" class="id_pasien" id="id_pasien" style="width: 100%;">
+                            <?php
+                            include('../database/database.php');
+                            $sql = "SELECT * FROM pasien";
+                            $result = mysqli_query($conn, $sql);
+                            if (mysqli_num_rows($result) > 0) {
+                                while ($row = mysqli_fetch_assoc($result)) {
+                                    echo '<option value="' . $row['id_pasien'] . '">' . $row['nama'] . '</option>';
+                                }
+                            }
+                            ?>
+                        </select>
                     </label>
                     <label class="form-control w-full">
                         <div class="label">
@@ -135,3 +154,13 @@ if (isset($_POST['submit'])) {
         </div>
     </div>
 </body>
+
+<script>
+    $(document).ready(function() {
+        // Inisialisasi Select2 pada elemen select
+        $('#id_pasien').select2({
+            placeholder: 'Pilih Nama Pasien', // Placeholder untuk pencarian
+            allowClear: true // Menambahkan tombol hapus pilihan
+        });
+    });
+</script>
