@@ -34,9 +34,12 @@ if (isset($_POST['submit'])) {
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Dashboard | Transaksi</title>
     <!-- Tambahkan Select2 CSS -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+    <!-- Select2 CSS -->
     <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
 
-    <!-- Tambahkan Select2 JS -->
+    <!-- Select2 JS -->
     <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
 
     <link href="../css/output.css" rel="stylesheet">
@@ -94,7 +97,7 @@ if (isset($_POST['submit'])) {
                         <div class="label" for="id_pasien">
                             <span class="label-text text-xl">Nama Pasien</span>
                         </div>
-                        <select name="id_pasien" class="select select-bordered w-full">
+                        <select name="id_pasien" class="select select-bordered w-full" id="select-pasien">
                             <?php
                             include('../database/database.php');
                             $sql = "SELECT * FROM pasien";
@@ -111,7 +114,7 @@ if (isset($_POST['submit'])) {
                         <div class="label" for="id_pasien">
                             <span class="label-text text-xl">Jenis Layanan</span>
                         </div>
-                        <select name="id_layanan" class="select select-bordered w-full">
+                        <select name="id_layanan" class="select select-bordered w-full" id="select-layanan">
                             <?php
                             include('../database/database.php');
                             $sql = "SELECT * FROM layanan";
@@ -169,10 +172,16 @@ if (isset($_POST['submit'])) {
 
 <script>
     $(document).ready(function() {
-        // Inisialisasi Select2 pada elemen select
-        $('#id_pasien').select2({
-            placeholder: 'Pilih Nama Pasien', // Placeholder untuk pencarian
-            allowClear: true // Menambahkan tombol hapus pilihan
+        $('#select-pasien').select2({
+            placeholder: 'Pilih Nama Pasien',
+            allowClear: true
+        });
+    });
+
+    $(document).ready(function() {
+        $('#select-layanan').select2({
+            placeholder: 'Pilih Layanan',
+            allowClear: true
         });
     });
 </script>
