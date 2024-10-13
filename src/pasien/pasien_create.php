@@ -64,7 +64,7 @@ if (isset($_POST['submit'])) {
         <div class="p-4">
             <div class="flex items-center justify-between">
                 <h1>Tambah Pasien</h1>
-                <a href="/hospital_billing/src/pasien/pasien.php" class="bg-blues opacity-95 text-white btn hover:bg-blues hover:opacity-100">Back</a>
+                <a href="pasien.php" class="bg-blues opacity-95 text-white btn hover:bg-blues hover:opacity-100">Back</a>
             </div>
             <?php
             if (!empty($successMessage)) {

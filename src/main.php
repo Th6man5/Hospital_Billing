@@ -37,7 +37,7 @@
         <div class="p-4">
             <h1>Hospital Billing</h1>
             <div class="grid grid-cols-4 gap-4 mb-4 ">
-                <a href="/hospital_billing/src/pasien/pasien.php" class="col-span-2">
+                <a href="pasien/pasien.php" class="col-span-2">
                     <div class="grid grid-cols-2 h-36 rounded bg-gray-50 dark:bg-gray-800 bg-blues2">
                         <div class="grid grid-rows-2">
                             <h6 class="text-4xl text-black dark:text-gray-500 place-self-center mt-auto font-bold">
@@ -61,7 +61,7 @@
                         </div>
                     </div>
                 </a>
-                <a href="/hospital_billing/src/dokter/dokter.php" class="col-span-2">
+                <a href="dokter/dokter.php" class="col-span-2">
                     <div class="grid grid-cols-2 h-36 rounded bg-gray-50 dark:bg-gray-800 col-span-2 bg-blues2">
                         <div class="grid grid-rows-2">
                             <h6 class="text-4xl text-black dark:text-gray-500 place-self-center mt-auto font-bold">
@@ -85,7 +85,7 @@
                         </div>
                     </div>
                 </a>
-                <a href="/hospital_billing/src/insuransi/insuransi.php" class="col-span-2">
+                <a href="insuransi/insuransi.php" class="col-span-2">
                     <div class="grid grid-cols-2 h-36 rounded bg-gray-50 dark:bg-gray-800 col-span-2 bg-blues2">
                         <div class="grid grid-rows-2">
                             <h6 class="text-4xl text-black dark:text-gray-500 place-self-center mt-auto font-bold">
@@ -109,7 +109,7 @@
                         </div>
                     </div>
                 </a>
-                <a href="/hospital_billing/src/transaksi/transaksi.php" class="col-span-2">
+                <a href="transaksi/transaksi.php" class="col-span-2">
                     <div class="grid grid-cols-2 h-36 rounded bg-gray-50 dark:bg-gray-800 col-span-2 bg-blues2">
                         <div class="grid grid-rows-2">
                             <h6 class="text-4xl text-black dark:text-gray-500 place-self-center mt-auto font-bold">
@@ -135,7 +135,7 @@
                         </div>
                     </div>
                 </a>
-                <a href="/hospital_billing/src/layanan/layanan.php" class="col-span-2">
+                <a href="layanan/layanan.php" class="col-span-2">
                     <div class="grid grid-cols-2 h-36 rounded bg-gray-50 dark:bg-gray-800 col-span-2 bg-blues2">
                         <div class="grid grid-rows-2">
                             <h6 class="text-4xl text-black dark:text-gray-500 place-self-center mt-auto font-bold">

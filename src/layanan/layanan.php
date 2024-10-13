@@ -49,7 +49,7 @@
         <div class="p-4">
             <div class="flex items-center justify-between">
                 <h1>Daftar Layanan</h1>
-                <a href="/hospital_billing/src/layanan/layanan_create.php" class="bg-blues opacity-95 text-black btn hover:bg-blues hover:opacity-100">Tambah Layanan</a>
+                <a href="layanan_create.php" class="bg-blues opacity-95 text-black btn hover:bg-blues hover:opacity-100">Tambah Layanan</a>
             </div>
             <div class="overflow-x-auto">
                 <table class="table">
@@ -77,10 +77,10 @@
                                 <td>' . number_format($row['harga']) . '</td>
                                 <td>' . $row['nama_dokter'] . '</td>
                                 <td class="flex gap-x-4 justify-center">
-                                    <a href="/hospital_billing/src/layanan/layanan_edit.php?id=' . $row['id_layanan'] . '" class="btn bg-yellow hover:shadow-md hover:bg-yellow group">
+                                    <a href="layanan_edit.php?id=' . $row['id_layanan'] . '" class="btn bg-yellow hover:shadow-md hover:bg-yellow group">
                                         <i class="bi bi-pencil-square  transition-all"></i>
                                     </a>
-                                    <a onclick="return confirm(\'Are you sure you want to delete this room type?\');" href="/hospital_billing/src/layanan/layanan_delete.php?id=' . $row['id_layanan'] . '" class="btn bg-red hover:shadow-md hover:bg-red group">
+                                    <a onclick="return confirm(\'Are you sure you want to delete this room type?\');" href="layanan_delete.php?id=' . $row['id_layanan'] . '" class="btn bg-red hover:shadow-md hover:bg-red group">
                                         <i class="bi bi-trash-fill  transition-all"></i>
                                     </a>
                                 </td>
