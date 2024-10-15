@@ -2,30 +2,47 @@
 if (isset($_POST['submit'])) {
     include('../database/database.php');
     $id_pasien = $_POST['id_pasien'];
-    $id_layanan = $_POST['id_layanan'];
+    $id_layanan_array = $_POST['id_layanan'];
     $jenis_pembayaran = $_POST['jenis_pembayaran'];
     $biaya_layanan = $_POST['biaya_layanan'];
     $potongan_harga = $_POST['potongan_harga'];
     $tanggal = $_POST['tanggal'];
     $waktu = $_POST['waktu'];
 
-
     do {
-        if (empty($id_pasien) || empty($id_layanan) || empty($jenis_pembayaran) || empty($biaya_layanan) || empty($potongan_harga) || empty($tanggal) || empty($waktu)) {
+        if (empty($id_pasien) || empty($id_layanan_array) || empty($jenis_pembayaran) || empty($biaya_layanan) || empty($potongan_harga) || empty($tanggal) || empty($waktu)) {
             echo "<script>alert('Please fill all the fields')</script>";
             break;
         } else {
-            $sql = "INSERT INTO transaksi ( id_pasien, id_layanan , jenis_pembayaran, biaya_layanan, potongan_harga, tanggal, waktu) VALUES ('$id_pasien', '$id_layanan', '$jenis_pembayaran', '$biaya_layanan', '$potongan_harga', '$tanggal', '$waktu')";
+            $id_layanan_list = implode(",", $id_layanan_array);
+            $sql_layanan = "SELECT nama_layanan FROM layanan WHERE id_layanan IN ($id_layanan_list)";
+            $result = mysqli_query($conn, $sql_layanan);
+
+            $nama_layanan_array = [];
+            if (mysqli_num_rows($result) > 0) {
+                while ($row = mysqli_fetch_assoc($result)) {
+                    $nama_layanan_array[] = $row['nama_layanan'];
+                }
+            }
+
+            $nama_layanan = implode(", ", $nama_layanan_array);
+
+            $sql = "INSERT INTO transaksi (id_pasien, nama_layanan, jenis_pembayaran, biaya_layanan, potongan_harga, tanggal, waktu) 
+                    VALUES ('$id_pasien', '$nama_layanan', '$jenis_pembayaran', '$biaya_layanan', '$potongan_harga', '$tanggal', '$waktu')";
+
             if (mysqli_query($conn, $sql)) {
                 $successMessage = 'Transaksi has been created successfully';
             } else {
                 echo 'Error: ' . $sql . '<br>' . mysqli_error($conn);
             }
+
             mysqli_close($conn);
         }
     } while (false);
 }
 ?>
+
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -115,7 +132,7 @@ if (isset($_POST['submit'])) {
                             <div class="label" for="id_pasien">
                                 <span class="label-text text-xl">Jenis Layanan</span>
                             </div>
-                            <select name="id_layanan" class="select select-bordered" id="select-layanan">
+                            <select name="id_layanan[]" class="select select-bordered" id="select-layanan" multiple>
                                 <?php
                                 include('../database/database.php');
                                 $sql = "SELECT * FROM layanan";
@@ -127,9 +144,7 @@ if (isset($_POST['submit'])) {
                                 }
                                 ?>
                             </select>
-                            <div class="pt-5">
-                                <button class="text-start bg-blues opacity-95 text-black btn hover:bg-blues hover:opacity-100 w-fit">Tambah</button>
-                            </div>
+
 
                         </label>
                         <div class="overflow-x-auto p-10">

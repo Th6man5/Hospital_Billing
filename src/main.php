@@ -51,7 +51,7 @@
                                     $sql = "SELECT COUNT(*) as total FROM pasien;";
                                     $result = mysqli_query($conn, $sql);
                                     $row = mysqli_fetch_array($result);
-    
+
                                     echo $row['total']
                                     ?>
                                 </h6>
@@ -74,7 +74,7 @@
                                     $sql = "SELECT COUNT(*) as total FROM dokter;";
                                     $result = mysqli_query($conn, $sql);
                                     $row = mysqli_fetch_array($result);
-                                    
+
                                     echo $row['total']
                                     ?>
                                 </h6>
@@ -182,7 +182,7 @@
                     echo "<tr>";
                     echo "<td>" . $row["id_transaksi"] . "</td>";
                     echo "<td>" . $row["id_pasien"] . "</td>";
-                    echo "<td>" . $row["id_layanan"] . "</td>";
+                    echo "<td>" . $row["nama_layanan"] . "</td>";
                     echo "<td>" . $row["jenis_pembayaran"] . "</td>";
                     echo "<td>" . $row["biaya_layanan"] . "</td>";
                     echo "<td>" . $row["potongan_harga"] . "</td>";

@@ -46,14 +46,13 @@ CREATE TABLE layanan (
 CREATE TABLE transaksi (
     id_transaksi INT PRIMARY KEY AUTO_INCREMENT,
     id_pasien INT NOT NULL,
-    id_layanan INT NOT NULL,
+    nama_layanan VARCHAR(225) NOT NULL,
     jenis_pembayaran VARCHAR(50) NOT NULL,
     total_harga DECIMAL(10, 2) NOT NULL,
     potongan_harga DECIMAL(5, 2),
     tanggal DATE NOT NULL,
     waktu TIME NOT NULL,
-    FOREIGN KEY (id_pasien) REFERENCES pasien(id_pasien) ON DELETE CASCADE,
-    FOREIGN KEY (id_layanan) REFERENCES layanan(id_layanan) ON DELETE CASCADE
+    FOREIGN KEY (id_pasien) REFERENCES pasien(id_pasien) ON DELETE CASCADE
 );
 
 

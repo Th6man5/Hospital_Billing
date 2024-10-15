@@ -58,7 +58,6 @@
                         <tr class="bg-blues2 text-black">
                             <th>No</th>
                             <th>Pasien</th>
-                            <th>Dokter</th>
                             <th>Jenis Layanan</th>
                             <th>Jenis Pembayaran</th>
                             <th>Biaya Layanan</th>
@@ -71,20 +70,17 @@
                     <tbody>
                         <?php
                         include('../database/database.php');
-                        $sql = "SELECT transaksi.id_transaksi, pasien.nama AS nama_pasien,layanan.nama_layanan,
-                                        dokter.nama AS nama_dokter, transaksi.jenis_pembayaran, transaksi.biaya_layanan,
+                        $sql = "SELECT transaksi.id_transaksi, pasien.nama AS nama_pasien, transaksi.nama_layanan,
+                                        transaksi.jenis_pembayaran, transaksi.biaya_layanan,
                                         transaksi.potongan_harga, transaksi.tanggal, transaksi.waktu
                                         FROM transaksi
-                                        JOIN pasien ON transaksi.id_pasien = pasien.id_pasien
-                                        JOIN layanan ON transaksi.id_layanan = layanan.id_layanan
-                                        JOIN dokter ON layanan.id_dokter = dokter.id_dokter;";
+                                        JOIN pasien ON transaksi.id_pasien = pasien.id_pasien;";
                         $result = mysqli_query($conn, $sql);
                         if (mysqli_num_rows($result) > 0) {
                             while ($row = mysqli_fetch_assoc($result)) {
                                 echo '<tr>
                                  <th>' . $row['id_transaksi'] . '</th>
                                     <td>' . $row['nama_pasien'] . '</td>
-                                    <td>' . $row['nama_dokter'] . '</td>
                                     <td>' . $row['nama_layanan'] . '</td>
                                     <td>' . $row['jenis_pembayaran'] . '</td>
                                     <td>' . number_format($row['biaya_layanan']) . '</td> 
