@@ -116,9 +116,9 @@ if (isset($_POST['submit'])) {
                         </div>
                         <input type="date" name="tanggal_lahir" placeholder="Type here" class="input input-bordered w-full " required />
                     </label>
-                        <div class="label">
-                            <span class="label-text text-xl">Jenis Asuransi</span>
-                        </div>
+                    <div class="label">
+                        <span class="label-text text-xl">Jenis Asuransi</span>
+                    </div>
                     <select name="id_insuransi" class="select select-bordered w-full">
                         <?php
                         include('../database/database.php');

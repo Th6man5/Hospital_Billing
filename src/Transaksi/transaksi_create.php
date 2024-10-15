@@ -127,93 +127,63 @@ if (isset($_POST['submit'])) {
                             ?>
                         </select>
                     </label>
-                    <div class="grid grid-cols-2 gap-x-5">
-                        <label class="form-control w-full">
-                            <div class="label" for="id_pasien">
-                                <span class="label-text text-xl">Jenis Layanan</span>
-                            </div>
-                            <select name="id_layanan[]" class="select select-bordered" id="select-layanan" multiple>
-                                <?php
-                                include('../database/database.php');
-                                $sql = "SELECT * FROM layanan";
-                                $result = mysqli_query($conn, $sql);
-                                if (mysqli_num_rows($result) > 0) {
-                                    while ($row = mysqli_fetch_assoc($result)) {
-                                        echo '<option value="' . $row['id_layanan'] . '">' . $row['nama_layanan'] . '</option>';
-                                    }
+
+                    <label class="form-control w-full">
+                        <div class="label" for="id_pasien">
+                            <span class="label-text text-xl">Jenis Layanan</span>
+                        </div>
+                        <select name="id_layanan[]" class="select select-bordered" id="select-layanan" multiple>
+                            <?php
+                            include('../database/database.php');
+                            $sql = "SELECT * FROM layanan";
+                            $result = mysqli_query($conn, $sql);
+                            if (mysqli_num_rows($result) > 0) {
+                                while ($row = mysqli_fetch_assoc($result)) {
+                                    echo '<option value="' . $row['id_layanan'] . '">' . $row['nama_layanan'] . '</option>';
                                 }
-                                ?>
+                            }
+                            ?>
+                        </select>
+                    </label>
+                    <div class="w-full flex gap-x-4">
+                        <label class="form-control w-full">
+                            <div class="label">
+                                <span class="label-text text-xl">Jenis Pembayaran</span>
+                            </div>
+                            <select name="jenis_pembayaran" class="select select-bordered w-full">
+                                <option value="Tunai">Tunai</option>
+                                <option value="QRIS">QRIS</option>
                             </select>
-
-
                         </label>
-                        <div class="overflow-x-auto p-10">
-                            <table class="table text-center">
-                                <!-- head -->
-                                <thead>
-                                    <tr class="bg-blues2 text-black">
-                                        <th>No</th>
-                                        <th>Jenis Layanan</th>
-                                        <th>Dokter</th>
-                                        <th>Harga Layanan</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <tr>
-                                        <th>1</th>
-                                        <td>Rawat Jalan</td>
-                                        <td>Dr. John Doe</td>
-                                        <td>Rp. 100.000</td>
-                                    </tr>
-                                    <tr>
-                                        <th>2</th>
-                                        <td>Rawat Inap</td>
-                                        <td>Dr. Jane Doe</td>
-                                        <td>Rp. 200.000</td>
-                                    </tr>
-                                </tbody>
-                            </table>
-                        </div>
-                        <div class="w-full flex gap-x-4">
-                            <label class="form-control w-full">
-                                <div class="label">
-                                    <span class="label-text text-xl">Jenis Pembayaran</span>
-                                </div>
-                                <select name="jenis_pembayaran" class="select select-bordered w-full">
-                                    <option value="Tunai">Tunai</option>
-                                    <option value="QRIS">QRIS</option>
-                                </select>
-                            </label>
-                            <label class="form-control w-full">
-                                <div class="label">
-                                    <span class="label-text text-xl">Total Harga</span>
-                                </div>
-                                <input type="number" name="biaya_layanan" placeholder="Type here" class="input input-bordered w-full " required />
-                            </label>
-                            <label class="form-control w-full">
-                                <div class="label">
-                                    <span class="label-text text-xl">Potongan Harga</span>
-                                </div>
-                                <input type="text" name="potongan_harga" placeholder="Type here" class="input input-bordered w-full " required />
-                            </label>
-                        </div>
-                        <div class="w-full flex gap-x-4">
-                            <label class="form-control w-full">
-                                <div class="label">
-                                    <span class="label-text text-xl">Tanggal</span>
-                                </div>
-                                <input type="date" name="tanggal" placeholder="Type here" class="input input-bordered w-full " required />
-                            </label>
-                            <label class="form-control w-full">
-                                <div class="label">
-                                    <span class="label-text text-xl">Waktu</span>
-                                </div>
-                                <input type="time" name="waktu" placeholder="Type here" class="input input-bordered w-full " required />
-                            </label>
-                        </div>
-                        <div class="mt-4">
-                            <button name="submit" type="submit" class="bg-blues opacity-95 text-white btn hover:bg-blues hover:opacity-100">Create</button>
-                        </div>
+                        <label class="form-control w-full">
+                            <div class="label">
+                                <span class="label-text text-xl">Total Harga</span>
+                            </div>
+                            <input type="number" name="biaya_layanan" placeholder="Type here" class="input input-bordered w-full " required />
+                        </label>
+                        <label class="form-control w-full">
+                            <div class="label">
+                                <span class="label-text text-xl">Potongan Harga</span>
+                            </div>
+                            <input type="text" name="potongan_harga" placeholder="Type here" class="input input-bordered w-full " required />
+                        </label>
+                    </div>
+                    <div class="w-full flex gap-x-4">
+                        <label class="form-control w-full">
+                            <div class="label">
+                                <span class="label-text text-xl">Tanggal</span>
+                            </div>
+                            <input type="date" name="tanggal" placeholder="Type here" class="input input-bordered w-full " required />
+                        </label>
+                        <label class="form-control w-full">
+                            <div class="label">
+                                <span class="label-text text-xl">Waktu</span>
+                            </div>
+                            <input type="time" name="waktu" placeholder="Type here" class="input input-bordered w-full " required />
+                        </label>
+                    </div>
+                    <div class="mt-4">
+                        <button name="submit" type="submit" class="bg-blues opacity-95 text-white btn hover:bg-blues hover:opacity-100">Create</button>
                     </div>
             </form>
         </div>
