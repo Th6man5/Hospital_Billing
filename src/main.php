@@ -38,8 +38,8 @@
         <div class="p-4">
             <h1 class="mb-5">Overview</h1>
             <div class="grid grid-cols-5 gap-4 mb-4 ">
-                <a href="pasien/pasien.php" class="col-span-1 group">
-                    <div class="h-36 rounded-xl bg-gray-50 dark:bg-gray-800 col-span-1 bg-blues2 p-6">
+                <a href="pasien/pasien.php" class="col-span-1 transform hover:animate-pulse">
+                    <div class="h-36 rounded-xl bg-gray-50 dark:bg-gray-800 col-span-1 bg-blues2 p-6 hover:bg-cards">
                         <div class="grid grid-cols-2 mt-3">
                             <div>
                                 <h6 class="text-2xl text-black dark:text-gray-500">
@@ -64,10 +64,13 @@
                         </div>
                     </div>
                 </a>
-                <a href="dokter/dokter.php" class="col-span-1">
-                    <div class="h-36 rounded-xl bg-gray-50 dark:bg-gray-800 col-span-1 bg-blues2 p-6">
+                <a href="dokter/dokter.php" class="col-span-1 transform hover:animate-pulse">
+                    <div class="h-36 rounded-xl bg-gray-50 dark:bg-gray-800 col-span-1 bg-blues2 p-6 hover:bg-cards">
                         <div class="grid grid-cols-2 mt-3">
                             <div>
+                                <h6 class="text-2xl text-black dark:text-gray-500">
+                                    Dokter
+                                </h6>
                                 <h6 class="text-4xl text-black dark:text-gray-500 mt-auto font-bold">
                                     <?php
                                     include('./database/database.php');
@@ -78,9 +81,6 @@
                                     echo $row['total']
                                     ?>
                                 </h6>
-                                <h6 class="text-2xl text-black dark:text-gray-500">
-                                    Dokter
-                                </h6>
                             </div>
                             <div class="flex justify-end items-center">
                                 <svg class="bi bi-shield-shaded flex-shrink-0 w-12 h-12 text-black transition duration-75 dark:text-gray-400 group-hover:text-gray-900" xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="currentColor">
@@ -90,10 +90,13 @@
                         </div>
                     </div>
                 </a>
-                <a href="insuransi/insuransi.php" class="col-span-1">
-                    <div class="h-36 rounded-xl bg-gray-50 dark:bg-gray-800 col-span-1 bg-blues2 p-6">
+                <a href="insuransi/insuransi.php" class="col-span-1 transform hover:animate-pulse">
+                    <div class="h-36 rounded-xl bg-gray-50 dark:bg-gray-800 col-span-1 bg-blues2 p-6 hover:bg-cards">
                         <div class="grid grid-cols-2 mt-3">
                             <div>
+                                <h6 class="text-2xl text-black dark:text-gray-500">
+                                    Insuransi
+                                </h6>
                                 <h6 class="text-4xl text-black dark:text-gray-500 mt-auto font-bold">
                                     <?php
                                     include('./database/database.php');
@@ -104,9 +107,6 @@
                                     echo $row['total']
                                     ?>
                                 </h6>
-                                <h6 class="text-2xl text-black dark:text-gray-500">
-                                    Insuransi
-                                </h6>
                             </div>
                             <div class="flex justify-end items-center">
                                 <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" class="bi bi-shield-shaded flex-shrink-0 w-12 h-12 text-black transition duration-75 dark:text-gray-400 group-hover:text-gray-900" viewBox="0 0 16 16">
@@ -116,53 +116,56 @@
                         </div>
                     </div>
                 </a>
-                <a href="transaksi/transaksi.php" class="col-span-1">
-                    <div class="h-36 rounded bg-gray-50 dark:bg-gray-800 col-span-1 bg-blues2">
-                        <div class="grid grid-rows-2">
-                            <h6 class="text-4xl text-black dark:text-gray-500 place-self-center mt-auto font-bold">
-                                <?php
-                                include('./database/database.php');
-                                $sql = "SELECT COUNT(*) as total FROM transaksi;";
-                                $result = mysqli_query($conn, $sql);
-                                $row = mysqli_fetch_array($result);
-
-                                echo $row['total']
-                                ?>
-                            </h6>
-                            <h6 class="text-2xl text-black dark:text-gray-500 place-self-center mb-auto">
-                                Transaksi
-                            </h6>
-                        </div>
-                        <div class="flex justify-center items-center">
-                            <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" class="bi bi-cash-stack flex-shrink-0 w-24 h-24  text-black transition duration-75 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-nav" viewBox="0 0 16 16">
-                                <path d="M1 3a1 1 0 0 1 1-1h12a1 1 0 0 1 1 1zm7 8a2 2 0 1 0 0-4 2 2 0 0 0 0 4" />
-                                <path d="M0 5a1 1 0 0 1 1-1h14a1 1 0 0 1 1 1v8a1 1 0 0 1-1 1H1a1 1 0 0 1-1-1zm3 0a2 2 0 0 1-2 2v4a2 2 0 0 1 2 2h10a2 2 0 0 1 2-2V7a2 2 0 0 1-2-2z" />
-                            </svg>
-
+                <a href="transaksi/transaksi.php" class="col-span-1 transform hover:animate-pulse">
+                    <div class="h-36 rounded-xl bg-gray-50 dark:bg-gray-800 col-span-1 bg-blues2 p-6 hover:bg-cards">
+                        <div class="grid grid-cols-2 mt-3">
+                            <div>
+                                <h6 class="text-2xl text-black dark:text-gray-500">
+                                    Transaksi
+                                </h6>
+                                <h6 class="text-4xl text-black dark:text-gray-500 mt-auto font-bold">
+                                    <?php
+                                    include('./database/database.php');
+                                    $sql = "SELECT COUNT(*) as total FROM transaksi;";
+                                    $result = mysqli_query($conn, $sql);
+                                    $row = mysqli_fetch_array($result);
+                                    
+                                    echo $row['total']
+                                    ?>
+                                </h6>
+                            </div>
+                            <div class="flex justify-end items-center">
+                                <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" class="bi bi-shield-shaded flex-shrink-0 w-12 h-12 text-black transition duration-75 dark:text-gray-400 group-hover:text-gray-900" viewBox="0 0 16 16">
+                                    <path d="M1 3a1 1 0 0 1 1-1h12a1 1 0 0 1 1 1zm7 8a2 2 0 1 0 0-4 2 2 0 0 0 0 4" />
+                                    <path d="M0 5a1 1 0 0 1 1-1h14a1 1 0 0 1 1 1v8a1 1 0 0 1-1 1H1a1 1 0 0 1-1-1zm3 0a2 2 0 0 1-2 2v4a2 2 0 0 1 2 2h10a2 2 0 0 1 2-2V7a2 2 0 0 1-2-2z" />
+                                </svg>
+                            </div>
                         </div>
                     </div>
                 </a>
-                <a href="layanan/layanan.php" class="col-span-1">
-                    <div class="h-36 rounded bg-gray-50 dark:bg-gray-800 col-span-1 bg-blues2">
-                        <div class="grid grid-rows-2">
-                            <h6 class="text-4xl text-black dark:text-gray-500 place-self-center mt-auto font-bold">
-                                <?php
-                                include('./database/database.php');
-                                $sql = "SELECT COUNT(*) as total FROM layanan;";
-                                $result = mysqli_query($conn, $sql);
-                                $row = mysqli_fetch_array($result);
-
-                                echo $row['total']
-                                ?>
-                            </h6>
-                            <h6 class="text-2xl text-black dark:text-gray-500 place-self-center mb-auto">
-                                Daftar Layanan
-                            </h6>
-                        </div>
-                        <div class="flex justify-center items-center">
-                            <svg class="flex-shrink-0 w-24 h-24 text-black transition duration-75 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-nav" xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="currentColor">
-                                <path d="M160-80q-33 0-56.5-23.5T80-160v-480q0-33 23.5-56.5T160-720h160v-80q0-33 23.5-56.5T400-880h160q33 0 56.5 23.5T640-800v80h160q33 0 56.5 23.5T880-640v480q0 33-23.5 56.5T800-80H160Zm0-80h640v-480H160v480Zm240-560h160v-80H400v80ZM160-160v-480 480Zm280-200v120h80v-120h120v-80H520v-120h-80v120H320v80h120Z" />
-                            </svg>
+                <a href="layanan/layanan.php" class="col-span-1 transform hover:animate-pulse">
+                    <div class="h-36 rounded-xl bg-gray-50 dark:bg-gray-800 col-span-1 bg-blues2 p-6 hover:bg-cards">
+                        <div class="grid grid-cols-2 mt-3">
+                            <div>
+                                <h6 class="text-2xl text-black dark:text-gray-500">
+                                    Layanan
+                                </h6>
+                                <h6 class="text-4xl text-black dark:text-gray-500 mt-auto font-bold">
+                                    <?php
+                                    include('./database/database.php');
+                                    $sql = "SELECT COUNT(*) as total FROM layanan;";
+                                    $result = mysqli_query($conn, $sql);
+                                    $row = mysqli_fetch_array($result);
+    
+                                    echo $row['total']
+                                    ?>
+                                </h6>
+                            </div>
+                            <div class="flex justify-end items-center">
+                                <svg class="bi bi-shield-shaded flex-shrink-0 w-12 h-12 text-black transition duration-75 dark:text-gray-400 group-hover:text-gray-900" xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="currentColor">
+                                    <path d="M160-80q-33 0-56.5-23.5T80-160v-480q0-33 23.5-56.5T160-720h160v-80q0-33 23.5-56.5T400-880h160q33 0 56.5 23.5T640-800v80h160q33 0 56.5 23.5T880-640v480q0 33-23.5 56.5T800-80H160Zm0-80h640v-480H160v480Zm240-560h160v-80H400v80ZM160-160v-480 480Zm280-200v120h80v-120h120v-80H520v-120h-80v120H320v80h120Z" />
+                                </svg>
+                            </div>
                         </div>
                     </div>
             </div>
