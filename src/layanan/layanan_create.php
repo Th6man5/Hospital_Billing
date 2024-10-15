@@ -60,7 +60,7 @@ if (isset($_POST['submit'])) {
     <div class="p-4 sm:ml-64">
         <div class="p-4">
             <div class="flex items-center justify-between">
-                <h1>Tambah Insuransi</h1>
+                <h1>Tambah Layanan</h1>
                 <a href="layanan.php" class="bg-blues opacity-95 text-white btn hover:bg-blues hover:opacity-100">Back</a>
             </div>
             <?php
@@ -91,7 +91,10 @@ if (isset($_POST['submit'])) {
                         </div>
                         <input type="text" name="harga" placeholder="Type here" class="input input-bordered w-full " required />
                     </label>
-                    <select name="id_dokter" class="select select-bordered w-full">
+                        <div class="label">
+                                <span class="label-text text-xl">Nama Dokter</span>
+                            </div>
+                        <select name="id_dokter" class="select select-bordered w-full">
                         <?php
                         include('../database/database.php');
                         $sql = "SELECT * FROM dokter";
