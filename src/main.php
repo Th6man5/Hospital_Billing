@@ -174,8 +174,17 @@
             $result = $conn->query($sql);
 
             if ($result->num_rows > 0) {
-                echo "<table border='1'>";
-                echo "<tr><th>ID Transaksi</th><th>ID Pasien</th><th>ID Layanan</th><th>Jenis Pembayaran</th><th>Total Harga</th><th>Potongan Harga</th><th>Tanggal</th><th>Waktu</th></tr>";
+                echo "<table class='table text-center' border='1'>" ;
+                echo "<tr class = 'bg-blues2 text-black '> 
+                      <th>ID Transaksi</th>
+                      <th>ID Pasien</th>
+                      <th>ID Layanan</th>
+                      <th>Jenis Pembayaran</th>
+                      <th>Total Harga</th>
+                      <th>Potongan Harga</th>
+                      <th>Tanggal</th>
+                      <th>Waktu</th>
+                      </tr>";
 
                 // Output data of each row
                 while ($row = $result->fetch_assoc()) {
@@ -192,6 +201,7 @@
                 }
 
                 echo "</table>";
+                
             } else {
                 echo "No new transactions found.";
             }
