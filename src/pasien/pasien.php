@@ -72,10 +72,11 @@
                         $sql = "SELECT p.id_pasien, p.nama, p.no_telpon, p.jenis_kelamin, p.tempat_lahir, p.tanggal_lahir, i.id_insuransi
                                     FROM pasien p LEFT JOIN insuransi i ON p.id_insuransi = i.id_insuransi";
                         $result = mysqli_query($conn, $sql);
+                        $no = 1;
                         if (mysqli_num_rows($result) > 0) {
                             while ($row = mysqli_fetch_assoc($result)) {
                                 echo '<tr>
-                                <th>' . $row['id_pasien'] . '</th>
+                                <th>' . $no . '</th>
                                 <td>' . $row['nama'] . '</td>
                                 <td>' . $row['no_telpon'] . '</td>
                                 <td>' . $row['jenis_kelamin'] . '</td>
@@ -91,6 +92,7 @@
                                     </a>
                                 </td>
                                 </tr>';
+                                $no++;
                             }
                         }
                         ?>

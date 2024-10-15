@@ -76,10 +76,11 @@
                                         FROM transaksi
                                         JOIN pasien ON transaksi.id_pasien = pasien.id_pasien;";
                         $result = mysqli_query($conn, $sql);
+                        $no = 1;
                         if (mysqli_num_rows($result) > 0) {
                             while ($row = mysqli_fetch_assoc($result)) {
                                 echo '<tr>
-                                 <th>' . $row['id_transaksi'] . '</th>
+                                    <th>' . $no . '</th>
                                     <td>' . $row['nama_pasien'] . '</td>
                                     <td>' . $row['nama_layanan'] . '</td>
                                     <td>' . $row['jenis_pembayaran'] . '</td>
@@ -96,6 +97,7 @@
                                     </a>
                                 </td>
                                 </tr>';
+                                $no++;
                             }
                         }
                         ?>

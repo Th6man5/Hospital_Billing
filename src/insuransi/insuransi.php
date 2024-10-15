@@ -74,10 +74,11 @@
                         $sql = "SELECT i.id_insuransi, i.no_polis, i.nama_perusahaan, i.alamat_perusahaan, i.tanggal_polis, i.no_telepon_perusahaan, i.tanggal_polis_awal, i.tanggal_polis_akhir, i.jenis_pertanggungan
                                     FROM insuransi i";
                         $result = mysqli_query($conn, $sql);
+                        $no = 1;
                         if (mysqli_num_rows($result) > 0) {
                             while ($row = mysqli_fetch_assoc($result)) {
                                 echo '<tr>
-                                <th>' . $row['id_insuransi'] . '</th>
+                                <th>' . $no . '</th>
                                 <th>' . $row['no_polis'] . '</th>
                                 <td>' . $row['nama_perusahaan'] . '</td>
                                 <td>' . $row['alamat_perusahaan'] . '</td>
@@ -95,6 +96,7 @@
                                     </a>
                                 </td>
                                 </tr>';
+                                $no++;
                             }
                         }
                         ?>
