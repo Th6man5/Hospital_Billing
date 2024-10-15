@@ -132,19 +132,39 @@ if (isset($_POST['submit'])) {
                         <div class="label" for="id_pasien">
                             <span class="label-text text-xl">Jenis Layanan</span>
                         </div>
-                        <select name="id_layanan[]" class="select select-bordered" id="select-layanan" multiple>
+                        <select name="id_layanan[]" class="select select-bordered" id="select-layanan" multiple onchange="calculateTotal()">
                             <?php
                             include('../database/database.php');
                             $sql = "SELECT * FROM layanan";
                             $result = mysqli_query($conn, $sql);
                             if (mysqli_num_rows($result) > 0) {
                                 while ($row = mysqli_fetch_assoc($result)) {
-                                    echo '<option value="' . $row['id_layanan'] . '">' . $row['nama_layanan'] . '</option>';
+                                    echo '<option value="' . $row['id_layanan'] . '" data-price="' . $row['harga'] . '">' . $row['nama_layanan'] . '</option>';
                                 }
                             }
                             ?>
                         </select>
                     </label>
+                    <div class="w-full flex gap-x-4">
+                        <label class="form-control w-full">
+                            <div class="label">
+                                <span class="label-text text-xl">Biaya Layanan</span>
+                            </div>
+                            <input type="number" id="total-harga" placeholder="Type here" class="input input-bordered w-full " required readonly />
+                        </label>
+                        <label class="form-control w-full">
+                            <div class="label">
+                                <span class="label-text text-xl">Potongan Harga</span>
+                            </div>
+                            <input type="text" name="potongan_harga" placeholder="Type here" class="input input-bordered w-full " required />
+                        </label>
+                        <label class="form-control w-full">
+                            <div class="label">
+                                <span class="label-text text-xl">Total Harga</span>
+                            </div>
+                            <input type="text" name="biaya_layanan" placeholder="Type here" class="input input-bordered w-full " required />
+                        </label>
+                    </div>
                     <div class="w-full flex gap-x-4">
                         <label class="form-control w-full">
                             <div class="label">
@@ -155,20 +175,6 @@ if (isset($_POST['submit'])) {
                                 <option value="QRIS">QRIS</option>
                             </select>
                         </label>
-                        <label class="form-control w-full">
-                            <div class="label">
-                                <span class="label-text text-xl">Total Harga</span>
-                            </div>
-                            <input type="number" name="biaya_layanan" placeholder="Type here" class="input input-bordered w-full " required />
-                        </label>
-                        <label class="form-control w-full">
-                            <div class="label">
-                                <span class="label-text text-xl">Potongan Harga</span>
-                            </div>
-                            <input type="text" name="potongan_harga" placeholder="Type here" class="input input-bordered w-full " required />
-                        </label>
-                    </div>
-                    <div class="w-full flex gap-x-4">
                         <label class="form-control w-full">
                             <div class="label">
                                 <span class="label-text text-xl">Tanggal</span>
@@ -204,4 +210,19 @@ if (isset($_POST['submit'])) {
             allowClear: true
         });
     });
+</script>
+
+<script>
+    function calculateTotal() {
+        let select = document.getElementById('select-layanan');
+        let total = 0;
+
+        for (let option of select.options) {
+            if (option.selected) {
+                total += parseFloat(option.getAttribute('data-price'));
+            }
+        }
+
+        document.getElementById('total-harga').value = total;
+    }
 </script>

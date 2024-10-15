@@ -69,10 +69,11 @@
                         $sql = "SELECT l.id_layanan, l.nama_layanan, l.harga, d.nama AS nama_dokter
                                     FROM layanan l JOIN dokter d ON l.id_dokter = d.id_dokter";
                         $result = mysqli_query($conn, $sql);
+                        $no = 1;
                         if (mysqli_num_rows($result) > 0) {
                             while ($row = mysqli_fetch_assoc($result)) {
                                 echo '<tr>
-                                <th>' . $row['id_layanan'] . '</th>
+                                <th>' . $no . '</th>
                                 <td>' . $row['nama_layanan'] . '</td>
                                 <td>' . number_format($row['harga']) . '</td>
                                 <td>' . $row['nama_dokter'] . '</td>
@@ -85,6 +86,7 @@
                                     </a>
                                 </td>
                                 </tr>';
+                                $no++;
                             }
                         }
                         ?>

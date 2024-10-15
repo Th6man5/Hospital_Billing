@@ -116,7 +116,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
                         <div class="label">
                             <span class="label-text text-xl">Harga</span>
                         </div>
-                        <input type="text" name="harga" value="<?php echo $harga; ?>" placeholder=" Type here" class="input input-bordered w-full " required />
+                        <input type="number" name="harga" value="<?php echo $harga; ?>" placeholder=" Type here" class="input input-bordered w-full " required />
                     </label>
                     <select name="id_dokter" class="select select-bordered w-full">
                         <?php

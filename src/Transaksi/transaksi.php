@@ -60,7 +60,7 @@
                             <th>Pasien</th>
                             <th>Jenis Layanan</th>
                             <th>Jenis Pembayaran</th>
-                            <th>Biaya Layanan</th>
+                            <th>Total Harga</th>
                             <th>Potongan Harga (%)</th>
                             <th>Tanggal</th>
                             <th>Waktu</th>
