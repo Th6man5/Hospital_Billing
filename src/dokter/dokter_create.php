@@ -31,7 +31,7 @@ if (isset($_POST['submit'])) {
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Dashboard | Insuransi</title>
+    <title>Dashboard | Dokter</title>
     <link href="../css/output.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
 
@@ -91,9 +91,13 @@ if (isset($_POST['submit'])) {
                     </label>
                     <label class="form-control w-full">
                         <div class="label">
-                            <span class="label-text text-xl">Jenis_Kelamin</span>
+                            <span class="label-text text-xl">Jenis Kelamin</span>
                         </div>
-                        <input type="text" name="jenis_kelamin" placeholder="Type here" class="input input-bordered w-full " required />
+                        <select name="jenis_kelamin" class="select select-bordered w-full">
+                            <option value="L">Laki-Laki</option>
+                            <option value="P">Perempuan</option>
+                            <option value="U">Unknown</option>
+                        </select>
                     </label>
                     <div class="w-full flex gap-x-4">
                         <label class="form-control w-full">

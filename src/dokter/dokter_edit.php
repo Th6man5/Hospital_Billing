@@ -125,7 +125,11 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
                         <div class="label">
                             <span class="label-text text-xl">Jenis Kelamin</span>
                         </div>
-                        <input type="text" name="jenis_kelamin" placeholder="Type here" class="input input-bordered w-full " value="<?php echo ($jenis_kelamin); ?>" required />
+                        <select name="jenis_kelamin" class="select select-bordered w-full">
+                            <option value="L">Laki-Laki</option>
+                            <option value="P">Perempuan</option>
+                            <option value="U">Unknown</option>
+                        </select>
                     </label>
                     <div class="w-full flex gap-x-4">
                         <label class="form-control w-full">

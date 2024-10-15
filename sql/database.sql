@@ -48,7 +48,7 @@ CREATE TABLE transaksi (
     id_pasien INT NOT NULL,
     id_layanan INT NOT NULL,
     jenis_pembayaran VARCHAR(50) NOT NULL,
-    biaya_layanan DECIMAL(10, 2) NOT NULL,
+    total_harga DECIMAL(10, 2) NOT NULL,
     potongan_harga DECIMAL(5, 2),
     tanggal DATE NOT NULL,
     waktu TIME NOT NULL,

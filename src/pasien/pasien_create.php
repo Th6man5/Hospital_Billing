@@ -96,9 +96,13 @@ if (isset($_POST['submit'])) {
                     </label>
                     <label class="form-control w-full">
                         <div class="label">
-                            <span class="label-text text-xl">jenis_kelamin</span>
+                            <span class="label-text text-xl">Jenis Kelamin</span>
                         </div>
-                        <input type="text" name="jenis_kelamin" placeholder="Type here" class="input input-bordered w-full " required />
+                        <select name="jenis_kelamin" class="select select-bordered w-full">
+                            <option value="L">Laki-Laki</option>
+                            <option value="P">Perempuan</option>
+                            <option value="U">Unknown</option>
+                        </select>
                     </label>
                     <label class="form-control w-full">
                         <div class="label">
