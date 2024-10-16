@@ -89,10 +89,8 @@
                                     <td>' . $row['tanggal'] . '</td>
                                     <td>' . $row['waktu'] . '</td>
                                 <td class="flex gap-x-4 justify-center">
-                                    <a href="transaksi_edit.php?id=' . $row['id_transaksi'] . '" class="btn bg-yellow hover:shadow-md hover:bg-yellow group">
-                                        <i class="bi bi-pencil-square  transition-all"></i>
-                                    </a>
-                                    <a onclick="return confirm(\'Are you sure you want to delete this room type?\');" href="transaksi_delete.php?id=' . $row['id_transaksi'] . '" class="btn bg-red hover:shadow-md hover:bg-red group">
+                                
+                                    <a onclick="return confirm(\'Are you sure you want to delete this Transaction?\');" href="transaksi_delete.php?id=' . $row['id_transaksi'] . '" class="btn bg-red hover:shadow-md hover:bg-red group">
                                         <i class="bi bi-trash-fill  transition-all"></i>
                                     </a>
                                 </td>

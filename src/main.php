@@ -12,15 +12,15 @@
         @import url('https://fonts.googleapis.com/css2?family=Baloo+Paaji+2:wght@400..800&display=swap');
 
         h1 {
-            font-family: "Baloo Paaji 2", sans-serif;
-            font-weight: 600;
+            font-family: Lexend;
+            font-weight: 500;
             font-size: 60px;
         }
 
         h6 {
-            font-family: Lexend;
-            font-weight: 200;
-            font-size: 14px;
+            font-family: "Baloo Paaji 2", sans-serif;
+            font-weight: 600;
+            font-size: 60px;
         }
 
         p {
@@ -36,7 +36,7 @@
     <?php include 'template/sidebar.php'; ?>
     <div class="p-4 sm:ml-64">
         <div class="p-4">
-            <h1 class="mb-5">Overview</h1>
+            <h6 class="mb-5">Overview</h6>
             <div class="grid grid-cols-5 gap-4 mb-4 ">
                 <a href="pasien/pasien.php" class="col-span-1 transform hover:animate-pulse">
                     <div class="h-36 rounded-xl bg-gray-50 dark:bg-gray-800 col-span-1 bg-blues2 p-6 hover:bg-cards">
@@ -172,18 +172,18 @@
             </div>
 
             <div class="mt-10">
-                <h1 class="mb-5">Transaksi Terbaru</h1>
+                <h6 class="mb-5">Transaksi Terbaru</h6>
                 <?php
                 include('./database/database.php');
-                $sql = "SELECT * FROM transaksi WHERE tanggal >= DATE_SUB(CURDATE(), INTERVAL 1 DAY) ORDER BY tanggal DESC, waktu DESC";
+                $sql = "SELECT * FROM transaksi JOIN pasien ON transaksi.id_pasien = pasien.id_pasien WHERE tanggal >= DATE_SUB(CURDATE(), INTERVAL 1 DAY) ORDER BY tanggal DESC, waktu DESC";
                 $result = $conn->query($sql);
 
                 if ($result->num_rows > 0) {
                     echo "<table class='table text-center'>";
                     echo "<tr class = 'bg-blues2 text-black '> 
                       <th>ID Transaksi</th>
-                      <th>ID Pasien</th>
-                      <th>ID Layanan</th>
+                      <th>Nama Pasien</th>
+                      <th>Nama Layanan</th>
                       <th>Jenis Pembayaran</th>
                       <th>Total Harga</th>
                       <th>Potongan Harga</th>
@@ -194,7 +194,7 @@
                     while ($row = $result->fetch_assoc()) {
                         echo "<tr>";
                         echo "<td>" . $row["id_transaksi"] . "</td>";
-                        echo "<td>" . $row["id_pasien"] . "</td>";
+                        echo "<td>" . $row["nama"] . "</td>";
                         echo "<td>" . $row["nama_layanan"] . "</td>";
                         echo "<td>" . $row["jenis_pembayaran"] . "</td>";
                         echo "<td>" . $row["biaya_layanan"] . "</td>";
