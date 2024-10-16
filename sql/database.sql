@@ -27,7 +27,7 @@ CREATE TABLE insuransi (
 CREATE TABLE dokter (
     id_dokter INT PRIMARY KEY AUTO_INCREMENT,
     nama VARCHAR(100) NOT NULL,
-    jenis_kelamin ENUM('L', 'P', 'U') NOT NULL,
+    jenis_kelamin VARCHAR(255),
     tanggal_lahir DATE NOT NULL,
     no_telepon VARCHAR(15),
     email VARCHAR(100),
@@ -46,14 +46,13 @@ CREATE TABLE layanan (
 CREATE TABLE transaksi (
     id_transaksi INT PRIMARY KEY AUTO_INCREMENT,
     id_pasien INT NOT NULL,
-    id_layanan INT NOT NULL,
+    nama_layanan VARCHAR(225) NOT NULL,
     jenis_pembayaran VARCHAR(50) NOT NULL,
-    biaya_layanan DECIMAL(10, 2) NOT NULL,
+    total_harga DECIMAL(10, 2) NOT NULL,
     potongan_harga DECIMAL(5, 2),
     tanggal DATE NOT NULL,
     waktu TIME NOT NULL,
-    FOREIGN KEY (id_pasien) REFERENCES pasien(id_pasien) ON DELETE CASCADE,
-    FOREIGN KEY (id_layanan) REFERENCES layanan(id_layanan) ON DELETE CASCADE
+    FOREIGN KEY (id_pasien) REFERENCES pasien(id_pasien) ON DELETE CASCADE
 );
 
 
@@ -98,3 +97,8 @@ VALUES
 (3, 3, 'Tunai', 300000.00, 10, '2024-10-03', '09:15:00'),
 (4, 1, 'Tunai', 150000.00, 10, '2024-10-04', '11:00:00'),
 (5, 4, 'Qris', 500000.00, 10, '2024-10-05', '16:30:00');
+
+ALTER TABLE transaksi DROP FOREIGN KEY transaksi_ibfk_2;
+
+ALTER TABLE transaksi DROP COLUMN id_layanan;
+ALTER TABLE transaksi ADD nama_layanan VARCHAR(255);

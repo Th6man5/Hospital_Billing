@@ -71,10 +71,11 @@
                         $sql = "SELECT d.id_dokter, d.nama, d.jenis_kelamin, d.tanggal_lahir, d.no_telepon, d.email, d.alamat, d.spesialis
                                     FROM dokter d ";
                         $result = mysqli_query($conn, $sql);
+                        $no = 1;
                         if (mysqli_num_rows($result) > 0) {
                             while ($row = mysqli_fetch_assoc($result)) {
                                 echo '<tr>
-                                <th>' . $row['id_dokter'] . '</th>
+                                <th>' . $no . '</th>
                                 <td>' . $row['nama'] . '</td>
                                 <td>' . $row['jenis_kelamin'] . '</td>
                                 <td>' . $row['tanggal_lahir'] . '</td>
@@ -91,6 +92,7 @@
                                     </a>
                                 </td>
                                 </tr>';
+                                $no++;
                             }
                         }
                         ?>

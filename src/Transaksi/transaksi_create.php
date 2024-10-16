@@ -2,30 +2,47 @@
 if (isset($_POST['submit'])) {
     include('../database/database.php');
     $id_pasien = $_POST['id_pasien'];
-    $id_layanan = $_POST['id_layanan'];
+    $id_layanan_array = $_POST['id_layanan'];
     $jenis_pembayaran = $_POST['jenis_pembayaran'];
     $biaya_layanan = $_POST['biaya_layanan'];
     $potongan_harga = $_POST['potongan_harga'];
     $tanggal = $_POST['tanggal'];
     $waktu = $_POST['waktu'];
 
-
     do {
-        if (empty($id_pasien) || empty($id_layanan) || empty($jenis_pembayaran) || empty($biaya_layanan) || empty($potongan_harga) || empty($tanggal) || empty($waktu)) {
+        if (empty($id_pasien) || empty($id_layanan_array) || empty($jenis_pembayaran) || empty($biaya_layanan) || empty($potongan_harga) || empty($tanggal) || empty($waktu)) {
             echo "<script>alert('Please fill all the fields')</script>";
             break;
         } else {
-            $sql = "INSERT INTO transaksi ( id_pasien, id_layanan , jenis_pembayaran, biaya_layanan, potongan_harga, tanggal, waktu) VALUES ('$id_pasien', '$id_layanan', '$jenis_pembayaran', '$biaya_layanan', '$potongan_harga', '$tanggal', '$waktu')";
+            $id_layanan_list = implode(",", $id_layanan_array);
+            $sql_layanan = "SELECT nama_layanan FROM layanan WHERE id_layanan IN ($id_layanan_list)";
+            $result = mysqli_query($conn, $sql_layanan);
+
+            $nama_layanan_array = [];
+            if (mysqli_num_rows($result) > 0) {
+                while ($row = mysqli_fetch_assoc($result)) {
+                    $nama_layanan_array[] = $row['nama_layanan'];
+                }
+            }
+
+            $nama_layanan = implode(", ", $nama_layanan_array);
+
+            $sql = "INSERT INTO transaksi (id_pasien, nama_layanan, jenis_pembayaran, biaya_layanan, potongan_harga, tanggal, waktu) 
+                    VALUES ('$id_pasien', '$nama_layanan', '$jenis_pembayaran', '$biaya_layanan', '$potongan_harga', '$tanggal', '$waktu')";
+
             if (mysqli_query($conn, $sql)) {
                 $successMessage = 'Transaksi has been created successfully';
             } else {
                 echo 'Error: ' . $sql . '<br>' . mysqli_error($conn);
             }
+
             mysqli_close($conn);
         }
     } while (false);
 }
 ?>
+
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -34,9 +51,12 @@ if (isset($_POST['submit'])) {
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Dashboard | Transaksi</title>
     <!-- Tambahkan Select2 CSS -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+    <!-- Select2 CSS -->
     <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
 
-    <!-- Tambahkan Select2 JS -->
+    <!-- Select2 JS -->
     <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
 
     <link href="../css/output.css" rel="stylesheet">
@@ -94,7 +114,7 @@ if (isset($_POST['submit'])) {
                         <div class="label" for="id_pasien">
                             <span class="label-text text-xl">Nama Pasien</span>
                         </div>
-                        <select name="id_pasien" class="select select-bordered w-full">
+                        <select name="id_pasien" class="select select-bordered w-full" id="select-pasien">
                             <?php
                             include('../database/database.php');
                             $sql = "SELECT * FROM pasien";
@@ -107,18 +127,19 @@ if (isset($_POST['submit'])) {
                             ?>
                         </select>
                     </label>
+
                     <label class="form-control w-full">
                         <div class="label" for="id_pasien">
                             <span class="label-text text-xl">Jenis Layanan</span>
                         </div>
-                        <select name="id_layanan" class="select select-bordered w-full">
+                        <select name="id_layanan[]" class="select select-bordered" id="select-layanan" multiple onchange="calculateTotal()">
                             <?php
                             include('../database/database.php');
                             $sql = "SELECT * FROM layanan";
                             $result = mysqli_query($conn, $sql);
                             if (mysqli_num_rows($result) > 0) {
                                 while ($row = mysqli_fetch_assoc($result)) {
-                                    echo '<option value="' . $row['id_layanan'] . '">' . $row['nama_layanan'] . '</option>';
+                                    echo '<option value="' . $row['id_layanan'] . '" data-price="' . $row['harga'] . '">' . $row['nama_layanan'] . '</option>';
                                 }
                             }
                             ?>
@@ -127,15 +148,9 @@ if (isset($_POST['submit'])) {
                     <div class="w-full flex gap-x-4">
                         <label class="form-control w-full">
                             <div class="label">
-                                <span class="label-text text-xl">Jenis Pembayaran</span>
-                            </div>
-                            <input type="text" name="jenis_pembayaran" placeholder="Type here" class="input input-bordered w-full " required />
-                        </label>
-                        <label class="form-control w-full">
-                            <div class="label">
                                 <span class="label-text text-xl">Biaya Layanan</span>
                             </div>
-                            <input type="number" name="biaya_layanan" placeholder="Type here" class="input input-bordered w-full " required />
+                            <input type="number" id="total-harga" placeholder="Type here" class="input input-bordered w-full " required readonly />
                         </label>
                         <label class="form-control w-full">
                             <div class="label">
@@ -143,8 +158,23 @@ if (isset($_POST['submit'])) {
                             </div>
                             <input type="text" name="potongan_harga" placeholder="Type here" class="input input-bordered w-full " required />
                         </label>
+                        <label class="form-control w-full">
+                            <div class="label">
+                                <span class="label-text text-xl">Total Harga</span>
+                            </div>
+                            <input type="text" name="biaya_layanan" placeholder="Type here" class="input input-bordered w-full " required />
+                        </label>
                     </div>
                     <div class="w-full flex gap-x-4">
+                        <label class="form-control w-full">
+                            <div class="label">
+                                <span class="label-text text-xl">Jenis Pembayaran</span>
+                            </div>
+                            <select name="jenis_pembayaran" class="select select-bordered w-full">
+                                <option value="Tunai">Tunai</option>
+                                <option value="QRIS">QRIS</option>
+                            </select>
+                        </label>
                         <label class="form-control w-full">
                             <div class="label">
                                 <span class="label-text text-xl">Tanggal</span>
@@ -161,7 +191,6 @@ if (isset($_POST['submit'])) {
                     <div class="mt-4">
                         <button name="submit" type="submit" class="bg-blues opacity-95 text-white btn hover:bg-blues hover:opacity-100">Create</button>
                     </div>
-                </div>
             </form>
         </div>
     </div>
@@ -169,10 +198,31 @@ if (isset($_POST['submit'])) {
 
 <script>
     $(document).ready(function() {
-        // Inisialisasi Select2 pada elemen select
-        $('#id_pasien').select2({
-            placeholder: 'Pilih Nama Pasien', // Placeholder untuk pencarian
-            allowClear: true // Menambahkan tombol hapus pilihan
+        $('#select-pasien').select2({
+            placeholder: 'Pilih Nama Pasien',
+            allowClear: true
         });
     });
+
+    $(document).ready(function() {
+        $('#select-layanan').select2({
+            placeholder: 'Pilih Layanan',
+            allowClear: true
+        });
+    });
+</script>
+
+<script>
+    function calculateTotal() {
+        let select = document.getElementById('select-layanan');
+        let total = 0;
+
+        for (let option of select.options) {
+            if (option.selected) {
+                total += parseFloat(option.getAttribute('data-price'));
+            }
+        }
+
+        document.getElementById('total-harga').value = total;
+    }
 </script>

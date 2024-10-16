@@ -11,7 +11,7 @@ if (isset($_POST['submit'])) {
     $jenis_pertanggungan = $_POST['jenis_pertanggungan'];
 
     do {
-        if (empty($no_polis) || empty($nama_perusahaan) || empty($alamat_perusahaan) || empty($tanggal_polis) || empty($no_telepon_perusahaan) || empty($tanggal_polis_awal) || empty($tanggal_polis_awal) || empty($jenis_pertanggungan)) {
+        if (empty($no_polis) || empty($nama_perusahaan) || empty($Alamat_perusahaan) || empty($Tanggal_polis) || empty($no_telepon_perusahaan) || empty($tanggal_polis_awal) || empty($tanggal_polis_awal) || empty($jenis_pertanggungan)) {
             echo "<script>alert('Please fill all the fields')</script>";
             break;
         } else {
