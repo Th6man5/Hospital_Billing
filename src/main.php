@@ -129,7 +129,7 @@
                                     $sql = "SELECT COUNT(*) as total FROM transaksi;";
                                     $result = mysqli_query($conn, $sql);
                                     $row = mysqli_fetch_array($result);
-                                    
+
                                     echo $row['total']
                                     ?>
                                 </h6>
@@ -156,7 +156,7 @@
                                     $sql = "SELECT COUNT(*) as total FROM layanan;";
                                     $result = mysqli_query($conn, $sql);
                                     $row = mysqli_fetch_array($result);
-    
+
                                     echo $row['total']
                                     ?>
                                 </h6>
@@ -168,17 +168,19 @@
                             </div>
                         </div>
                     </div>
+                </a>
             </div>
-            <?php
-            include('./database/database.php');
 
-            // Query to get the newly added data in the last 24 hours
-            $sql = "SELECT * FROM transaksi WHERE tanggal >= DATE_SUB(CURDATE(), INTERVAL 1 DAY) ORDER BY tanggal DESC, waktu DESC";
-            $result = $conn->query($sql);
+            <div class="mt-10">
+                <h1 class="mb-5">Transaksi Terbaru</h1>
+                <?php
+                include('./database/database.php');
+                $sql = "SELECT * FROM transaksi WHERE tanggal >= DATE_SUB(CURDATE(), INTERVAL 1 DAY) ORDER BY tanggal DESC, waktu DESC";
+                $result = $conn->query($sql);
 
-            if ($result->num_rows > 0) {
-                echo "<table class='table text-center' border='1'>" ;
-                echo "<tr class = 'bg-blues2 text-black '> 
+                if ($result->num_rows > 0) {
+                    echo "<table class='table text-center'>";
+                    echo "<tr class = 'bg-blues2 text-black '> 
                       <th>ID Transaksi</th>
                       <th>ID Pasien</th>
                       <th>ID Layanan</th>
@@ -189,29 +191,27 @@
                       <th>Waktu</th>
                       </tr>";
 
-                // Output data of each row
-                while ($row = $result->fetch_assoc()) {
-                    echo "<tr>";
-                    echo "<td>" . $row["id_transaksi"] . "</td>";
-                    echo "<td>" . $row["id_pasien"] . "</td>";
-                    echo "<td>" . $row["nama_layanan"] . "</td>";
-                    echo "<td>" . $row["jenis_pembayaran"] . "</td>";
-                    echo "<td>" . $row["biaya_layanan"] . "</td>";
-                    echo "<td>" . $row["potongan_harga"] . "</td>";
-                    echo "<td>" . $row["tanggal"] . "</td>";
-                    echo "<td>" . $row["waktu"] . "</td>";
-                    echo "</tr>";
+                    while ($row = $result->fetch_assoc()) {
+                        echo "<tr>";
+                        echo "<td>" . $row["id_transaksi"] . "</td>";
+                        echo "<td>" . $row["id_pasien"] . "</td>";
+                        echo "<td>" . $row["nama_layanan"] . "</td>";
+                        echo "<td>" . $row["jenis_pembayaran"] . "</td>";
+                        echo "<td>" . $row["biaya_layanan"] . "</td>";
+                        echo "<td>" . $row["potongan_harga"] . "</td>";
+                        echo "<td>" . $row["tanggal"] . "</td>";
+                        echo "<td>" . $row["waktu"] . "</td>";
+                        echo "</tr>";
+                    }
+
+                    echo "</table>";
+                } else {
+                    echo "No new transactions found.";
                 }
 
-                echo "</table>";
-                
-            } else {
-                echo "No new transactions found.";
-            }
-
-            // Close connection
-            $conn->close();
-            ?>
+                $conn->close();
+                ?>
+            </div>
         </div>
     </div>
 

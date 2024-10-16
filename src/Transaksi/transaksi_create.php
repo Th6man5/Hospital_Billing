@@ -10,7 +10,7 @@ if (isset($_POST['submit'])) {
     $waktu = $_POST['waktu'];
 
     do {
-        if (empty($id_pasien) || empty($id_layanan_array) || empty($jenis_pembayaran) || empty($biaya_layanan) || empty($potongan_harga) || empty($tanggal) || empty($waktu)) {
+        if (empty($id_pasien) || empty($id_layanan_array) || empty($jenis_pembayaran) || empty($potongan_harga) || empty($tanggal) || empty($waktu)) {
             echo "<script>alert('Please fill all the fields')</script>";
             break;
         } else {
@@ -50,15 +50,9 @@ if (isset($_POST['submit'])) {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Dashboard | Transaksi</title>
-    <!-- Tambahkan Select2 CSS -->
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-
-    <!-- Select2 CSS -->
     <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
-
-    <!-- Select2 JS -->
     <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
-
     <link href="../css/output.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
 
@@ -146,24 +140,28 @@ if (isset($_POST['submit'])) {
                         </select>
                     </label>
                     <div class="w-full flex gap-x-4">
+
                         <label class="form-control w-full">
                             <div class="label">
                                 <span class="label-text text-xl">Biaya Layanan</span>
                             </div>
-                            <input type="number" id="total-harga" placeholder="Type here" class="input input-bordered w-full " required readonly />
+                            <input type="number" id="total-harga" placeholder="Type here" class="input input-bordered w-full" required readonly />
                         </label>
+
                         <label class="form-control w-full">
                             <div class="label">
                                 <span class="label-text text-xl">Potongan Harga</span>
                             </div>
-                            <input type="text" name="potongan_harga" placeholder="Type here" class="input input-bordered w-full " required />
+                            <input type="text" name="potongan_harga" placeholder="Type here" class="input input-bordered w-full" id="potongan-harga" required oninput="calculateDiscountedPrice()" />
                         </label>
+
                         <label class="form-control w-full">
                             <div class="label">
                                 <span class="label-text text-xl">Total Harga</span>
                             </div>
-                            <input type="text" name="biaya_layanan" placeholder="Type here" class="input input-bordered w-full " required />
+                            <input type="text" name="biaya_layanan" placeholder="Type here" class="input input-bordered w-full" id="harga-diskon" required readonly />
                         </label>
+
                     </div>
                     <div class="w-full flex gap-x-4">
                         <label class="form-control w-full">
@@ -224,5 +222,20 @@ if (isset($_POST['submit'])) {
         }
 
         document.getElementById('total-harga').value = total;
+    }
+</script>
+
+<script>
+    function calculateDiscountedPrice() {
+        let biayaLayanan = parseFloat(document.getElementById('total-harga').value) || 0;
+        let potonganHarga = parseFloat(document.getElementById('potongan-harga').value) || 0;
+
+        let totalDiskon = (biayaLayanan * potonganHarga) / 100
+        let hargaTotal = biayaLayanan - totalDiskon;
+        if (hargaTotal < 0) {
+            hargaTotal = 0;
+        }
+
+        document.getElementById('harga-diskon').value = hargaTotal.toFixed(2);
     }
 </script>
