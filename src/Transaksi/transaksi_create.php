@@ -105,6 +105,9 @@ if (isset($_POST['submit'])) {
             <form method="POST">
                 <div class="p-10">
                     <label class="form-control w-full">
+                        <div class="grid">
+
+                        </div>
                         <div class="label" for="id_pasien">
                             <span class="label-text text-xl">Nama Pasien</span>
                         </div>
@@ -133,7 +136,7 @@ if (isset($_POST['submit'])) {
                             $result = mysqli_query($conn, $sql);
                             if (mysqli_num_rows($result) > 0) {
                                 while ($row = mysqli_fetch_assoc($result)) {
-                                    echo '<option value="' . $row['id_layanan'] . '" data-price="' . $row['harga'] . '">' . $row['nama_layanan'] . '</option>';
+                                    echo '<option value="' . $row['id_layanan'] . '" data-price="' . $row['harga'] . '">' . $row['nama_layanan'] . ' | ' . number_format($row['harga']) .  '</option>';
                                 }
                             }
                             ?>
@@ -152,7 +155,7 @@ if (isset($_POST['submit'])) {
                             <div class="label">
                                 <span class="label-text text-xl">Potongan Harga</span>
                             </div>
-                            <input type="text" name="potongan_harga" placeholder="Type here" class="input input-bordered w-full" id="potongan-harga" required oninput="calculateDiscountedPrice()" />
+                            <input type="number" name="potongan_harga" placeholder="Type here" class="input input-bordered w-full" id="potongan-harga" required oninput="calculateDiscountedPrice()" />
                         </label>
 
                         <label class="form-control w-full">
