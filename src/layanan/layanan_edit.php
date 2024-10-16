@@ -86,7 +86,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
     <div class="p-4 sm:ml-64">
         <div class="p-4">
             <div class="flex items-center justify-between">
-                <h1>Update Insuransi</h1>
+                <h1>Update Layanan</h1>
                 <a href="layanan.php" class="bg-blues opacity-95 text-white btn hover:bg-blues hover:opacity-100">Back</a>
             </div>
             <?php
@@ -118,6 +118,9 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
                         </div>
                         <input type="number" name="harga" value="<?php echo $harga; ?>" placeholder=" Type here" class="input input-bordered w-full " required />
                     </label>
+                        <div class="label">
+                            <span class="label-text text-xl">Nama Dokter</span>
+                        </div>
                     <select name="id_dokter" class="select select-bordered w-full">
                         <?php
                         include('../database/database.php');
