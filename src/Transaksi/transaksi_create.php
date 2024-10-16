@@ -59,10 +59,11 @@ if (isset($_POST['submit'])) {
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Krona+One&family=League+Spartan:wght@100..900&display=swap');
         @import url('https://fonts.googleapis.com/css2?family=Lexend:wght@100..900&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Baloo+Paaji+2:wght@400..800&display=swap');
 
         h1 {
-            font-family: Lexend;
-            font-weight: 500;
+            font-family: "Baloo Paaji 2", sans-serif;
+            font-weight: 600;
             font-size: 60px;
         }
 
