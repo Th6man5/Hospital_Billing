@@ -129,7 +129,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
                         </div>
                         <input type="text" name="nama_perusahaan" value="<?php echo ($nama_perusahaan); ?>" placeholder="Type here" class="input input-bordered w-full " required />
                     </label>
-                    <div class="w-full flex gap-x-4">
+                    <div class="w-full grid-cols-3 grid gap-x-4">
                         <label class="form-control w-full">
                             <div class="label">
                                 <span class="label-text text-xl">Alamat Perusahaan</span>
