@@ -120,7 +120,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
                     </label>
                     <label class="form-control w-full">
                         <div class="label">
-                            <span class="label-text text-xl">no_telpon</span>
+                            <span class="label-text text-xl">No_telpon</span>
                         </div>
                         <input type="text" name="no_telpon" value="<?php echo $no_telpon; ?>" placeholder="Type here" class="input input-bordered w-full " required />
                     </label>
@@ -136,16 +136,19 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
                     </label>
                     <label class="form-control w-full">
                         <div class="label">
-                            <span class="label-text text-xl">tempat_lahir</span>
+                            <span class="label-text text-xl">Tempat_lahir</span>
                         </div>
                         <input type="text" name="tempat_lahir" value="<?php echo $tempat_lahir; ?>" placeholder="Type here" class="input input-bordered w-full " required />
                     </label>
                     <label class="form-control w-full">
                         <div class="label">
-                            <span class="label-text text-xl">tanggal_lahir</span>
+                            <span class="label-text text-xl">Tanggal_lahir</span>
                         </div>
                         <input type="date" name="tanggal_lahir" value="<?php echo $tanggal_lahir; ?>" placeholder="Type here" class="input input-bordered w-full " required />
                     </label>
+                        <div class="label">
+                            <span class="label-text text-xl">Jenis_Asuransi</span>
+                        </div>
                     <select name="id_insuransi" class="select select-bordered w-full">
                         <?php
                         include('../database/database.php');
