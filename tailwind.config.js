@@ -25,7 +25,7 @@ module.exports = {
       green: "#00B01C",
       cards: "#091057",
       icon: "#007bff",
-      background: "#F4F6FF",
+      background: "#B7E0FF",
     },
   },
   daisyui: {

@@ -43,7 +43,7 @@
     </style>
 </head>
 
-<body>
+<body class="bg-background h-screen">
 
     <?php include '../template/sidebar.php'; ?>
     <div class="p-4 sm:ml-64">
