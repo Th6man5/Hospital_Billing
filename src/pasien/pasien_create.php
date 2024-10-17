@@ -1,29 +1,45 @@
 <?php
 if (isset($_POST['submit'])) {
     include('../database/database.php');
-    $nama = $_POST['nama'];
+
+    $id_eksternal = $_POST['id_eksternal'];
+    $nama_lengkap = $_POST['nama_lengkap'];
+    $nama_panggilan = $_POST['nama_panggilan'];
     $no_telpon = $_POST['no_telpon'];
     $jenis_kelamin = $_POST['jenis_kelamin'];
+    $ras = $_POST['ras'];
+    $alamat = $_POST['alamat'];
+    $kode_negara = $_POST['kode_negara'];
+    $bahasa_utama = $_POST['bahasa_utama'];
+    $status_pernikahan = $_POST['status_pernikahan'];
+    $kewarganegaraan = $_POST['kewarganegaraan'];
     $tempat_lahir = $_POST['tempat_lahir'];
     $tanggal_lahir = $_POST['tanggal_lahir'];
+    $indikator_meninggal = $_POST['indikator_meninggal'];
     $id_insuransi = $_POST['id_insuransi'];
 
     do {
-        if (empty($nama) || empty($no_telpon) || empty($jenis_kelamin) || empty($tempat_lahir) || empty($tanggal_lahir) || empty($id_insuransi)) {
-            echo "<script>alert('Please fill all the fields')</script>";
+        if (empty($nama_lengkap) || empty($no_telpon) || empty($jenis_kelamin) || empty($tempat_lahir) || empty($tanggal_lahir) || empty($id_insuransi)) {
+            echo "<script>alert('Please fill all the required fields')</script>";
             break;
         } else {
-            $sql = "INSERT INTO pasien (nama, no_telpon, jenis_kelamin, tempat_lahir, tanggal_lahir, id_insuransi) VALUES ('$nama', '$no_telpon', '$jenis_kelamin','$tempat_lahir','$tanggal_lahir','$id_insuransi' )";
+            $sql = "INSERT INTO pasien (id_eksternal, nama_lengkap, nama_panggilan, no_telpon, jenis_kelamin, ras, alamat, kode_negara, bahasa_utama, status_pernikahan, kewarganegaraan, tempat_lahir, tanggal_lahir, indikator_meninggal, id_insuransi) 
+                    VALUES ('$id_eksternal', '$nama_lengkap', '$nama_panggilan', '$no_telpon', '$jenis_kelamin', '$ras', '$alamat', '$kode_negara', '$bahasa_utama', '$status_pernikahan', '$kewarganegaraan', '$tempat_lahir', '$tanggal_lahir', '$indikator_meninggal', '$id_insuransi')";
+
             if (mysqli_query($conn, $sql)) {
                 $successMessage = 'Pasien has been created successfully';
+                echo "<script>alert('$successMessage')</script>";
             } else {
                 echo 'Error: ' . $sql . '<br>' . mysqli_error($conn);
             }
+
+            // Tutup koneksi
             mysqli_close($conn);
         }
     } while (false);
 }
 ?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -85,15 +101,27 @@ if (isset($_POST['submit'])) {
                 <div class="p-10">
                     <label class="form-control w-full">
                         <div class="label">
-                            <span class="label-text text-xl">Nama</span>
+                            <span class="label-text text-xl">ID Eksternal</span>
                         </div>
-                        <input type="text" name="nama" placeholder="Type here" class="input input-bordered w-full " required />
+                        <input type="text" name="id_eksternal" placeholder="Type here" class="input input-bordered w-full" required />
                     </label>
                     <label class="form-control w-full">
                         <div class="label">
-                            <span class="label-text text-xl">No_telpon</span>
+                            <span class="label-text text-xl">Nama Lengkap</span>
                         </div>
-                        <input type="text" name="no_telpon" placeholder="Type here" class="input input-bordered w-full " required />
+                        <input type="text" name="nama_lengkap" placeholder="Type here" class="input input-bordered w-full" required />
+                    </label>
+                    <label class="form-control w-full">
+                        <div class="label">
+                            <span class="label-text text-xl">Nama Panggilan</span>
+                        </div>
+                        <input type="text" name="nama_panggilan" placeholder="Type here" class="input input-bordered w-full" />
+                    </label>
+                    <label class="form-control w-full">
+                        <div class="label">
+                            <span class="label-text text-xl">No Telpon</span>
+                        </div>
+                        <input type="text" name="no_telpon" placeholder="Type here" class="input input-bordered w-full" required />
                     </label>
                     <label class="form-control w-full">
                         <div class="label">
@@ -107,15 +135,64 @@ if (isset($_POST['submit'])) {
                     </label>
                     <label class="form-control w-full">
                         <div class="label">
-                            <span class="label-text text-xl">Tempat_lahir</span>
+                            <span class="label-text text-xl">Ras</span>
                         </div>
-                        <input type="text" name="tempat_lahir" placeholder="Type here" class="input input-bordered w-full " required />
+                        <input type="text" name="ras" placeholder="Type here" class="input input-bordered w-full" />
                     </label>
                     <label class="form-control w-full">
                         <div class="label">
-                            <span class="label-text text-xl">Tanggal_lahir</span>
+                            <span class="label-text text-xl">Alamat</span>
                         </div>
-                        <input type="date" name="tanggal_lahir" placeholder="Type here" class="input input-bordered w-full " required />
+                        <textarea name="alamat" placeholder="Type here" class="textarea textarea-bordered w-full"></textarea>
+                    </label>
+                    <label class="form-control w-full">
+                        <div class="label">
+                            <span class="label-text text-xl">Kode Negara</span>
+                        </div>
+                        <input type="text" name="kode_negara" placeholder="Type here" class="input input-bordered w-full" />
+                    </label>
+                    <label class="form-control w-full">
+                        <div class="label">
+                            <span class="label-text text-xl">Bahasa Utama</span>
+                        </div>
+                        <input type="text" name="bahasa_utama" placeholder="Type here" class="input input-bordered w-full" />
+                    </label>
+                    <label class="form-control w-full">
+                        <div class="label">
+                            <span class="label-text text-xl">Status Pernikahan</span>
+                        </div>
+                        <select name="status_pernikahan" class="select select-bordered w-full">
+                            <option value="Belum Menikah">Belum Menikah</option>
+                            <option value="Menikah">Menikah</option>
+                            <option value="Duda/Janda">Duda/Janda</option>
+                        </select>
+                    </label>
+                    <label class="form-control w-full">
+                        <div class="label">
+                            <span class="label-text text-xl">Kewarganegaraan</span>
+                        </div>
+                        <input type="text" name="kewarganegaraan" placeholder="Type here" class="input input-bordered w-full" />
+                    </label>
+                    <label class="form-control w-full">
+                        <div class="label">
+                            <span class="label-text text-xl">Tempat Lahir</span>
+                        </div>
+                        <input type="text" name="tempat_lahir" placeholder="Type here" class="input input-bordered w-full" required />
+                    </label>
+                    <label class="form-control w-full">
+                        <div class="label">
+                            <span class="label-text text-xl">Tanggal Lahir</span>
+                        </div>
+                        <input type="date" name="tanggal_lahir" placeholder="Type here" class="input input-bordered w-full" required />
+                    </label>
+                    <label class="form-control w-full">
+                        <div class="label">
+                            <span class="label-text text-xl">Indikator Meninggal</span>
+                        </div>
+                        <select name="indikator_meninggal" class="select select-bordered w-full">
+                            <option value="Tidak">Tidak</option>
+                            <option value="Ya">Ya</option>
+                        </select>
                     </label>
                     <div class="label">
                         <span class="label-text text-xl">Jenis Asuransi</span>
@@ -137,6 +214,7 @@ if (isset($_POST['submit'])) {
                     </div>
                 </div>
             </form>
+
         </div>
     </div>
 </body>

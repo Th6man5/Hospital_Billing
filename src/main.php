@@ -194,7 +194,7 @@
                     while ($row = $result->fetch_assoc()) {
                         echo "<tr>";
                         echo "<td>" . $row["id_transaksi"] . "</td>";
-                        echo "<td>" . $row["nama"] . "</td>";
+                        echo "<td>" . $row["nama_lengkap"] . "</td>";
                         echo "<td>" . $row["nama_layanan"] . "</td>";
                         echo "<td>" . $row["jenis_pembayaran"] . "</td>";
                         echo "<td>" . number_format($row["biaya_layanan"]) . "</td>";
