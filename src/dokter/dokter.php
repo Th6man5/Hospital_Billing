@@ -51,7 +51,7 @@
                 <a href="dokter_create.php" class="bg-blues opacity-95 text-black btn hover:bg-blues hover:opacity-100">Tambah Dokter</a>
             </div>
             <div class="overflow-x-auto">
-                <table class="table">
+                <table class="table text-center">
                     <!-- head -->
                     <thead>
                         <tr class="bg-blues2 text-black">

@@ -71,7 +71,7 @@
                     <tbody>
                         <?php
                         include('../database/database.php');
-                        $sql = "SELECT transaksi.id_transaksi, pasien.nama AS nama_pasien, transaksi.nama_layanan,
+                        $sql = "SELECT transaksi.id_transaksi, pasien.nama_lengkap AS nama_pasien, transaksi.nama_layanan,
                                         transaksi.jenis_pembayaran, transaksi.biaya_layanan,
                                         transaksi.potongan_harga, transaksi.tanggal, transaksi.waktu
                                         FROM transaksi

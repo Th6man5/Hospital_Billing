@@ -43,7 +43,7 @@
     </style>
 </head>
 
-<body>
+<body class="bg-background h-screen">
 
     <?php include '../template/sidebar.php'; ?>
     <div class="p-4 sm:ml-64">
@@ -53,14 +53,24 @@
                 <a href="pasien_create.php" class="bg-blues opacity-95 text-black btn hover:bg-blues hover:opacity-100">Tambah Pasien</a>
             </div>
             <div class="overflow-x-auto">
-                <table class="table">
+                <table class="table text-center">
                     <!-- head -->
                     <thead>
                         <tr class="bg-blues2 text-black">
                             <th>No</th>
-                            <th>Nama</th>
+                            <th>ID Eksternal</th>
+                            <th>Nama Lengkap</th>
+                            <th>Nama Panggilan</th>
                             <th>No Telepon</th>
+                            .
                             <th>Jenis Kelamin</th>
+                            <th>Ras</th>
+                            <th class="px-16">Alamat</th>
+                            <th>Kode Negara</th>
+                            <th>Bahasa Utama</th>
+                            <th>Status Pernikahan</th>
+                            <th>Kewarganegaraan</th>
+                            <th>Indikator Meninggal</th>
                             <th>Tempat Lahir</th>
                             <th>Tanggal Lahir</th>
                             <th>Insuransi</th>
@@ -70,7 +80,7 @@
                     <tbody>
                         <?php
                         include('../database/database.php');
-                        $sql = "SELECT p.id_pasien, p.nama, p.no_telpon, p.jenis_kelamin, p.tempat_lahir, p.tanggal_lahir, i.nama_perusahaan
+                        $sql = "SELECT p.id_pasien, p.nama_lengkap, p.no_telpon, p.jenis_kelamin, p.tempat_lahir, p.tanggal_lahir, p.id_eksternal, p.nama_panggilan, p.ras, p.alamat, p.kode_negara, p.bahasa_utama, p.status_pernikahan, p.kewarganegaraan, p.indikator_meninggal, i.nama_perusahaan
                                     FROM pasien p JOIN insuransi i ON p.id_insuransi = i.id_insuransi";
                         $result = mysqli_query($conn, $sql);
                         $no = 1;
@@ -78,9 +88,18 @@
                             while ($row = mysqli_fetch_assoc($result)) {
                                 echo '<tr>
                                 <th>' . $no . '</th>
-                                <td>' . $row['nama'] . '</td>
+                                <td>' . $row['id_eksternal'] . '</td>
+                                <td>' . $row['nama_lengkap'] . '</td>
+                                <td>' . $row['nama_panggilan'] . '</td>
                                 <td>' . $row['no_telpon'] . '</td>
                                 <td>' . $row['jenis_kelamin'] . '</td>
+                                <td>' . $row['ras'] . '</td>
+                                <td>' . $row['alamat'] . '</td>
+                                <td>' . $row['kode_negara'] . '</td>
+                                <td>' . $row['bahasa_utama'] . '</td>
+                                <td>' . $row['status_pernikahan'] . '</td>
+                                <td>' . $row['kewarganegaraan'] . '</td>
+                                <td>' . $row['indikator_meninggal'] . '</td>
                                 <td>' . $row['tempat_lahir'] . '</td>
                                 <td>' . $row['tanggal_lahir'] . '</td>
                                 <td>' . $row['nama_perusahaan'] . '</td>
