@@ -12,7 +12,7 @@
         @import url('https://fonts.googleapis.com/css2?family=Baloo+Paaji+2:wght@400..800&display=swap');
 
         h1 {
-            font-family: Lexend;
+            font-family: "Baloo Paaji 2", sans-serif;
             font-weight: 500;
             font-size: 60px;
         }

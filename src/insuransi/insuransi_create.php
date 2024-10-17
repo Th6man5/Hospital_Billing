@@ -39,10 +39,11 @@ if (isset($_POST['submit'])) {
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Krona+One&family=League+Spartan:wght@100..900&display=swap');
         @import url('https://fonts.googleapis.com/css2?family=Lexend:wght@100..900&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Baloo+Paaji+2:wght@400..800&display=swap');
 
         h1 {
-            font-family: Lexend;
-            font-weight: 500;
+            font-family: "Baloo Paaji 2", sans-serif;
+            font-weight: 600;
             font-size: 60px;
         }
 
@@ -96,8 +97,8 @@ if (isset($_POST['submit'])) {
                         </div>
                         <input type="text" name="nama_perusahaan" placeholder="Type here" class="input input-bordered w-full " required />
                     </label>
-                    <div class="w-full flex gap-x-4">
-                        <label class="form-control w-full">
+                    <div class="w-full grid-cols-3 grid gap-x-4">
+                            <label class="form-control w-full">
                             <div class="label">
                                 <span class="label-text text-xl">Alamat Perusahaan</span>
                             </div>
@@ -133,6 +134,7 @@ if (isset($_POST['submit'])) {
                             </div>
                             <input type="text" name="jenis_pertanggungan" placeholder="Type here" class="input input-bordered w-full " required />
                         </label>
+                        </div>
                     </div>
                     <div class="mt-4">
                         <button name="submit" type="submit" class="bg-blues opacity-95 text-white btn hover:bg-blues hover:opacity-100">Create</button>
