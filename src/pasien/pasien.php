@@ -70,8 +70,8 @@
                     <tbody>
                         <?php
                         include('../database/database.php');
-                        $sql = "SELECT p.id_pasien, p.nama, p.no_telpon, p.jenis_kelamin, p.tempat_lahir, p.tanggal_lahir, i.id_insuransi
-                                    FROM pasien p LEFT JOIN insuransi i ON p.id_insuransi = i.id_insuransi";
+                        $sql = "SELECT p.id_pasien, p.nama, p.no_telpon, p.jenis_kelamin, p.tempat_lahir, p.tanggal_lahir, i.nama_perusahaan
+                                    FROM pasien p JOIN insuransi i ON p.id_insuransi = i.id_insuransi";
                         $result = mysqli_query($conn, $sql);
                         $no = 1;
                         if (mysqli_num_rows($result) > 0) {
@@ -83,7 +83,7 @@
                                 <td>' . $row['jenis_kelamin'] . '</td>
                                 <td>' . $row['tempat_lahir'] . '</td>
                                 <td>' . $row['tanggal_lahir'] . '</td>
-                                <td>' . (!empty($row['id_insuransi']) ? 'ada' : '') . '</td>
+                                <td>' . $row['nama_perusahaan'] . '</td>
                                 <td class="flex gap-x-4 justify-center">
                                     <a href="pasien_edit.php?id=' . $row['id_pasien'] . '" class="btn bg-yellow hover:shadow-md hover:bg-yellow group">
                                         <i class="bi bi-pencil-square  transition-all"></i>

@@ -197,7 +197,7 @@
                         echo "<td>" . $row["nama"] . "</td>";
                         echo "<td>" . $row["nama_layanan"] . "</td>";
                         echo "<td>" . $row["jenis_pembayaran"] . "</td>";
-                        echo "<td>" . $row["biaya_layanan"] . "</td>";
+                        echo "<td>" . number_format($row["biaya_layanan"]) . "</td>";
                         echo "<td>" . $row["potongan_harga"] . "</td>";
                         echo "<td>" . $row["tanggal"] . "</td>";
                         echo "<td>" . $row["waktu"] . "</td>";
@@ -206,7 +206,7 @@
 
                     echo "</table>";
                 } else {
-                    echo "No new transactions found.";
+                    echo "Belum ada Transaksi baru.";
                 }
 
                 $conn->close();
