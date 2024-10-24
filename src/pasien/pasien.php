@@ -52,7 +52,7 @@
                 <h1>Pasien</h1>
                 <a href="pasien_create.php" class="bg-blues opacity-95 text-black btn hover:bg-blues hover:opacity-100">Tambah Pasien</a>
             </div>
-            <div class="overflow-x-auto">
+            <div class="overflow-x-auto rounded-2xl">
                 <table class="table text-center">
                     <!-- head -->
                     <thead>

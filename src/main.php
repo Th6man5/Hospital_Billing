@@ -28,6 +28,12 @@
             font-weight: 100;
             font-size: 16px;
         }
+
+
+
+        .table tbody tr:nth-child(even) {
+            background-color: #FFFFFF;
+        }
     </style>
 </head>
 

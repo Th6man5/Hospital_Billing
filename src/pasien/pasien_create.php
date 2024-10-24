@@ -75,7 +75,7 @@ if (isset($_POST['submit'])) {
     </style>
 </head>
 
-<body class="bg-background h-screen">
+<body class="bg-background h-full">
     <?php include '../template/sidebar.php'; ?>
     <div class="p-4 sm:ml-64">
         <div class="p-4">
