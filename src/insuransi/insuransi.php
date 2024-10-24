@@ -66,13 +66,14 @@
                             <th>Tanggal Polis Awal</th>
                             <th>Tanggal Polis Akhir</th>
                             <th>Jenis Pertanggungan</th>
+                            <th>Potongan Harga (%)</th>
                             <th class="text-center">Action</th>
                         </tr>
                     </thead>
                     <tbody>
                         <?php
                         include('../database/database.php');
-                        $sql = "SELECT i.id_insuransi, i.no_polis, i.nama_perusahaan, i.alamat_perusahaan, i.tanggal_polis, i.no_telepon_perusahaan, i.tanggal_polis_awal, i.tanggal_polis_akhir, i.jenis_pertanggungan
+                        $sql = "SELECT i.id_insuransi, i.no_polis, i.nama_perusahaan, i.alamat_perusahaan, i.tanggal_polis, i.no_telepon_perusahaan, i.tanggal_polis_awal, i.tanggal_polis_akhir, i.jenis_pertanggungan, i.potongan_harga
                                     FROM insuransi i";
                         $result = mysqli_query($conn, $sql);
                         $no = 1;
@@ -88,6 +89,7 @@
                                 <td>' . $row['tanggal_polis_awal'] . '</td>
                                 <td>' . $row['tanggal_polis_akhir'] . '</td>
                                 <td>' . $row['jenis_pertanggungan'] . '</td>
+                                <td>' . $row['potongan_harga'] . '%</td>
                                 <td class="flex gap-x-4 justify-center">
                                     <a href="insuransi_edit.php?id=' . $row['id_insuransi'] . '" class="btn bg-yellow hover:shadow-md hover:bg-yellow group">
                                         <i class="bi bi-pencil-square  transition-all"></i>

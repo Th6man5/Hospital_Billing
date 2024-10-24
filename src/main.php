@@ -192,7 +192,6 @@
                       <th>Nama Layanan</th>
                       <th>Jenis Pembayaran</th>
                       <th>Total Harga</th>
-                      <th>Potongan Harga</th>
                       <th>Tanggal</th>
                       <th>Waktu</th>
                       </tr>";
@@ -204,7 +203,6 @@
                         echo "<td>" . $row["nama_layanan"] . "</td>";
                         echo "<td>" . $row["jenis_pembayaran"] . "</td>";
                         echo "<td>" . number_format($row["biaya_layanan"]) . "</td>";
-                        echo "<td>" . $row["potongan_harga"] . "</td>";
                         echo "<td>" . $row["tanggal"] . "</td>";
                         echo "<td>" . $row["waktu"] . "</td>";
                         echo "</tr>";

@@ -62,7 +62,6 @@
                             <th>Jenis Layanan</th>
                             <th>Jenis Pembayaran</th>
                             <th>Total Harga</th>
-                            <th>Potongan Harga (%)</th>
                             <th>Tanggal</th>
                             <th>Waktu</th>
                             <th class="text-center">Action</th>
@@ -72,8 +71,7 @@
                         <?php
                         include('../database/database.php');
                         $sql = "SELECT transaksi.id_transaksi, pasien.nama_lengkap AS nama_pasien, transaksi.nama_layanan,
-                                        transaksi.jenis_pembayaran, transaksi.biaya_layanan,
-                                        transaksi.potongan_harga, transaksi.tanggal, transaksi.waktu
+                                        transaksi.jenis_pembayaran, transaksi.biaya_layanan, transaksi.tanggal, transaksi.waktu
                                         FROM transaksi
                                         JOIN pasien ON transaksi.id_pasien = pasien.id_pasien;";
                         $result = mysqli_query($conn, $sql);
@@ -86,7 +84,6 @@
                                     <td>' . $row['nama_layanan'] . '</td>
                                     <td>' . $row['jenis_pembayaran'] . '</td>
                                     <td>' . number_format($row['biaya_layanan']) . '</td> 
-                                    <td>' . $row['potongan_harga'] . '</td>
                                     <td>' . $row['tanggal'] . '</td>
                                     <td>' . $row['waktu'] . '</td>
                                 <td class="flex gap-x-4 justify-center">

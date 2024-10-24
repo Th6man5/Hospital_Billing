@@ -5,12 +5,11 @@ if (isset($_POST['submit'])) {
     $id_layanan_array = $_POST['id_layanan'];
     $jenis_pembayaran = $_POST['jenis_pembayaran'];
     $biaya_layanan = $_POST['biaya_layanan'];
-    $potongan_harga = $_POST['potongan_harga'];
     $tanggal = $_POST['tanggal'];
     $waktu = $_POST['waktu'];
 
     do {
-        if (empty($id_pasien) || empty($id_layanan_array) || empty($jenis_pembayaran) || empty($potongan_harga) || empty($tanggal) || empty($waktu)) {
+        if (empty($id_pasien) || empty($id_layanan_array) || empty($jenis_pembayaran) || empty($tanggal) || empty($waktu)) {
             echo "<script>alert('Please fill all the fields')</script>";
             break;
         } else {
@@ -27,8 +26,8 @@ if (isset($_POST['submit'])) {
 
             $nama_layanan = implode(", ", $nama_layanan_array);
 
-            $sql = "INSERT INTO transaksi (id_pasien, nama_layanan, jenis_pembayaran, biaya_layanan, potongan_harga, tanggal, waktu) 
-                    VALUES ('$id_pasien', '$nama_layanan', '$jenis_pembayaran', '$biaya_layanan', '$potongan_harga', '$tanggal', '$waktu')";
+            $sql = "INSERT INTO transaksi (id_pasien, nama_layanan, jenis_pembayaran, biaya_layanan, tanggal, waktu) 
+                    VALUES ('$id_pasien', '$nama_layanan', '$jenis_pembayaran', '$biaya_layanan', '$tanggal', '$waktu')";
 
             if (mysqli_query($conn, $sql)) {
                 $successMessage = 'Transaksi has been created successfully';
@@ -215,6 +214,7 @@ if (isset($_POST['submit'])) {
 </script>
 
 <script>
+    // Fungsi untuk menghitung total harga layanan dari pilihan layanan
     function calculateTotal() {
         let select = document.getElementById('select-layanan');
         let total = 0;
@@ -225,21 +225,27 @@ if (isset($_POST['submit'])) {
             }
         }
 
+        // Set total harga layanan
         document.getElementById('total-harga').value = total;
-    }
-</script>
 
-<script>
+        // Panggil fungsi untuk menghitung harga setelah potongan
+        calculateDiscountedPrice();
+    }
+
+    // Fungsi untuk menghitung total harga setelah potongan
     function calculateDiscountedPrice() {
-        let biayaLayanan = parseFloat(document.getElementById('total-harga').value) || 0;
+        let totalHargaLayanan = parseFloat(document.getElementById('total-harga').value) || 0;
         let potonganHarga = parseFloat(document.getElementById('potongan-harga').value) || 0;
 
-        let totalDiskon = (biayaLayanan * potonganHarga) / 100
-        let hargaTotal = biayaLayanan - totalDiskon;
-        if (hargaTotal < 0) {
-            hargaTotal = 0;
+        // Hitung total setelah potongan
+        let totalSetelahPotongan = totalHargaLayanan - (totalHargaLayanan * (potonganHarga / 100));
+
+        // Pastikan total tidak negatif
+        if (totalSetelahPotongan < 0) {
+            totalSetelahPotongan = 0;
         }
 
-        document.getElementById('harga-diskon').value = hargaTotal.toFixed(2);
+        // Tampilkan total setelah potongan di input biaya_layanan (harga-diskon)
+        document.getElementById('harga-diskon').value = totalSetelahPotongan.toFixed(2);
     }
 </script>
