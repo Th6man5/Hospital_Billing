@@ -105,13 +105,10 @@ if (isset($_POST['submit'])) {
             <form method="POST">
                 <div class="p-10">
                     <label class="form-control w-full">
-                        <div class="grid">
-
-                        </div>
                         <div class="label" for="id_pasien">
                             <span class="label-text text-xl">Nama Pasien</span>
                         </div>
-                        <select name="id_pasien" class="select select-bordered w-full" id="select-pasien">
+                        <select name="id_pasien" class="select select-bordered w-full" id="select-pasien" onchange="fetchPotonganHarga()" onchange="this.form.submit()">
                             <?php
                             include('../database/database.php');
                             $sql = "SELECT * FROM pasien";
@@ -155,7 +152,7 @@ if (isset($_POST['submit'])) {
                             <div class="label">
                                 <span class="label-text text-xl">Potongan Harga</span>
                             </div>
-                            <input type="number" name="potongan_harga" placeholder="Type here" class="input input-bordered w-full" id="potongan-harga" required oninput="calculateDiscountedPrice()" />
+                            <input type="number" name="potongan_harga" placeholder="Type here" class="input input-bordered w-full" id="potongan-harga" required oninput="calculateDiscountedPrice()" value="<?php echo htmlspecialchars($potongan_harga); ?>" readonly />
                         </label>
 
                         <label class="form-control w-full">
@@ -247,5 +244,23 @@ if (isset($_POST['submit'])) {
 
         // Tampilkan total setelah potongan di input biaya_layanan (harga-diskon)
         document.getElementById('harga-diskon').value = totalSetelahPotongan.toFixed(2);
+    }
+</script>
+
+<script>
+    function fetchPotonganHarga() {
+        var idPasien = document.getElementById("select-pasien").value;
+
+        // Gunakan AJAX untuk mengambil potongan harga dari server
+        var xhr = new XMLHttpRequest();
+        xhr.open("POST", "get_potongan_harga.php", true);
+        xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+        xhr.onreadystatechange = function() {
+            if (xhr.readyState === 4 && xhr.status === 200) {
+                // Set nilai input potongan harga dengan data dari server
+                document.getElementById("potongan-harga").value = xhr.responseText;
+            }
+        };
+        xhr.send("id_pasien=" + idPasien);
     }
 </script>

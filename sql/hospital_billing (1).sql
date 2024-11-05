@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Oct 24, 2024 at 02:16 PM
+-- Generation Time: Nov 05, 2024 at 05:37 PM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -75,8 +75,7 @@ CREATE TABLE `insuransi` (
 INSERT INTO `insuransi` (`id_insuransi`, `no_polis`, `nama_perusahaan`, `alamat_perusahaan`, `tanggal_polis`, `no_telepon_perusahaan`, `tanggal_polis_awal`, `tanggal_polis_akhir`, `jenis_pertanggungan`, `potongan_harga`) VALUES
 (1, 1001, 'Asuransi coba', 'Jl. Sehat No. 1, Jakarta', '2023-01-15', '08123456789', '2023-01-15', '2024-01-15', 'Kesehatan', 10),
 (2, 1002, 'Asuransi Keluarga', 'Jl. Keluarga No. 5, Bandung', '2022-03-20', '08987654321', '2022-03-20', '2023-03-20', 'Keluarga', 20),
-(4, 1004, 'Asuransi Properti', 'Jl. Properti No. 2, Medan', '2022-06-25', '08765432100', '2022-06-25', '2023-06-25', 'Kesehatan', 30),
-(5, 1005, 'Asuransi Perjalanan', 'Jl. Wisata No. 9, Yogyakarta', '2023-07-30', '08556677889', '2023-07-30', '2024-07-30', 'Kesehatan', 25);
+(4, 1004, 'Asuransi Properti', 'Jl. Properti No. 2, Medan', '2022-06-25', '08765432100', '2022-06-25', '2023-06-25', 'Kesehatan', 30);
 
 -- --------------------------------------------------------
 
@@ -132,8 +131,7 @@ CREATE TABLE `pasien` (
 --
 
 INSERT INTO `pasien` (`id_pasien`, `id_eksternal`, `nama_lengkap`, `nama_panggilan`, `no_telpon`, `jenis_kelamin`, `ras`, `alamat`, `kode_negara`, `bahasa_utama`, `status_pernikahan`, `kewarganegaraan`, `tempat_lahir`, `tanggal_lahir`, `indikator_meninggal`, `id_insuransi`) VALUES
-(1, 'P001', 'John Doe', 'John', '08123456789', 'L', 'Asia', 'Jl. Mawar No. 1', 'ID', 'Bahasa Indonesia', 'Belum Menikah', 'Indonesia', 'Jakarta', '1980-01-01', 'Tidak', 1),
-(5, 'P005', 'William Brown', 'Will', '08123456785', 'L', 'Asia', 'Jl. Kamboja No. 5', 'JP', 'Japanese', 'Menikah', 'Jepang', 'Tokyo', '2000-05-05', 'Tidak', 5);
+(1, 'P001', 'John Doe', 'John', '08123456789', 'L', 'Asia', 'Jl. Mawar No. 1', 'ID', 'Bahasa Indonesia', 'Belum Menikah', 'Indonesia', 'Jakarta', '1980-01-01', 'Tidak', 1);
 
 -- --------------------------------------------------------
 
@@ -244,7 +242,8 @@ ALTER TABLE `layanan`
 -- Constraints for table `pasien`
 --
 ALTER TABLE `pasien`
-  ADD CONSTRAINT `fk_insuransi` FOREIGN KEY (`id_insuransi`) REFERENCES `insuransi` (`id_insuransi`);
+  ADD CONSTRAINT `fk_insuransi` FOREIGN KEY (`id_insuransi`) REFERENCES `insuransi` (`id_insuransi`) ON DELETE CASCADE,
+  ADD CONSTRAINT `fk_insuransi_claims` FOREIGN KEY (`id_insuransi`) REFERENCES `insuransi` (`id_insuransi`) ON DELETE CASCADE;
 
 --
 -- Constraints for table `transaksi`

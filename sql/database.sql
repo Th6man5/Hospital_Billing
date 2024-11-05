@@ -30,6 +30,7 @@ CREATE TABLE insuransi (
     tanggal_polis_awal DATE,
     tanggal_polis_akhir DATE,
     jenis_pertanggungan VARCHAR(255),
+    
     CONSTRAINT pk_insuransi PRIMARY KEY (id_insuransi)
 );
 
