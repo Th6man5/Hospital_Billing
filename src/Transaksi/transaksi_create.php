@@ -1,41 +1,43 @@
 <?php
-if (isset($_POST['submit'])) {
+header("Access-Control-Allow-Origin: http://localhost:5173");
+header("Access-Control-Allow-Methods: GET, POST");
+header("Access-Control-Allow-Headers: Content-Type");
+header("Access-Control-Allow-Credentials: true");
+if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     include('../database/database.php');
+
     $id_pasien = $_POST['id_pasien'];
-    $id_layanan_array = $_POST['id_layanan'];
+    $nama_layanan_array = $_POST['id_layanan'];
     $jenis_pembayaran = $_POST['jenis_pembayaran'];
     $biaya_layanan = $_POST['biaya_layanan'];
     $tanggal = $_POST['tanggal'];
     $waktu = $_POST['waktu'];
 
+    $response = [];
+
     do {
-        if (empty($id_pasien) || empty($id_layanan_array) || empty($jenis_pembayaran) || empty($tanggal) || empty($waktu)) {
-            echo "<script>alert('Please fill all the fields')</script>";
+        if (empty($id_pasien) || empty($nama_layanan_array) || empty($jenis_pembayaran) || empty($biaya_layanan) || empty($tanggal) || empty($waktu)) {
+            $response['error'] = 'Please fill all the fields';
+            echo json_encode($response);
             break;
         } else {
-            $id_layanan_list = implode(",", $id_layanan_array);
-            $sql_layanan = "SELECT nama_layanan FROM layanan WHERE id_layanan IN ($id_layanan_list)";
-            $result = mysqli_query($conn, $sql_layanan);
-
-            $nama_layanan_array = [];
-            if (mysqli_num_rows($result) > 0) {
-                while ($row = mysqli_fetch_assoc($result)) {
-                    $nama_layanan_array[] = $row['nama_layanan'];
-                }
+            if (is_array($nama_layanan_array)) {
+                $nama_layanan = implode(", ", $nama_layanan_array);
+            } else {
+                $nama_layanan = $nama_layanan_array;
             }
-
-            $nama_layanan = implode(", ", $nama_layanan_array);
 
             $sql = "INSERT INTO transaksi (id_pasien, nama_layanan, jenis_pembayaran, biaya_layanan, tanggal, waktu) 
                     VALUES ('$id_pasien', '$nama_layanan', '$jenis_pembayaran', '$biaya_layanan', '$tanggal', '$waktu')";
 
             if (mysqli_query($conn, $sql)) {
-                $successMessage = 'Transaksi has been created successfully';
+                $response['success'] = 'Transaksi has been created successfully';
             } else {
-                echo 'Error: ' . $sql . '<br>' . mysqli_error($conn);
+                $response['error'] = 'Error: ' . mysqli_error($conn);
             }
 
             mysqli_close($conn);
+            // echo json_encode($response);
         }
     } while (false);
 }
@@ -89,14 +91,14 @@ if (isset($_POST['submit'])) {
                 <a href="transaksi.php" class="bg-blues opacity-95 text-white btn hover:bg-blues hover:opacity-100">Back</a>
             </div>
             <?php
-            if (!empty($successMessage)) {
+            if (!empty($response['success'])) {
                 echo '
                 <div>
                     <div role="alert" class="alert alert-success">
                         <svg xmlns="http://www.w3.org/2000/svg" class="stroke-current shrink-0 h-6 w-6" fill="none" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
                         </svg>
-                        <span>' . $successMessage . '</span>
+                        <span>' . $response['success'] . '</span>
                     </div>
                 </div>
                 ';
@@ -133,7 +135,7 @@ if (isset($_POST['submit'])) {
                             $result = mysqli_query($conn, $sql);
                             if (mysqli_num_rows($result) > 0) {
                                 while ($row = mysqli_fetch_assoc($result)) {
-                                    echo '<option value="' . $row['id_layanan'] . '" data-price="' . $row['harga'] . '">' . $row['nama_layanan'] . ' | ' . number_format($row['harga']) .  '</option>';
+                                    echo '<option value="' . $row['nama_layanan'] . '" data-price="' . $row['harga'] . '">' . $row['nama_layanan'] . ' | ' . number_format($row['harga']) .  '</option>';
                                 }
                             }
                             ?>

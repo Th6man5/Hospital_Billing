@@ -30,14 +30,6 @@
             font-weight: 100;
             font-size: 16px;
         }
-
-        .table tbody tr:nth-child(odd) {
-            background-color: #FFFFFF;
-        }
-
-        .table tbody tr:nth-child(even) {
-            background-color: #EEEEEE;
-        }
     </style>
 
     </style>
@@ -52,8 +44,8 @@
                 <h1>Pasien</h1>
                 <a href="pasien_create.php" class="bg-blues opacity-95 text-black btn hover:bg-blues hover:opacity-100">Tambah Pasien</a>
             </div>
-            <div class="overflow-x-auto rounded-2xl">
-                <table class="table text-center">
+            <div class="overflow-x-auto shadow-lg">
+                <table class="table text-center  border border-grey">
                     <!-- head -->
                     <thead>
                         <tr class="bg-blues2 text-black">
@@ -62,7 +54,6 @@
                             <th>Nama Lengkap</th>
                             <th>Nama Panggilan</th>
                             <th>No Telepon</th>
-                            .
                             <th>Jenis Kelamin</th>
                             <th>Ras</th>
                             <th class="px-16">Alamat</th>

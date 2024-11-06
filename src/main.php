@@ -185,7 +185,7 @@
                 $result = $conn->query($sql);
 
                 if ($result->num_rows > 0) {
-                    echo "<table class='table text-center'>";
+                    echo "<table class='table text-center  border border-grey shadow-lg'>";
                     echo "<tr class = 'bg-blues2 text-black '> 
                       <th>ID Transaksi</th>
                       <th>Nama Pasien</th>

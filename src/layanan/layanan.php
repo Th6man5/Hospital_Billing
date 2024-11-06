@@ -30,16 +30,6 @@
             font-weight: 100;
             font-size: 16px;
         }
-
-        .table tbody tr:nth-child(odd) {
-            background-color: #FFFFFF;
-        }
-
-        .table tbody tr:nth-child(even) {
-            background-color: #EEEEEE;
-        }
-    </style>
-
     </style>
 </head>
 
@@ -52,8 +42,8 @@
                 <h1>Daftar Layanan</h1>
                 <a href="layanan_create.php" class="bg-blues opacity-95 text-black btn hover:bg-blues hover:opacity-100">Tambah Layanan</a>
             </div>
-            <div class="overflow-x-auto">
-                <table class="table">
+            <div class="overflow-x-auto shadow-lg">
+                <table class="table text-center border border-grey">
                     <!-- head -->
                     <thead>
                         <tr class="bg-blues2 text-black">
