@@ -211,7 +211,6 @@ if (isset($_POST['submit'])) {
 </script>
 
 <script>
-    // Fungsi untuk menghitung total harga layanan dari pilihan layanan
     function calculateTotal() {
         let select = document.getElementById('select-layanan');
         let total = 0;
@@ -222,27 +221,21 @@ if (isset($_POST['submit'])) {
             }
         }
 
-        // Set total harga layanan
         document.getElementById('total-harga').value = total;
 
-        // Panggil fungsi untuk menghitung harga setelah potongan
         calculateDiscountedPrice();
     }
 
-    // Fungsi untuk menghitung total harga setelah potongan
     function calculateDiscountedPrice() {
         let totalHargaLayanan = parseFloat(document.getElementById('total-harga').value) || 0;
         let potonganHarga = parseFloat(document.getElementById('potongan-harga').value) || 0;
 
-        // Hitung total setelah potongan
         let totalSetelahPotongan = totalHargaLayanan - (totalHargaLayanan * (potonganHarga / 100));
 
-        // Pastikan total tidak negatif
         if (totalSetelahPotongan < 0) {
             totalSetelahPotongan = 0;
         }
 
-        // Tampilkan total setelah potongan di input biaya_layanan (harga-diskon)
         document.getElementById('harga-diskon').value = totalSetelahPotongan.toFixed(2);
     }
 </script>
@@ -251,13 +244,11 @@ if (isset($_POST['submit'])) {
     function fetchPotonganHarga() {
         var idPasien = document.getElementById("select-pasien").value;
 
-        // Gunakan AJAX untuk mengambil potongan harga dari server
         var xhr = new XMLHttpRequest();
         xhr.open("POST", "get_potongan_harga.php", true);
         xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
         xhr.onreadystatechange = function() {
             if (xhr.readyState === 4 && xhr.status === 200) {
-                // Set nilai input potongan harga dengan data dari server
                 document.getElementById("potongan-harga").value = xhr.responseText;
             }
         };
