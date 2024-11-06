@@ -1,7 +1,7 @@
 <?php
 include('../database/database.php');
 
-$nama = $no_telpon = $jenis_kelamin = $tempat_lahir = $tanggal_lahir = $id_insuransi = '';
+$id_eksternal = $no_telpon = $jenis_kelamin = $tempat_lahir = $tanggal_lahir = $id_insuransi = $nama_lengkap = $nama_panggilan = $ras = $alamat = $kode_negara = $bahasa_utama = $status_pernikahan = $kewarganegaraan = $indikator_meninggal = '';
 
 $successMessage = '';
 if ($_SERVER['REQUEST_METHOD'] == 'GET') {
@@ -21,35 +21,53 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
         exit;
     }
 
-    $nama = $row['nama'];
+    $id_eksternal = $row['id_eksternal'];
     $no_telpon = $row['no_telpon'];
     $jenis_kelamin = $row['jenis_kelamin'];
     $tempat_lahir = $row['tempat_lahir'];
     $tanggal_lahir = $row['tanggal_lahir'];
     $id_insuransi = $row['id_insuransi'];
+    $nama_lengkap = $row['nama_lengkap'];
+    $nama_panggilan = $row['nama_panggilan'];
+    $ras = $row['ras'];
+    $alamat = $row['alamat'];
+    $kode_negara = $row['kode_negara'];
+    $bahasa_utama = $row['bahasa_utama'];
+    $status_pernikahan = $row['status_pernikahan'];
+    $kewarganegaraan = $row['kewarganegaraan'];
+    $indikator_meninggal = $row['indikator_meninggal'];
 } else {
     $id = $_POST['id_pasien'];
-    $nama = $_POST['nama'];
+    $id_eksternal = $_POST['id_eksternal'];
     $no_telpon = $_POST['no_telpon'];
     $jenis_kelamin = $_POST['jenis_kelamin'];
     $tempat_lahir = $_POST['tempat_lahir'];
     $tanggal_lahir = $_POST['tanggal_lahir'];
     $id_insuransi = $_POST['id_insuransi'];
+    $nama_lengkap = $_POST['nama_lengkap'];
+    $nama_panggilan = $_POST['nama_panggilan'];
+    $ras = $_POST['ras'];
+    $alamat = $_POST['alamat'];
+    $kode_negara = $_POST['kode_negara'];
+    $bahasa_utama = $_POST['bahasa_utama'];
+    $status_pernikahan = $_POST['status_pernikahan'];
+    $kewarganegaraan = $_POST['kewarganegaraan'];
+    $indikator_meninggal = $_POST['indikator_meninggal'];
 
     do {
-        if (empty($nama) || empty($no_telpon) || empty($jenis_kelamin) || empty($tempat_lahir) || empty($tanggal_lahir) || empty($id_insuransi)) {
+        if (empty($no_telpon) || empty($id_eksternal) || empty($jenis_kelamin) || empty($tempat_lahir) || empty($tanggal_lahir) || empty($id_insuransi)) {
             echo "<script>alert('Please fill all the fields')</script>";
             break;
         }
 
-        $sql = "UPDATE pasien SET nama = '$nama', no_telpon = '$no_telpon', jenis_kelamin = '$jenis_kelamin', tempat_lahir = '$tempat_lahir', tanggal_lahir = '$tanggal_lahir', id_insuransi = '$id_insuransi' WHERE id_pasien = $id";
+        $sql = "UPDATE pasien SET id_eksternal = '$id_eksternal', no_telpon = '$no_telpon', jenis_kelamin = '$jenis_kelamin', tempat_lahir = '$tempat_lahir', tanggal_lahir = '$tanggal_lahir', id_insuransi = '$id_insuransi', nama_lengkap = '$nama_lengkap', nama_panggilan = '$nama_panggilan', ras = '$ras', alamat = '$alamat', kode_negara = '$kode_negara', bahasa_utama = '$bahasa_utama', status_pernikahan = '$status_pernikahan', kewarganegaraan = '$kewarganegaraan', indikator_meninggal = '$indikator_meninggal' WHERE id_pasien = $id";
 
         $result = mysqli_query($conn, $sql);
         if (!$result) {
             echo "<script>alert('Failed to update pasien')</script>";
         }
 
-        $successMessage = 'pasien has been updated!';
+        $successMessage = 'Pasien has been updated!';
     } while (false);
 }
 ?>
@@ -88,7 +106,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
     </style>
 </head>
 
-<body>
+<body class="bg-background h-full">
     <?php include '../template/sidebar.php'; ?>
     <div class="p-4 sm:ml-64">
         <div class="p-4">
@@ -115,41 +133,102 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
                 <div class="p-10">
                     <label class="form-control w-full">
                         <div class="label">
-                            <span class="label-text text-xl">Nama</span>
+                            <span class="label-text text-xl">ID Eksternal</span>
                         </div>
-                        <input type="text" name="nama" value="<?php echo $nama; ?>" placeholder="Type here" class="input input-bordered w-full " required />
+                        <input type="text" name="id_eksternal" value="<?php echo $id_eksternal; ?>" placeholder="Type here" class="input input-bordered w-full" required />
                     </label>
                     <label class="form-control w-full">
                         <div class="label">
-                            <span class="label-text text-xl">No_telpon</span>
+                            <span class="label-text text-xl">Nama Lengkap</span>
                         </div>
-                        <input type="text" name="no_telpon" value="<?php echo $no_telpon; ?>" placeholder="Type here" class="input input-bordered w-full " required />
+                        <input type="text" name="nama_lengkap" value="<?php echo $nama_lengkap; ?>" placeholder="Type here" class="input input-bordered w-full" required />
+                    </label>
+                    <label class="form-control w-full">
+                        <div class="label">
+                            <span class="label-text text-xl">Nama Panggilan</span>
+                        </div>
+                        <input type="text" name="nama_panggilan" value="<?php echo $nama_panggilan; ?>" placeholder="Type here" class="input input-bordered w-full" />
+                    </label>
+                    <label class="form-control w-full">
+                        <div class="label">
+                            <span class="label-text text-xl">No Telpon</span>
+                        </div>
+                        <input type="text" name="no_telpon" value="<?php echo $no_telpon; ?>" placeholder="Type here" class="input input-bordered w-full" required />
                     </label>
                     <label class="form-control w-full">
                         <div class="label">
                             <span class="label-text text-xl">Jenis Kelamin</span>
                         </div>
                         <select name="jenis_kelamin" class="select select-bordered w-full">
-                            <option value="L">Laki-Laki</option>
-                            <option value="P">Perempuan</option>
-                            <option value="U">Unknown</option>
+                            <option value="L" <?php if ($jenis_kelamin == 'L') echo 'selected'; ?>>Laki-Laki</option>
+                            <option value="P" <?php if ($jenis_kelamin == 'P') echo 'selected'; ?>>Perempuan</option>
+                            <option value="U" <?php if ($jenis_kelamin == 'U') echo 'selected'; ?>>Unknown</option>
                         </select>
                     </label>
                     <label class="form-control w-full">
                         <div class="label">
-                            <span class="label-text text-xl">Tempat_lahir</span>
+                            <span class="label-text text-xl">Ras</span>
                         </div>
-                        <input type="text" name="tempat_lahir" value="<?php echo $tempat_lahir; ?>" placeholder="Type here" class="input input-bordered w-full " required />
+                        <input type="text" name="ras" value="<?php echo $ras; ?>" placeholder="Type here" class="input input-bordered w-full" />
                     </label>
                     <label class="form-control w-full">
                         <div class="label">
-                            <span class="label-text text-xl">Tanggal_lahir</span>
+                            <span class="label-text text-xl">Alamat</span>
                         </div>
-                        <input type="date" name="tanggal_lahir" value="<?php echo $tanggal_lahir; ?>" placeholder="Type here" class="input input-bordered w-full " required />
+                        <textarea name="alamat" placeholder="Type here" class="textarea textarea-bordered w-full"><?php echo $alamat; ?></textarea>
                     </label>
+                    <label class="form-control w-full">
                         <div class="label">
-                            <span class="label-text text-xl">Jenis_Asuransi</span>
+                            <span class="label-text text-xl">Kode Negara</span>
                         </div>
+                        <input type="text" name="kode_negara" value="<?php echo $kode_negara; ?>" placeholder="Type here" class="input input-bordered w-full" />
+                    </label>
+                    <label class="form-control w-full">
+                        <div class="label">
+                            <span class="label-text text-xl">Bahasa Utama</span>
+                        </div>
+                        <input type="text" name="bahasa_utama" value="<?php echo $bahasa_utama; ?>" placeholder="Type here" class="input input-bordered w-full" />
+                    </label>
+                    <label class="form-control w-full">
+                        <div class="label">
+                            <span class="label-text text-xl">Status Pernikahan</span>
+                        </div>
+                        <select name="status_pernikahan" class="select select-bordered w-full">
+                            <option value="Belum Menikah" <?php if ($status_pernikahan == 'Belum Menikah') echo 'selected'; ?>>Belum Menikah</option>
+                            <option value="Menikah" <?php if ($status_pernikahan == 'Menikah') echo 'selected'; ?>>Menikah</option>
+                            <option value="Duda/Janda" <?php if ($status_pernikahan == 'Duda/Janda') echo 'selected'; ?>>Duda/Janda</option>
+                        </select>
+                    </label>
+                    <label class="form-control w-full">
+                        <div class="label">
+                            <span class="label-text text-xl">Kewarganegaraan</span>
+                        </div>
+                        <input type="text" name="kewarganegaraan" value="<?php echo $kewarganegaraan; ?>" placeholder="Type here" class="input input-bordered w-full" />
+                    </label>
+                    <label class="form-control w-full">
+                        <div class="label">
+                            <span class="label-text text-xl">Tempat Lahir</span>
+                        </div>
+                        <input type="text" name="tempat_lahir" value="<?php echo $tempat_lahir; ?>" placeholder="Type here" class="input input-bordered w-full" required />
+                    </label>
+                    <label class="form-control w-full">
+                        <div class="label">
+                            <span class="label-text text-xl">Tanggal Lahir</span>
+                        </div>
+                        <input type="date" name="tanggal_lahir" value="<?php echo $tanggal_lahir; ?>" class="input input-bordered w-full" required />
+                    </label>
+                    <label class="form-control w-full">
+                        <div class="label">
+                            <span class="label-text text-xl">Indikator Meninggal</span>
+                        </div>
+                        <select name="indikator_meninggal" class="select select-bordered w-full">
+                            <option value="Tidak" <?php if ($indikator_meninggal == 'Tidak') echo 'selected'; ?>>Tidak</option>
+                            <option value="Ya" <?php if ($indikator_meninggal == 'Ya') echo 'selected'; ?>>Ya</option>
+                        </select>
+                    </label>
+                    <div class="label">
+                        <span class="label-text text-xl">Jenis Asuransi</span>
+                    </div>
                     <select name="id_insuransi" class="select select-bordered w-full">
                         <?php
                         include('../database/database.php');
@@ -157,13 +236,14 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
                         $result = mysqli_query($conn, $sql);
                         if (mysqli_num_rows($result) > 0) {
                             while ($row = mysqli_fetch_assoc($result)) {
-                                echo '<option value="' . $row['id_insuransi'] . '">' . $row['nama_perusahaan'] . '</option>';
+                                $selected = ($id_insuransi == $row['id_insuransi']) ? 'selected' : '';
+                                echo '<option value="' . $row['id_insuransi'] . '" ' . $selected . '>' . $row['nama_perusahaan'] . '</option>';
                             }
                         }
                         ?>
                     </select>
                     <div class="mt-4">
-                        <button name="submit" type="submit" class="bg-blues opacity-95 text-white btn hover:bg-blues hover:opacity-100">Update</button>
+                        <button name="submit" type="submit" class="bg-blues opacity-95 text-white btn hover:bg-blues hover:opacity-100">Create</button>
                     </div>
                 </div>
             </form>

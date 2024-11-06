@@ -16,7 +16,7 @@
          <ul class="space-y-2 font-medium">
              <li>
                  <a href="http://localhost/hospital_billing/src/main.php" class="flex items-center p-2 rounded-lg text-black group hover:bg-black hover:text-white
-        <?php echo (basename($_SERVER['PHP_SELF']) == 'main.php' ) ? 'bg-black bg-opacity-50 text-white' : 'text-gray-900'; ?>">
+        <?php echo (basename($_SERVER['PHP_SELF']) == 'main.php') ? 'bg-black bg-opacity-50 text-white' : 'text-gray-900'; ?>">
                      <svg class="flex-shrink-0 w-5 h-5 text-gray-500 transition duration-75 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-white" xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="currentColor">
                          <path d="M520-600v-240h320v240H520ZM120-440v-400h320v400H120Zm400 320v-400h320v400H520Zm-400 0v-240h320v240H120Zm80-400h160v-240H200v240Zm400 320h160v-240H600v240Zm0-480h160v-80H600v80ZM200-200h160v-80H200v80Zm160-320Zm240-160Zm0 240ZM360-280Z" />
                      </svg>
@@ -49,13 +49,14 @@
                      <span class="flex-1 ms-3 whitespace-nowrap">Insuransi</span>
                  </a>
              </li>
-             <li> 
-                <a href="http://localhost/hospital_billing/src/transaksi/transaksi.php" class="flex items-center p-2 text-gray-900 rounded-lg text-black hover:bg-black hover:text-white group <?php echo (basename($_SERVER['PHP_SELF']) == 'transaksi.php' || basename($_SERVER['PHP_SELF']) == 'transaksi_create.php' || basename($_SERVER['PHP_SELF']) == 'transaksi_edit.php') ? 'bg-black bg-opacity-50 text-white' : 'text-gray-900'; ?>">
+             <li>
+                 <a href="http://localhost/hospital_billing/src/transaksi/transaksi.php" class="flex items-center p-2 text-gray-900 rounded-lg text-black hover:bg-black hover:text-white group <?php echo (basename($_SERVER['PHP_SELF']) == 'transaksi.php' || basename($_SERVER['PHP_SELF']) == 'transaksi_create.php' || basename($_SERVER['PHP_SELF']) == 'transaksi_edit.php') ? 'bg-black bg-opacity-50 text-white' : 'text-gray-900'; ?>">
                      <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-cash-stack flex-shrink-0 w-5 h-5 text-gray-500 transition duration-75 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-white" viewBox="0 0 16 16">
-                        <path d="M1 3a1 1 0 0 1 1-1h12a1 1 0 0 1 1 1zm7 8a2 2 0 1 0 0-4 2 2 0 0 0 0 4" /><path d="M0 5a1 1 0 0 1 1-1h14a1 1 0 0 1 1 1v8a1 1 0 0 1-1 1H1a1 1 0 0 1-1-1zm3 0a2 2 0 0 1-2 2v4a2 2 0 0 1 2 2h10a2 2 0 0 1 2-2V7a2 2 0 0 1-2-2z" />
-                    </svg>
-                    <span class="flex-1 ms-3 whitespace-nowrap">Transaksi</span>
-                </a>
+                         <path d="M1 3a1 1 0 0 1 1-1h12a1 1 0 0 1 1 1zm7 8a2 2 0 1 0 0-4 2 2 0 0 0 0 4" />
+                         <path d="M0 5a1 1 0 0 1 1-1h14a1 1 0 0 1 1 1v8a1 1 0 0 1-1 1H1a1 1 0 0 1-1-1zm3 0a2 2 0 0 1-2 2v4a2 2 0 0 1 2 2h10a2 2 0 0 1 2-2V7a2 2 0 0 1-2-2z" />
+                     </svg>
+                     <span class="flex-1 ms-3 whitespace-nowrap">Transaksi</span>
+                 </a>
              </li>
              <li>
                  <a href="http://localhost/hospital_billing/src/layanan/layanan.php" class="flex items-center p-2 text-gray-900 rounded-lg text-black hover:bg-black hover:text-white group <?php echo (basename($_SERVER['PHP_SELF']) == 'layanan.php' || basename($_SERVER['PHP_SELF']) == 'layanan_create.php' || basename($_SERVER['PHP_SELF']) == 'layanan_edit.php') ? 'bg-black bg-opacity-50 text-white' : 'text-gray-900'; ?>">

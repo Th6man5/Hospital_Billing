@@ -30,20 +30,12 @@
             font-weight: 100;
             font-size: 16px;
         }
-
-        .table tbody tr:nth-child(odd) {
-            background-color: #FFFFFF;
-        }
-
-        .table tbody tr:nth-child(even) {
-            background-color: #EEEEEE;
-        }
     </style>
 
     </style>
 </head>
 
-<body>
+<body class="bg-background h-screen">
 
     <?php include '../template/sidebar.php'; ?>
     <div class="p-4 sm:ml-64">
@@ -52,8 +44,8 @@
                 <h1>Transaksi</h1>
                 <a href="transaksi_create.php" class="bg-blues opacity-95 text-black btn hover:bg-blues hover:opacity-100">Tambah Transaksi</a>
             </div>
-            <div class="overflow-x-auto">
-                <table class="table text-center">
+            <div class="overflow-x-auto shadow-lg">
+                <table class="table text-center  border border-grey">
                     <!-- head -->
                     <thead>
                         <tr class="bg-blues2 text-black">
@@ -62,7 +54,6 @@
                             <th>Jenis Layanan</th>
                             <th>Jenis Pembayaran</th>
                             <th>Total Harga</th>
-                            <th>Potongan Harga (%)</th>
                             <th>Tanggal</th>
                             <th>Waktu</th>
                             <th class="text-center">Action</th>
@@ -71,9 +62,8 @@
                     <tbody>
                         <?php
                         include('../database/database.php');
-                        $sql = "SELECT transaksi.id_transaksi, pasien.nama AS nama_pasien, transaksi.nama_layanan,
-                                        transaksi.jenis_pembayaran, transaksi.biaya_layanan,
-                                        transaksi.potongan_harga, transaksi.tanggal, transaksi.waktu
+                        $sql = "SELECT transaksi.id_transaksi, pasien.nama_lengkap AS nama_pasien, transaksi.nama_layanan,
+                                        transaksi.jenis_pembayaran, transaksi.biaya_layanan, transaksi.tanggal, transaksi.waktu
                                         FROM transaksi
                                         JOIN pasien ON transaksi.id_pasien = pasien.id_pasien;";
                         $result = mysqli_query($conn, $sql);
@@ -86,7 +76,6 @@
                                     <td>' . $row['nama_layanan'] . '</td>
                                     <td>' . $row['jenis_pembayaran'] . '</td>
                                     <td>' . number_format($row['biaya_layanan']) . '</td> 
-                                    <td>' . $row['potongan_harga'] . '</td>
                                     <td>' . $row['tanggal'] . '</td>
                                     <td>' . $row['waktu'] . '</td>
                                 <td class="flex gap-x-4 justify-center">

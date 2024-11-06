@@ -82,7 +82,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
     </style>
 </head>
 
-<body>
+<body class="bg-background h-screen">
     <?php include '../template/sidebar.php'; ?>
     <div class="p-4 sm:ml-64">
         <div class="p-4">
@@ -119,9 +119,9 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
                         </div>
                         <input type="number" name="harga" value="<?php echo $harga; ?>" placeholder=" Type here" class="input input-bordered w-full " required />
                     </label>
-                        <div class="label">
-                            <span class="label-text text-xl">Nama Dokter</span>
-                        </div>
+                    <div class="label">
+                        <span class="label-text text-xl">Nama Dokter</span>
+                    </div>
                     <select name="id_dokter" class="select select-bordered w-full">
                         <?php
                         include('../database/database.php');

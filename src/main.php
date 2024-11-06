@@ -28,10 +28,16 @@
             font-weight: 100;
             font-size: 16px;
         }
+
+
+
+        .table tbody tr:nth-child(even) {
+            background-color: #FFFFFF;
+        }
     </style>
 </head>
 
-<body>
+<body class="bg-background h-screen">
 
     <?php include 'template/sidebar.php'; ?>
     <div class="p-4 sm:ml-64">
@@ -179,14 +185,13 @@
                 $result = $conn->query($sql);
 
                 if ($result->num_rows > 0) {
-                    echo "<table class='table text-center'>";
+                    echo "<table class='table text-center  border border-grey shadow-lg'>";
                     echo "<tr class = 'bg-blues2 text-black '> 
                       <th>ID Transaksi</th>
                       <th>Nama Pasien</th>
                       <th>Nama Layanan</th>
                       <th>Jenis Pembayaran</th>
                       <th>Total Harga</th>
-                      <th>Potongan Harga</th>
                       <th>Tanggal</th>
                       <th>Waktu</th>
                       </tr>";
@@ -194,11 +199,10 @@
                     while ($row = $result->fetch_assoc()) {
                         echo "<tr>";
                         echo "<td>" . $row["id_transaksi"] . "</td>";
-                        echo "<td>" . $row["nama"] . "</td>";
+                        echo "<td>" . $row["nama_lengkap"] . "</td>";
                         echo "<td>" . $row["nama_layanan"] . "</td>";
                         echo "<td>" . $row["jenis_pembayaran"] . "</td>";
                         echo "<td>" . number_format($row["biaya_layanan"]) . "</td>";
-                        echo "<td>" . $row["potongan_harga"] . "</td>";
                         echo "<td>" . $row["tanggal"] . "</td>";
                         echo "<td>" . $row["waktu"] . "</td>";
                         echo "</tr>";
