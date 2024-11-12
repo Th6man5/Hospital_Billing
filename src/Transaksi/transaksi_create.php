@@ -179,14 +179,28 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                             <div class="label">
                                 <span class="label-text text-xl">Tanggal</span>
                             </div>
-                            <input type="date" name="tanggal" placeholder="Type here" class="input input-bordered w-full " required />
+                            <input type="date" id="tanggal" name="tanggal" placeholder="Type here" class="input input-bordered w-full" required readonly />
                         </label>
                         <label class="form-control w-full">
                             <div class="label">
                                 <span class="label-text text-xl">Waktu</span>
                             </div>
-                            <input type="time" name="waktu" placeholder="Type here" class="input input-bordered w-full " required />
+                            <input type="time" id="waktu" name="waktu" placeholder="Type here" class="input input-bordered w-full" required readonly />
                         </label>
+
+                        <script>
+                            // Mendapatkan tanggal dan waktu saat ini
+                            const now = new Date();
+
+                            // Format tanggal ke 'YYYY-MM-DD'
+                            const today = now.toISOString().split("T")[0];
+                            document.getElementById("tanggal").value = today;
+
+                            // Format waktu ke 'HH:MM'
+                            const currentTime = now.toTimeString().slice(0, 8);
+                            document.getElementById("waktu").value = currentTime;
+                        </script>
+
                     </div>
                     <div class="mt-4">
                         <button name="submit" type="submit" class="bg-blues opacity-95 text-white btn hover:bg-blues hover:opacity-100">Create</button>
