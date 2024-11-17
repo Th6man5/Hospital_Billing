@@ -1,3 +1,47 @@
+<?php
+// URL endpoint API
+$apiDiagnosaUrl = "https://rawat-jalan.pockethost.io/api/collections/diagnosa/records";
+$apiPendaftaranUrl = "https://rawat-jalan.pockethost.io/api/collections/pendaftaran/records";
+$apiPasienUrl = "https://rawat-jalan.pockethost.io/api/collections/pasien/records";
+
+// Mengambil data dari API
+$responseDiagnosa = file_get_contents($apiDiagnosaUrl);
+$responsePendaftaran = file_get_contents($apiPendaftaranUrl);
+$responsePasien = file_get_contents($apiPasienUrl);
+
+// Mengonversi JSON response menjadi array PHP
+$dataDiagnosa = json_decode($responseDiagnosa, true);
+$dataPendaftaran = json_decode($responsePendaftaran, true);
+$dataPasien = json_decode($responsePasien, true);
+
+// Menyesuaikan array data
+$diagnosa = $dataDiagnosa['items'];
+$pendaftaran = $dataPendaftaran['items'];
+$pasien = $dataPasien['items'];
+
+// Menggabungkan data diagnosa dengan pendaftaran
+$combinedData = [];
+foreach ($diagnosa as $d) {
+    // Cari data pendaftaran terkait diagnosa
+    foreach ($pendaftaran as $p) {
+        if ($d['pendaftaran'] == $p['id']) { // Cocokkan id pendaftaran
+            $d['pendaftaran_data'] = $p; // Tambahkan data pendaftaran ke diagnosa
+
+            // Cari data pasien terkait pendaftaran
+            foreach ($pasien as $pa) {
+                if ($p['pasien'] == $pa['id']) { // Cocokkan id pasien
+                    $d['pendaftaran_data']['pasien_data'] = $pa; // Tambahkan data pasien ke pendaftaran
+                    break; // Keluar dari loop pasien setelah ditemukan
+                }
+            }
+            break; // Keluar dari loop pendaftaran setelah ditemukan
+        }
+    }
+
+    $combinedData[] = $d; // Tambahkan data gabungan ke array hasil
+}
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -42,7 +86,10 @@
         <div class="p-4">
             <div class="flex items-center justify-between">
                 <h1>Transaksi</h1>
-                <a href="transaksi_create.php" class="bg-blues opacity-95 text-black btn hover:bg-blues hover:opacity-100">Tambah Transaksi</a>
+                <!-- <a href="transaksi_create.php" class="bg-blues opacity-95 text-black btn hover:bg-blues hover:opacity-100">Tambah Transaksi</a> -->
+            </div>
+            <div>
+                <h2>Belum Bayar</h2>
             </div>
             <div class="overflow-x-auto shadow-lg">
                 <table class="table text-center  border border-grey">
@@ -61,42 +108,59 @@
                     </thead>
                     <tbody>
                         <?php
-                        include('../database/database.php');
-                        $sql = "SELECT transaksi.id_transaksi, pasien.nama_lengkap AS nama_pasien, transaksi.nama_layanan,
-                                        transaksi.jenis_pembayaran, transaksi.biaya_layanan, transaksi.tanggal, transaksi.waktu
-                                        FROM transaksi
-                                        JOIN pasien ON transaksi.id_pasien = pasien.id_pasien;";
-                        $result = mysqli_query($conn, $sql);
                         $no = 1;
-                        if (mysqli_num_rows($result) > 0) {
-                            while ($row = mysqli_fetch_assoc($result)) {
-                                echo '<tr>
-                                    <th>' . $no . '</th>
-                                    <td>' . $row['nama_pasien'] . '</td>
-                                    <td>' . $row['nama_layanan'] . '</td>
-                                    <td>' . $row['jenis_pembayaran'] . '</td>
-                                    <td>' . number_format($row['biaya_layanan']) . '</td> 
-                                    <td>' . $row['tanggal'] . '</td>
-                                    <td>' . $row['waktu'] . '</td>
-                                <td class="flex gap-x-4 justify-center">
-                                
-                                    <a onclick="return confirm(\'Are you sure you want to delete this Transaction?\');" href="transaksi_delete.php?id=' . $row['id_transaksi'] . '" class="btn bg-red hover:shadow-md hover:bg-red group">
-                                        <i class="bi bi-trash-fill  transition-all"></i>
-                                    </a>
-                                </td>
-                                </tr>';
-                                $no++;
+                        foreach ($combinedData as $data) {
+                            if (isset($data['pendaftaran_data']['pasien_data']) && is_array($data['pendaftaran_data']['pasien_data'])) {
+                                $namaPasien = $data['pendaftaran_data']['pasien_data']['nama_lengkap'];
+                            } else {
+                                $namaPasien = 'Kosong';
                             }
+                            echo '<tr>
+                <th>' . $no . '</th>
+                <td>' . $namaPasien . '</td>
+              </tr>';
+                            $no++;
                         }
                         ?>
-                        <tr>
-                        </tr>
                     </tbody>
+
                 </table>
+            </div>
+
+            <div class="mt-4">
+                <h2>Sudah Bayar</h2>
             </div>
         </div>
 
 </body>
+<?php
+// include('../database/database.php');
+// $sql = "SELECT transaksi.id_transaksi, pasien.nama_lengkap AS nama_pasien, transaksi.nama_layanan,
+//                                         transaksi.jenis_pembayaran, transaksi.biaya_layanan, transaksi.tanggal, transaksi.waktu
+//                                         FROM transaksi
+//                                         JOIN pasien ON transaksi.id_pasien = pasien.id_pasien;";
+// $result = mysqli_query($conn, $sql);
+// $no = 1;
+// if (mysqli_num_rows($result) > 0) {
+//     while ($row = mysqli_fetch_assoc($result)) {
+//         echo '<tr>
+//                                     <th>' . $no . '</th>
+//                                     <td>' . $row['nama_pasien'] . '</td>
+//                                     <td>' . $row['nama_layanan'] . '</td>
+//                                     <td>' . $row['jenis_pembayaran'] . '</td>
+//                                     <td>' . number_format($row['biaya_layanan']) . '</td> 
+//                                     <td>' . $row['tanggal'] . '</td>
+//                                     <td>' . $row['waktu'] . '</td>
+//                                 <td class="flex gap-x-4 justify-center">
 
+//                                     <a onclick="return confirm(\'Are you sure you want to delete this Transaction?\');" href="transaksi_delete.php?id=' . $row['id_transaksi'] . '" class="btn bg-red hover:shadow-md hover:bg-red group">
+//                                         <i class="bi bi-trash-fill  transition-all"></i>
+//                                     </a>
+//                                 </td>
+//                                 </tr>';
+//         $no++;
+//     }
+// }
+?>
 
 </html>
