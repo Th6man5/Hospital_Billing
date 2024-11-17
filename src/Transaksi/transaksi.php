@@ -97,8 +97,8 @@ foreach ($diagnosa as $d) {
                     <thead>
                         <tr class="bg-blues2 text-black">
                             <th>No</th>
-                            <th>Pasien</th>
-                            <th>Jenis Layanan</th>
+                            <th>Nama Pasien</th>
+                            <th>Dokter</th>
                             <th>Jenis Pembayaran</th>
                             <th>Total Harga</th>
                             <th>Tanggal</th>
@@ -112,13 +112,16 @@ foreach ($diagnosa as $d) {
                         foreach ($combinedData as $data) {
                             if (isset($data['pendaftaran_data']['pasien_data']) && is_array($data['pendaftaran_data']['pasien_data'])) {
                                 $namaPasien = $data['pendaftaran_data']['pasien_data']['nama_lengkap'];
+                                $idDokter = $data['pendaftaran_data']['dokter'];
                             } else {
                                 $namaPasien = 'Kosong';
+                                $idDokter = 'Kosong';
                             }
                             echo '<tr>
-                <th>' . $no . '</th>
-                <td>' . $namaPasien . '</td>
-              </tr>';
+                                    <th>' . $no . '</th>
+                                    <td>' . $namaPasien . '</td>
+                                    <td>' . $idDokter . '</td>
+                                </tr>';
                             $no++;
                         }
                         ?>
