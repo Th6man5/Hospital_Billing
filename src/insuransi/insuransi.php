@@ -19,6 +19,7 @@
             font-size: 60px;
         }
 
+
         h6 {
             font-family: Lexend;
             font-weight: 200;
