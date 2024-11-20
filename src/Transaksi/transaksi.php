@@ -24,17 +24,17 @@ $combinedData = [];
 foreach ($diagnosa as $d) {
     // Cari data pendaftaran terkait diagnosa
     foreach ($pendaftaran as $p) {
-        if ($d['pendaftaran'] == $p['id']) { // Cocokkan id pendaftaran
-            $d['pendaftaran_data'] = $p; // Tambahkan data pendaftaran ke diagnosa
+        if ($d['pendaftaran'] == $p['id']) {
+            $d['pendaftaran_data'] = $p;
 
             // Cari data pasien terkait pendaftaran
             foreach ($pasien as $pa) {
-                if ($p['pasien'] == $pa['id']) { // Cocokkan id pasien
-                    $d['pendaftaran_data']['pasien_data'] = $pa; // Tambahkan data pasien ke pendaftaran
-                    break; // Keluar dari loop pasien setelah ditemukan
+                if ($p['pasien'] == $pa['id']) {
+                    $d['pendaftaran_data']['pasien_data'] = $pa;
+                    break;
                 }
             }
-            break; // Keluar dari loop pendaftaran setelah ditemukan
+            break;
         }
     }
 
@@ -98,12 +98,11 @@ foreach ($diagnosa as $d) {
                         <tr class="bg-blues2 text-black">
                             <th>No</th>
                             <th>Nama Pasien</th>
-                            <th>Dokter</th>
-                            <th>Jenis Pembayaran</th>
-                            <th>Total Harga</th>
+                            <th>ID Dokter</th>
+                            <th>Status</th>
+                            <th>Kode Diagnosis</th>
                             <th>Tanggal</th>
-                            <th>Waktu</th>
-                            <th class="text-center">Action</th>
+                            <th>Status Pembayaran</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -111,16 +110,27 @@ foreach ($diagnosa as $d) {
                         $no = 1;
                         foreach ($combinedData as $data) {
                             if (isset($data['pendaftaran_data']['pasien_data']) && is_array($data['pendaftaran_data']['pasien_data'])) {
+                                $id = $data['id'];
                                 $namaPasien = $data['pendaftaran_data']['pasien_data']['nama_lengkap'];
                                 $idDokter = $data['pendaftaran_data']['dokter'];
+                                $status = $data['pendaftaran_data']['status'];
+                                $kodeDiag = $data['kode_diagnosis'];
+                                $tanggal = $data['tanggal'];
+                                $statusPembayaran = 'Belum Bayar';
                             } else {
-                                $namaPasien = 'Kosong';
-                                $idDokter = 'Kosong';
+                                $namaPasien = '-';
+                                $idDokter = '-';
+                                $status = '-';
+                                $tanggal = '-';
                             }
                             echo '<tr>
                                     <th>' . $no . '</th>
                                     <td>' . $namaPasien . '</td>
                                     <td>' . $idDokter . '</td>
+                                    <td>' . $status . '</td>
+                                    <td>' . $kodeDiag . '</td>
+                                    <td>' . $tanggal . '</td>
+                                    <td><a href="transaksiDiag_create.php?id=' . $id . '" class="inline-flex items-center rounded-md bg-gray-50 px-2 py-1 text-xs font-medium text-white ring-1 ring-inset ring-red hover:bg-red hover:text-black transition-all">' . $statusPembayaran . '</a></td>
                                 </tr>';
                             $no++;
                         }
@@ -132,6 +142,50 @@ foreach ($diagnosa as $d) {
 
             <div class="mt-4">
                 <h2>Sudah Bayar</h2>
+            </div>
+            <div class="overflow-x-auto shadow-lg">
+                <table class="table text-center  border border-grey">
+                    <!-- head -->
+                    <thead>
+                        <tr class="bg-blues2 text-black">
+                            <th>No</th>
+                            <th>Nama Pasien</th>
+                            <th>ID Dokter</th>
+                            <th>Status</th>
+                            <th>Kode Diagnosis</th>
+                            <th>Tanggal</th>
+                            <th>Waktu</th>
+                            <th>Total Harga</th>
+                            <th>Status Pembayaran</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <?php
+                        include('../database/database.php');
+                        $sql = "SELECT nama_pasien, dokter, status, kode_diagnosis, tanggal, waktu, total_harga FROM transaksi_diag";
+                        $result = mysqli_query($conn, $sql);
+                        $statusPembayaran = 'Sudah Bayar';
+                        $no = 1;
+                        if (mysqli_num_rows($result) > 0) {
+                            while ($row = mysqli_fetch_assoc($result)) {
+                                echo '<tr>
+                                    <th>' . $no . '</th>
+                                    <td>' . $row['nama_pasien'] . '</td>
+                                    <td>' . $row['dokter'] . '</td>
+                                    <td>' . $row['status'] . '</td>
+                                    <td>' . $row['kode_diagnosis'] . '</td>
+                                    <td>' . $row['tanggal'] . '</td>
+                                    <td>' . $row['waktu'] . '</td>
+                                    <td>' . $row['total_harga'] . '</td>
+                                    <td><a class="inline-flex items-center rounded-md bg-gray-50 px-2 py-1 text-xs font-medium text-white ring-1 ring-inset ring-green hover:bg-green hover:text-black transition-all">' . $statusPembayaran . '</a></td>
+                                </tr>';
+                                $no++;
+                            }
+                        }
+                        ?>
+                    </tbody>
+
+                </table>
             </div>
         </div>
 
