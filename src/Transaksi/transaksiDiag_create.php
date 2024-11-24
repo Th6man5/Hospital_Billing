@@ -66,7 +66,8 @@ if (isset($_GET['id'])) {
     $data['nama_lengkap'] = $data['pendaftaran_data']['pasien_data']['nama_lengkap'];
     $data['kode_diagnosis'] = $data['kode_diagnosis'];
     $data['dokter'] = $data['pendaftaran_data']['dokter'];
-    $data['status'] = $data['pendaftaran_data']['status'];
+    $data['id_diagnosa'] = $data['id'];
+    echo json_encode($data['id_diagnosa']);
 } else {
     echo "ID tidak tersedia.";
 }
@@ -76,23 +77,25 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
     $nama_pasien = $_POST['nama_pasien'];
     $dokter = $_POST['dokter'];
-    $status = $_POST['status'];
+    $jenis_layanan = $_POST['jenis_layanan'];
+    $jenis_pemeriksaan = $_POST['jenis_pemeriksaan'];
     $kode_diagnosis = $_POST['kode_diagnosis'];
     $tanggal = $_POST['tanggal'];
     $waktu = $_POST['waktu'];
     $jenis_pembayaran = $_POST['jenis_pembayaran'];
     $total_harga = $_POST['total_harga'];
+    $id_diagnosa = $_POST['id_diagnosa'];
 
     $response = [];
 
     do {
-        if (empty($nama_pasien) || empty($dokter) || empty($status) || empty($tanggal) || empty($tanggal) || empty($total_harga)) {
+        if (empty($nama_pasien) || empty($dokter) ||  empty($tanggal) || empty($tanggal) || empty($total_harga) || empty($jenis_pembayaran) || empty($kode_diagnosis) || empty($jenis_layanan) || empty($jenis_pemeriksaan) || empty($waktu) ||  empty($total_harga)) {
             $response['error'] = 'Please fill all the fields';
             echo json_encode($response);
             break;
         } else {
-            $sql = "INSERT INTO transaksi_diag (nama_pasien, dokter, status, kode_diagnosis, tanggal, waktu, jenis_pembayaran, total_harga) 
-                    VALUES ('$nama_pasien', '$dokter', '$status', '$kode_diagnosis', '$tanggal', '$waktu', '$jenis_pembayaran', '$total_harga')";
+            $sql = "INSERT INTO transaksi_diag (nama_pasien, dokter, jenis_layanan, jenis_pemeriksaan, kode_diagnosis, tanggal, waktu, jenis_pembayaran, total_harga, id_diagnosa) 
+                    VALUES ('$nama_pasien', '$dokter', '$jenis_layanan', '$jenis_pemeriksaan', '$kode_diagnosis', '$tanggal', '$waktu', '$jenis_pembayaran', '$total_harga', '$id_diagnosa')";
 
             if (mysqli_query($conn, $sql)) {
                 $response['success'] = 'Transaksi has been created successfully';
@@ -145,7 +148,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     </style>
 
 
-    <script>
+    <!-- <script>
         const now = new Date();
 
         const today = now.toISOString().split("T")[0];
@@ -153,7 +156,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
         const currentTime = now.toTimeString().slice(0, 8);
         document.getElementById("waktu").value = currentTime;
-    </script>
+    </script> -->
 
 </head>
 
@@ -181,6 +184,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             ?>
             <form method="post">
                 <div class="p-10">
+                    <input type="hidden" name="id_diagnosa" value="<?php echo htmlspecialchars($data['id_diagnosa']); ?>" />
                     <label class="form-control w-full">
                         <div class="label">
                             <span class="label-text text-xl">Nama Pasien</span>
@@ -202,12 +206,20 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                         <input type="text" name="dokter" placeholder="Type here" class="input input-bordered w-full" value="<?php echo htmlspecialchars($data['dokter']); ?>" required readonly />
                     </label>
 
-                    <label class="form-control w-full">
-                        <div class="label">
-                            <span class="label-text text-xl">Status</span>
-                        </div>
-                        <input type="text" name="status" placeholder="Type here" class="input input-bordered w-full" value="<?php echo htmlspecialchars($data['status']); ?>" required readonly />
-                    </label>
+                    <div class="grid grid-cols-2 gap-4">
+                        <label class="form-control w-full">
+                            <div class="label">
+                                <span class="label-text text-xl">Jenis Layanan</span>
+                            </div>
+                            <input type="text" name="jenis_layanan" placeholder="Type here" class="input input-bordered w-full" value="<?php echo htmlspecialchars($data['jenis_layanan']); ?>" required readonly />
+                        </label>
+                        <label class="form-control w-full">
+                            <div class="label">
+                                <span class="label-text text-xl">Jenis Pemeriksaan</span>
+                            </div>
+                            <input type="text" name="jenis_pemeriksaan" placeholder="Type here" class="input input-bordered w-full" value="<?php echo htmlspecialchars($data['jenis_pemeriksaan']); ?>" required readonly />
+                        </label>
+                    </div>
 
                     <div class="grid grid-cols-2 gap-4">
                         <label class="form-control w-full">
@@ -221,7 +233,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                             <div class="label">
                                 <span class="label-text text-xl">Tanggal Bayar</span>
                             </div>
-                            <input type="date" id="tanggal" name="tanggal" placeholder="Type here" class="input input-bordered w-full" value="<?php date("Y-m-d"); ?>" required />
+                            <input type="date" id="tanggal" name="tanggal" placeholder="Type here" class="input input-bordered w-full" required />
                         </label>
                     </div>
 

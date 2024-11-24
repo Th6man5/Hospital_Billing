@@ -99,7 +99,8 @@ foreach ($diagnosa as $d) {
                             <th>No</th>
                             <th>Nama Pasien</th>
                             <th>ID Dokter</th>
-                            <th>Status</th>
+                            <th>Jenis Layanan</th>
+                            <th>Jenis Pemeriksaan</th>
                             <th>Kode Diagnosis</th>
                             <th>Tanggal</th>
                             <th>Status Pembayaran</th>
@@ -107,32 +108,42 @@ foreach ($diagnosa as $d) {
                     </thead>
                     <tbody>
                         <?php
+                        include('../database/database.php');
+                        $sqlTransaksi = "SELECT id_diagnosa FROM transaksi_diag";
+                        $resultTransaksi = mysqli_query($conn, $sqlTransaksi);
+
+                        $sudahBayarIds = [];
+                        if (mysqli_num_rows($resultTransaksi) > 0) {
+                            while ($row = mysqli_fetch_assoc($resultTransaksi)) {
+                                $sudahBayarIds[] = $row['id_diagnosa'];
+                            }
+                        }
+
                         $no = 1;
                         foreach ($combinedData as $data) {
                             if (isset($data['pendaftaran_data']['pasien_data']) && is_array($data['pendaftaran_data']['pasien_data'])) {
                                 $id = $data['id'];
                                 $namaPasien = $data['pendaftaran_data']['pasien_data']['nama_lengkap'];
                                 $idDokter = $data['pendaftaran_data']['dokter'];
-                                $status = $data['pendaftaran_data']['status'];
+                                $jenisLayanan = $data['jenis_layanan'];
+                                $jenisPemeriksaan = $data['jenis_pemeriksaan'];
                                 $kodeDiag = $data['kode_diagnosis'];
                                 $tanggal = $data['tanggal'];
                                 $statusPembayaran = 'Belum Bayar';
-                            } else {
-                                $namaPasien = '-';
-                                $idDokter = '-';
-                                $status = '-';
-                                $tanggal = '-';
                             }
-                            echo '<tr>
+                            if (!in_array($id, $sudahBayarIds)) {
+                                echo '<tr>
                                     <th>' . $no . '</th>
                                     <td>' . $namaPasien . '</td>
                                     <td>' . $idDokter . '</td>
-                                    <td>' . $status . '</td>
+                                    <td>' . $jenisLayanan . '</td>
+                                    <td>' . $jenisPemeriksaan . '</td>
                                     <td>' . $kodeDiag . '</td>
                                     <td>' . $tanggal . '</td>
                                     <td><a href="transaksiDiag_create.php?id=' . $id . '" class="inline-flex items-center rounded-md bg-gray-50 px-2 py-1 text-xs font-medium text-white ring-1 ring-inset ring-red hover:bg-red hover:text-black transition-all">' . $statusPembayaran . '</a></td>
                                 </tr>';
-                            $no++;
+                                $no++;
+                            }
                         }
                         ?>
                     </tbody>
@@ -151,9 +162,10 @@ foreach ($diagnosa as $d) {
                             <th>No</th>
                             <th>Nama Pasien</th>
                             <th>ID Dokter</th>
-                            <th>Status</th>
+                            <th>Jenis Layanan</th>
+                            <th>Jenis Pemeriksaan</th>
                             <th>Kode Diagnosis</th>
-                            <th>Tanggal</th>
+                            <th>Tanggal Pembayaran</th>
                             <th>Waktu</th>
                             <th>Total Harga</th>
                             <th>Status Pembayaran</th>
@@ -162,7 +174,7 @@ foreach ($diagnosa as $d) {
                     <tbody>
                         <?php
                         include('../database/database.php');
-                        $sql = "SELECT nama_pasien, dokter, status, kode_diagnosis, tanggal, waktu, total_harga FROM transaksi_diag";
+                        $sql = "SELECT nama_pasien, dokter, jenis_layanan, jenis_pemeriksaan, kode_diagnosis, tanggal, waktu, total_harga FROM transaksi_diag";
                         $result = mysqli_query($conn, $sql);
                         $statusPembayaran = 'Sudah Bayar';
                         $no = 1;
@@ -172,7 +184,8 @@ foreach ($diagnosa as $d) {
                                     <th>' . $no . '</th>
                                     <td>' . $row['nama_pasien'] . '</td>
                                     <td>' . $row['dokter'] . '</td>
-                                    <td>' . $row['status'] . '</td>
+                                    <td>' . $row['jenis_layanan'] . '</td>
+                                    <td>' . $row['jenis_pemeriksaan'] . '</td>
                                     <td>' . $row['kode_diagnosis'] . '</td>
                                     <td>' . $row['tanggal'] . '</td>
                                     <td>' . $row['waktu'] . '</td>
