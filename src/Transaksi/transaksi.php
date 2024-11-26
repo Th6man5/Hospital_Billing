@@ -63,6 +63,10 @@ foreach ($diagnosa as $d) {
             font-size: 60px;
         }
 
+        h2 {
+            font-family: "Baloo Paaji 2", sans-serif;
+        }
+
         h6 {
             font-family: Lexend;
             font-weight: 200;
@@ -86,10 +90,9 @@ foreach ($diagnosa as $d) {
         <div class="p-4">
             <div class="flex items-center justify-between">
                 <h1>Transaksi</h1>
-                <!-- <a href="transaksi_create.php" class="bg-blues opacity-95 text-black btn hover:bg-blues hover:opacity-100">Tambah Transaksi</a> -->
             </div>
             <div>
-                <h2>Belum Bayar</h2>
+                <h2 class="text-2xl font-bold">Belum Bayar</h2>
             </div>
             <div class="overflow-x-auto shadow-lg">
                 <table class="table text-center  border border-grey">
@@ -103,7 +106,7 @@ foreach ($diagnosa as $d) {
                             <th>Jenis Pemeriksaan</th>
                             <th>Kode Diagnosis</th>
                             <th>Tanggal</th>
-                            <th>Status Pembayaran</th>
+                            <th>Action</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -129,7 +132,6 @@ foreach ($diagnosa as $d) {
                                 $jenisPemeriksaan = $data['jenis_pemeriksaan'];
                                 $kodeDiag = $data['kode_diagnosis'];
                                 $tanggal = $data['tanggal'];
-                                $statusPembayaran = 'Belum Bayar';
                             }
                             if (!in_array($id, $sudahBayarIds)) {
                                 echo '<tr>
@@ -140,7 +142,7 @@ foreach ($diagnosa as $d) {
                                     <td>' . $jenisPemeriksaan . '</td>
                                     <td>' . $kodeDiag . '</td>
                                     <td>' . $tanggal . '</td>
-                                    <td><a href="transaksiDiag_create.php?id=' . $id . '" class="inline-flex items-center rounded-md bg-gray-50 px-2 py-1 text-xs font-medium text-white ring-1 ring-inset ring-red hover:bg-red hover:text-black transition-all">' . $statusPembayaran . '</a></td>
+                                    <td><a href="transaksiDiag_create.php?id=' . $id . '" class="inline-flex items-center rounded-md px-2 py-1 text-xs font-medium text-white ring-1 ring-inset ring-green hover:bg-green hover:text-black transition-all "><i class="bi bi-cash-stack text-xl mr-2"></i>Bayar</a></td>
                                 </tr>';
                                 $no++;
                             }
@@ -152,7 +154,7 @@ foreach ($diagnosa as $d) {
             </div>
 
             <div class="mt-4">
-                <h2>Sudah Bayar</h2>
+                <h2 class="text-2xl font-bold">Sudah Bayar</h2>
             </div>
             <div class="overflow-x-auto shadow-lg">
                 <table class="table text-center  border border-grey">
@@ -168,7 +170,6 @@ foreach ($diagnosa as $d) {
                             <th>Tanggal Pembayaran</th>
                             <th>Waktu</th>
                             <th>Total Harga</th>
-                            <th>Status Pembayaran</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -176,7 +177,6 @@ foreach ($diagnosa as $d) {
                         include('../database/database.php');
                         $sql = "SELECT nama_pasien, dokter, jenis_layanan, jenis_pemeriksaan, kode_diagnosis, tanggal, waktu, total_harga FROM transaksi_diag";
                         $result = mysqli_query($conn, $sql);
-                        $statusPembayaran = 'Sudah Bayar';
                         $no = 1;
                         if (mysqli_num_rows($result) > 0) {
                             while ($row = mysqli_fetch_assoc($result)) {
@@ -190,7 +190,7 @@ foreach ($diagnosa as $d) {
                                     <td>' . $row['tanggal'] . '</td>
                                     <td>' . $row['waktu'] . '</td>
                                     <td>' . $row['total_harga'] . '</td>
-                                    <td><a class="inline-flex items-center rounded-md bg-gray-50 px-2 py-1 text-xs font-medium text-white ring-1 ring-inset ring-green hover:bg-green hover:text-black transition-all">' . $statusPembayaran . '</a></td>
+                                   
                                 </tr>';
                                 $no++;
                             }
@@ -203,34 +203,5 @@ foreach ($diagnosa as $d) {
         </div>
 
 </body>
-<?php
-// include('../database/database.php');
-// $sql = "SELECT transaksi.id_transaksi, pasien.nama_lengkap AS nama_pasien, transaksi.nama_layanan,
-//                                         transaksi.jenis_pembayaran, transaksi.biaya_layanan, transaksi.tanggal, transaksi.waktu
-//                                         FROM transaksi
-//                                         JOIN pasien ON transaksi.id_pasien = pasien.id_pasien;";
-// $result = mysqli_query($conn, $sql);
-// $no = 1;
-// if (mysqli_num_rows($result) > 0) {
-//     while ($row = mysqli_fetch_assoc($result)) {
-//         echo '<tr>
-//                                     <th>' . $no . '</th>
-//                                     <td>' . $row['nama_pasien'] . '</td>
-//                                     <td>' . $row['nama_layanan'] . '</td>
-//                                     <td>' . $row['jenis_pembayaran'] . '</td>
-//                                     <td>' . number_format($row['biaya_layanan']) . '</td> 
-//                                     <td>' . $row['tanggal'] . '</td>
-//                                     <td>' . $row['waktu'] . '</td>
-//                                 <td class="flex gap-x-4 justify-center">
-
-//                                     <a onclick="return confirm(\'Are you sure you want to delete this Transaction?\');" href="transaksi_delete.php?id=' . $row['id_transaksi'] . '" class="btn bg-red hover:shadow-md hover:bg-red group">
-//                                         <i class="bi bi-trash-fill  transition-all"></i>
-//                                     </a>
-//                                 </td>
-//                                 </tr>';
-//         $no++;
-//     }
-// }
-?>
 
 </html>
