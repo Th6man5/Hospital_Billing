@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Nov 21, 2024 at 01:53 PM
+-- Generation Time: Nov 26, 2024 at 11:57 AM
 -- Server version: 10.1.38-MariaDB
 -- PHP Version: 7.3.2
 
@@ -168,20 +168,15 @@ CREATE TABLE `transaksi_diag` (
   `id_transaksi_diag` int(11) NOT NULL,
   `nama_pasien` varchar(255) NOT NULL,
   `dokter` varchar(255) NOT NULL,
-  `status` varchar(255) NOT NULL,
+  `jenis_layanan` varchar(255) NOT NULL,
+  `jenis_pemeriksaan` varchar(255) NOT NULL,
   `kode_diagnosis` varchar(255) NOT NULL,
   `tanggal` date NOT NULL,
   `waktu` time NOT NULL,
   `total_harga` int(100) NOT NULL,
-  `jenis_pembayaran` varchar(255) NOT NULL
+  `jenis_pembayaran` varchar(255) NOT NULL,
+  `id_diagnosa` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
---
--- Dumping data for table `transaksi_diag`
---
-
-INSERT INTO `transaksi_diag` (`id_transaksi_diag`, `nama_pasien`, `dokter`, `status`, `kode_diagnosis`, `tanggal`, `waktu`, `total_harga`, `jenis_pembayaran`) VALUES
-(1, 'Adit_as', 'DPENSH00004', 'berjalan', 'R-15', '2024-11-20', '23:59:00', 23232, 'dsds');
 
 --
 -- Indexes for dumped tables
@@ -264,7 +259,7 @@ ALTER TABLE `transaksi`
 -- AUTO_INCREMENT for table `transaksi_diag`
 --
 ALTER TABLE `transaksi_diag`
-  MODIFY `id_transaksi_diag` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id_transaksi_diag` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- Constraints for dumped tables
