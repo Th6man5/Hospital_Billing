@@ -1,6 +1,25 @@
 <?php
 include('../database/database.php');
 
+$apiUrlLayanan = "https://4dbh2ssn-3000.asse.devtunnels.ms/api/layanan";
+
+$responseLayanan = file_get_contents($apiUrlLayanan);
+
+if ($responseLayanan === false) {
+    echo '<div>Error: Tidak dapat mengakses API layanan. Pastikan URL API benar atau server aktif.</div>';
+    $itemsLayanan = [];
+} else {
+
+    $dataLayanan = json_decode($responseLayanan, true);
+
+    if (isset($dataLayanan['payload']) && is_array($dataLayanan['payload'])) {
+        $itemsLayanan = $dataLayanan['payload'];
+    } else {
+        echo '<div>Error: Format data API dokter tidak sesuai.</div>';
+        $itemsLayanan = [];
+    }
+}
+
 if (isset($_GET['id'])) {
     $id = $_GET['id'];
 
@@ -67,7 +86,6 @@ if (isset($_GET['id'])) {
     $data['kode_diagnosis'] = $data['kode_diagnosis'];
     $data['dokter'] = $data['pendaftaran_data']['dokter'];
     $data['id_diagnosa'] = $data['id'];
-    echo json_encode($data['id_diagnosa']);
 } else {
     echo "ID tidak tersedia.";
 }
@@ -89,7 +107,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $response = [];
 
     do {
-        if (empty($nama_pasien) || empty($dokter) ||  empty($tanggal) || empty($tanggal) || empty($total_harga) || empty($jenis_pembayaran) || empty($kode_diagnosis) || empty($jenis_layanan) || empty($jenis_pemeriksaan) || empty($waktu) ||  empty($total_harga)) {
+        if (empty($nama_pasien)) {
             $response['error'] = 'Please fill all the fields';
             echo json_encode($response);
             break;
@@ -206,19 +224,63 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                         <input type="text" name="dokter" placeholder="Type here" class="input input-bordered w-full" value="<?php echo htmlspecialchars($data['dokter']); ?>" required readonly />
                     </label>
 
-                    <div class="grid grid-cols-2 gap-4">
+                    <div class="grid grid-cols-2 gap-x-4">
                         <label class="form-control w-full">
                             <div class="label">
                                 <span class="label-text text-xl">Jenis Layanan</span>
                             </div>
                             <input type="text" name="jenis_layanan" placeholder="Type here" class="input input-bordered w-full" value="<?php echo htmlspecialchars($data['jenis_layanan']); ?>" required readonly />
                         </label>
+
                         <label class="form-control w-full">
                             <div class="label">
                                 <span class="label-text text-xl">Jenis Pemeriksaan</span>
                             </div>
                             <input type="text" name="jenis_pemeriksaan" placeholder="Type here" class="input input-bordered w-full" value="<?php echo htmlspecialchars($data['jenis_pemeriksaan']); ?>" required readonly />
                         </label>
+
+                        <label class="form-control w-full">
+                            <div class="label">
+                                <span class="label-text text-xl">Input Jenis Layanan</span>
+                            </div>
+                            <select id="total_harga" name="total_harga"
+                                class="input input-bordered w-full">
+                                <?php
+                                if (!empty($itemsLayanan)) {
+                                    foreach ($itemsLayanan as $layanan) {
+                                        if (isset($layanan['id_layanan']) && isset($layanan['nama_layanan'])) {
+                                            echo '<option value="' . htmlspecialchars($layanan['biaya_layanan']) . '">' . htmlspecialchars($layanan['nama_layanan']) . ' | ' . htmlspecialchars($layanan['biaya_layanan']) . '</option>';
+                                        } else {
+                                            echo '<option>Error: Data layanan tidak lengkap.</option>';
+                                        }
+                                    }
+                                } else {
+                                    echo '<option>Error: Data layanan tidak tersedia.</option>';
+                                }
+                                ?>
+                                <option value="0">Cover Asuransi</option>
+                            </select>
+                        </label>
+
+                        <label class="form-control w-full">
+                            <div class="label">
+                                <span class="label-text text-xl">Jenis Pembayaran</span>
+                            </div>
+                            <select id="jenis_pembayaran" name="jenis_pembayaran" class="input input-bordered w-full" onchange="updateTotalHarga()">
+                                <option value="Mandiri">Mandiri</option>
+                                <option value="BPJS">BPJS</option>
+                            </select>
+                        </label>
+                        <script>
+                            function updateTotalHarga() {
+                                var jenisPembayaran = document.getElementById('jenis_pembayaran').value;
+                                var totalHarga = document.getElementById('total_harga');
+
+                                if (jenisPembayaran === 'BPJS') {
+                                    totalHarga.value = '0';
+                                }
+                            }
+                        </script>
                     </div>
 
                     <div class="grid grid-cols-2 gap-4">
@@ -242,23 +304,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                             <span class="label-text text-xl">Waktu Bayar</span>
                         </div>
                         <input type="time" id="waktu" name="waktu" placeholder="Type here" class="input input-bordered w-full" required />
-                    </label>
-
-                    <label class="form-control w-full">
-                        <div class="label">
-                            <span class="label-text text-xl">Total Harga</span>
-                        </div>
-                        <input type="number" name="total_harga" placeholder="Type here" class="input input-bordered w-full" required />
-                    </label>
-
-                    <label class="form-control w-full">
-                        <div class="label">
-                            <span class="label-text text-xl">Jenis Pembayaran</span>
-                        </div>
-                        <select name="jenis_pembayaran" class="input input-bordered w-full">
-                            <option value="Mandiri">Mandiri</option>
-                            <option value="BPJS">BPJS</option>
-                        </select>
                     </label>
 
                     <div class="mt-4">
