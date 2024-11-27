@@ -11,7 +11,7 @@ services:
       - 3307:3306
 
   app:
-    image: hospital_billing
+    image: raihanm854/hospital_billing
     container_name: hospital_billing_web
     depends_on:
       - db
