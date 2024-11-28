@@ -1,7 +1,7 @@
 <?php
 include('../database/database.php');
 
-$apiUrlLayanan = "https://4dbh2ssn-3000.asse.devtunnels.ms/api/layanan";
+$apiUrlLayanan = "https://2hcmlwcq-3000.asse.devtunnels.ms/api/layanan";
 
 $responseLayanan = file_get_contents($apiUrlLayanan);
 
