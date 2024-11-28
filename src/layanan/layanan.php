@@ -1,3 +1,25 @@
+<?php
+include('../database/database.php');
+
+$apiUrlLayanan = "https://wabw.chasterise.fun/api/layanan";
+
+$responseLayanan = file_get_contents($apiUrlLayanan);
+
+if ($responseLayanan === false) {
+    echo '<div>Error: Tidak dapat mengakses API layanan.</div>';
+    $itemsLayanan = [];
+} else {
+
+    $dataLayanan = json_decode($responseLayanan, true);
+
+    if (isset($dataLayanan['payload']) && is_array($dataLayanan['payload'])) {
+        $itemsLayanan = $dataLayanan['payload'];
+    } else {
+        $itemsLayanan = [];
+    }
+}
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -49,38 +71,31 @@
                         <tr class="bg-blues2 text-black">
                             <th>No</th>
                             <th>Nama Layanan</th>
-                            <th>Harga</th>
-                            <th>Nama Dokter</th>
-                            <th class="text-center">Action</th>
+                            <th>Harga Layanan</th>
                         </tr>
                     </thead>
                     <tbody>
                         <?php
-                        include('../database/database.php');
-                        $sql = "SELECT l.id_layanan, l.nama_layanan, l.harga, d.nama AS nama_dokter
-                                    FROM layanan l JOIN dokter d ON l.id_dokter = d.id_dokter";
-                        $result = mysqli_query($conn, $sql);
-                        $no = 1;
-                        if (mysqli_num_rows($result) > 0) {
-                            while ($row = mysqli_fetch_assoc($result)) {
-                                echo '<tr>
-                                <th>' . $no . '</th>
-                                <td>' . $row['nama_layanan'] . '</td>
-                                <td>' . number_format($row['harga']) . '</td>
-                                <td>' . $row['nama_dokter'] . '</td>
-                                <td class="flex gap-x-4 justify-center">
-                                    <a href="layanan_edit.php?id=' . $row['id_layanan'] . '" class="btn bg-yellow hover:shadow-md hover:bg-yellow group">
-                                        <i class="bi bi-pencil-square  transition-all"></i>
-                                    </a>
-                                    <a onclick="return confirm(\'Are you sure you want to delete this room type?\');" href="layanan_delete.php?id=' . $row['id_layanan'] . '" class="btn bg-red hover:shadow-md hover:bg-red group">
-                                        <i class="bi bi-trash-fill  transition-all"></i>
-                                    </a>
-                                </td>
-                                </tr>';
-                                $no++;
+                        if (!empty($itemsLayanan)) {
+                            $no = 1;
+                            foreach ($itemsLayanan as $layanan) {
+                                if (isset($layanan['id_layanan']) && isset($layanan['nama_layanan'])) {
+                                    echo '
+                                    <tr>
+                                        <th>' . $no . '</th>
+                                        <td>' . $layanan['nama_layanan'] . '</td>
+                                        <td>' . number_format($layanan['biaya_layanan']) . '</td>
+                                    </tr>';
+                                    $no++;
+                                } else {
+                                    echo '<tr><td colspan="3">Error: Data layanan tidak lengkap.</td></tr>';
+                                }
                             }
+                        } else {
+                            echo '<tr><td colspan="3">Error: Data layanan tidak tersedia.</td></tr>';
                         }
                         ?>
+                      
                     </tbody>
                 </table>
             </div>

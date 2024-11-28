@@ -1,3 +1,17 @@
+<?php
+// URL endpoint API
+$apiDokterUrl = "https://rawat-jalan.pockethost.io/api/collections/dokter/records";
+
+// Mengambil data dari API
+$responseDokter = file_get_contents($apiDokterUrl);
+
+// Mengonversi JSON response menjadi array PHP
+$dataDokter = json_decode($responseDokter, true);
+
+// Menyesuaikan array data
+$items = $dataDokter['items'];
+
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -55,38 +69,23 @@
                             <th>Email</th>
                             <th>Alamat</th>
                             <th>Spesialis</th>
-                            <th class="text-center">Action</th>
                         </tr>
                     </thead>
                     <tbody>
                         <?php
-                        include('../database/database.php');
-                        $sql = "SELECT d.id_dokter, d.nama, d.jenis_kelamin, d.tanggal_lahir, d.no_telepon, d.email, d.alamat, d.spesialis
-                                    FROM dokter d ";
-                        $result = mysqli_query($conn, $sql);
                         $no = 1;
-                        if (mysqli_num_rows($result) > 0) {
-                            while ($row = mysqli_fetch_assoc($result)) {
-                                echo '<tr>
-                                <th>' . $no . '</th>
-                                <td>' . $row['nama'] . '</td>
-                                <td>' . $row['jenis_kelamin'] . '</td>
-                                <td>' . $row['tanggal_lahir'] . '</td>
-                                <td>' . $row['no_telepon'] . '</td>
-                                <td>' . $row['email'] . '</td>
-                                <td>' . $row['alamat'] . '</td>
-                                <td>' . $row['spesialis'] . '</td>
-                                <td class="flex gap-x-4 justify-center">
-                                    <a href="dokter_edit.php?id=' . $row['id_dokter'] . '" class="btn bg-yellow hover:shadow-md hover:bg-yellow group">
-                                        <i class="bi bi-pencil-square  transition-all"></i>
-                                    </a>
-                                    <a onclick="return confirm(\'Are you sure you want to delete this room type?\');" href="dokter_delete.php?id=' . $row['id_dokter'] . '" class="btn bg-red hover:shadow-md hover:bg-red group">
-                                        <i class="bi bi-trash-fill  transition-all"></i>
-                                    </a>
-                                </td>
-                                </tr>';
-                                $no++;
-                            }
+                        foreach ($items as $item) {
+                            echo '<tr>
+                                <td>' . $no . '</td>
+                                <td>' . $item['nama_dokter'] . '</td>
+                                <td>' . $item['jenis_kelamin'] . '</td>
+                                <td>' . $item['tanggal_lahir'] . '</td>
+                                <td>' . $item['no_telp'] . '</td>
+                                <td>' . $item['email'] . '</td>
+                                <td>' . $item['alamat'] . '</td>
+                                <td>' . $item['spesialisasi'] . '</td>
+                            </tr>';
+                            $no++;
                         }
                         ?>
                     </tbody>
