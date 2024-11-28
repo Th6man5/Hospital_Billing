@@ -1475,13 +1475,6 @@ html {
   margin-top: auto;
 }
 
-<<<<<<< HEAD
-.mb-10 {
-  margin-bottom: 2.5rem;
-}
-
-=======
->>>>>>> 65b16431c2fbf54db80c3e9fc9af6f2aba4990b6
 .flex {
   display: flex;
 }
@@ -1569,18 +1562,6 @@ html {
 
 .grid-cols-2 {
   grid-template-columns: repeat(2, minmax(0, 1fr));
-}
-
-.grid-cols-3 {
-  grid-template-columns: repeat(3, minmax(0, 1fr));
-}
-
-.grid-cols-5 {
-  grid-template-columns: repeat(5, minmax(0, 1fr));
-}
-
-.grid-cols-4 {
-  grid-template-columns: repeat(4, minmax(0, 1fr));
 }
 
 .items-center {
