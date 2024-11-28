@@ -1475,10 +1475,13 @@ html {
   margin-top: auto;
 }
 
+<<<<<<< HEAD
 .mb-10 {
   margin-bottom: 2.5rem;
 }
 
+=======
+>>>>>>> 65b16431c2fbf54db80c3e9fc9af6f2aba4990b6
 .flex {
   display: flex;
 }
