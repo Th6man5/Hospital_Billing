@@ -155,7 +155,7 @@
                 <h6 class="mb-5">Transaksi Terbaru</h6>
                 <?php
                 include('./database/database.php');
-                $sql = "SELECT * FROM transaksi JOIN pasien ON transaksi.id_pasien = pasien.id_pasien WHERE tanggal >= DATE_SUB(CURDATE(), INTERVAL 1 DAY) ORDER BY tanggal DESC, waktu DESC";
+                $sql = "SELECT * FROM transaksi_diag WHERE tanggal >= DATE_SUB(CURDATE(), INTERVAL 1 DAY) ORDER BY tanggal DESC, waktu DESC";
                 $result = $conn->query($sql);
 
                 if ($result->num_rows > 0) {
@@ -173,10 +173,10 @@
                     while ($row = $result->fetch_assoc()) {
                         echo "<tr>";
                         echo "<td>" . $row["id_transaksi"] . "</td>";
-                        echo "<td>" . $row["nama_lengkap"] . "</td>";
+                        echo "<td>" . $row["nama_pasien"] . "</td>";
                         echo "<td>" . $row["nama_layanan"] . "</td>";
                         echo "<td>" . $row["jenis_pembayaran"] . "</td>";
-                        echo "<td>" . number_format($row["biaya_layanan"]) . "</td>";
+                        echo "<td>" . number_format($row["total_harga"]) . "</td>";
                         echo "<td>" . $row["tanggal"] . "</td>";
                         echo "<td>" . $row["waktu"] . "</td>";
                         echo "</tr>";

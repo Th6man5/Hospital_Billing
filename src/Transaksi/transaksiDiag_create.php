@@ -1,12 +1,12 @@
 <?php
 include('../database/database.php');
 
-$apiUrlLayanan = "https://2hcmlwcq-3000.asse.devtunnels.ms/api/layanan";
+$apiUrlLayanan = "https://wabw.chasterise.fun/api/layanan";
 
 $responseLayanan = file_get_contents($apiUrlLayanan);
 
 if ($responseLayanan === false) {
-    echo '<div>Error: Tidak dapat mengakses API layanan. Pastikan URL API benar atau server aktif.</div>';
+    echo '<div>Error: Tidak dapat mengakses API layanan.</div>';
     $itemsLayanan = [];
 } else {
 
@@ -15,7 +15,6 @@ if ($responseLayanan === false) {
     if (isset($dataLayanan['payload']) && is_array($dataLayanan['payload'])) {
         $itemsLayanan = $dataLayanan['payload'];
     } else {
-        echo '<div>Error: Format data API dokter tidak sesuai.</div>';
         $itemsLayanan = [];
     }
 }
