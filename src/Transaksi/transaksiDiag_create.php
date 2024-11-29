@@ -24,15 +24,19 @@ if (isset($_GET['id'])) {
 
     // URL endpoint API
     $apiDiagnosaUrl = "https://rawat-jalan.pockethost.io/api/collections/diagnosa/records";
+    $apiJadwalUrl = "https://rawat-jalan.pockethost.io/api/collections/jadwal/records";
     $apiPendaftaranUrl = "https://rawat-jalan.pockethost.io/api/collections/pendaftaran/records";
     $apiPasienUrl = "https://rawat-jalan.pockethost.io/api/collections/pasien/records";
 
-    // Ambil data dari API
+    // Mengambil data dari API
     $responseDiagnosa = file_get_contents($apiDiagnosaUrl);
+    $responseJadwal = file_get_contents($apiJadwalUrl);
     $responsePendaftaran = file_get_contents($apiPendaftaranUrl);
     $responsePasien = file_get_contents($apiPasienUrl);
 
+    // Mengonversi JSON response menjadi array PHP
     $dataDiagnosa = json_decode($responseDiagnosa, true);
+    $dataJadwal = json_decode($responseJadwal, true);
     $dataPendaftaran = json_decode($responsePendaftaran, true);
     $dataPasien = json_decode($responsePasien, true);
 
@@ -49,29 +53,42 @@ if (isset($_GET['id'])) {
         }
 
         if ($data) {
-            // Cari data pendaftaran terkait diagnosa
-            $pendaftaranData = null;
-            foreach ($dataPendaftaran['items'] as $pendaftaran) {
-                if ($pendaftaran['id'] === $data['pendaftaran']) {
-                    $pendaftaranData = $pendaftaran;
+            // Cari data jadwal terkait diagnosa
+            $jadwalData = null;
+            foreach ($dataJadwal['items'] as $jadwal) {
+                if ($jadwal['id'] === $data['jadwal']) {
+                    $jadwalData = $jadwal;
                     break;
                 }
             }
 
-            // Cari data pasien terkait pendaftaran
-            if ($pendaftaranData) {
-                $pasienData = null;
-                foreach ($dataPasien['items'] as $pasien) {
-                    if ($pasien['id'] === $pendaftaranData['pasien']) {
-                        $pasienData = $pasien;
+            if ($jadwalData) {
+                $data['jadwal_data'] = $jadwalData;
+
+                // Cari data pendaftaran terkait jadwal
+                $pendaftaranData = null;
+                foreach ($dataPendaftaran['items'] as $pendaftaran) {
+                    if ($pendaftaran['id'] === $jadwalData['pendaftaran']) {
+                        $pendaftaranData = $pendaftaran;
                         break;
                     }
                 }
 
-                // Gabungkan data diagnosa, pendaftaran, dan pasien
-                $data['pendaftaran_data'] = $pendaftaranData;
-                if ($pasienData) {
-                    $data['pendaftaran_data']['pasien_data'] = $pasienData;
+                if ($pendaftaranData) {
+                    $data['jadwal_data']['pendaftaran_data'] = $pendaftaranData;
+
+                    // Cari data pasien terkait pendaftaran
+                    $pasienData = null;
+                    foreach ($dataPasien['items'] as $pasien) {
+                        if ($pasien['id'] === $pendaftaranData['pasien']) {
+                            $pasienData = $pasien;
+                            break;
+                        }
+                    }
+
+                    if ($pasienData) {
+                        $data['jadwal_data']['pendaftaran_data']['pasien_data'] = $pasienData;
+                    }
                 }
             }
         } else {
@@ -81,9 +98,9 @@ if (isset($_GET['id'])) {
         echo "Gagal mengambil data dari API Diagnosa.";
     }
 
-    $data['nama_lengkap'] = $data['pendaftaran_data']['pasien_data']['nama_lengkap'];
+    $data['nama_lengkap'] = $data['jadwal_data']['pendaftaran_data']['pasien_data']['nama_lengkap'] ?? 'Tidak Diketahui';
     $data['kode_diagnosis'] = $data['kode_diagnosis'];
-    $data['dokter'] = $data['pendaftaran_data']['dokter'];
+    $data['dokter'] = $data['jadwal_data']['pendaftaran_data']['dokter'] ?? 'Tidak Diketahui';
     $data['id_diagnosa'] = $data['id'];
 } else {
     echo "ID tidak tersedia.";
