@@ -1,45 +1,52 @@
 <?php
 // URL endpoint API
 $apiDiagnosaUrl = "https://rawat-jalan.pockethost.io/api/collections/diagnosa/records";
+$apiJadwalUrl = "https://rawat-jalan.pockethost.io/api/collections/jadwal/records";
 $apiPendaftaranUrl = "https://rawat-jalan.pockethost.io/api/collections/pendaftaran/records";
 $apiPasienUrl = "https://rawat-jalan.pockethost.io/api/collections/pasien/records";
 
 // Mengambil data dari API
 $responseDiagnosa = file_get_contents($apiDiagnosaUrl);
+$responseJadwal = file_get_contents($apiJadwalUrl);
 $responsePendaftaran = file_get_contents($apiPendaftaranUrl);
 $responsePasien = file_get_contents($apiPasienUrl);
 
 // Mengonversi JSON response menjadi array PHP
 $dataDiagnosa = json_decode($responseDiagnosa, true);
+$dataJadwal = json_decode($responseJadwal, true);
 $dataPendaftaran = json_decode($responsePendaftaran, true);
 $dataPasien = json_decode($responsePasien, true);
 
 // Menyesuaikan array data
 $diagnosa = $dataDiagnosa['items'];
+$jadwal = $dataJadwal['items'];
 $pendaftaran = $dataPendaftaran['items'];
 $pasien = $dataPasien['items'];
 
-// Menggabungkan data diagnosa dengan pendaftaran
-$combinedData = [];
-foreach ($diagnosa as $d) {
-    // Cari data pendaftaran terkait diagnosa
-    foreach ($pendaftaran as $p) {
-        if ($d['pendaftaran'] == $p['id']) {
-            $d['pendaftaran_data'] = $p;
+$jadwalById = array_column($jadwal, null, 'id');
+$pendaftaranById = array_column($pendaftaran, null, 'id');
+$pasienById = array_column($pasien, null, 'id');
 
-            // Cari data pasien terkait pendaftaran
-            foreach ($pasien as $pa) {
-                if ($p['pasien'] == $pa['id']) {
-                    $d['pendaftaran_data']['pasien_data'] = $pa;
-                    break;
-                }
-            }
-            break;
+$combinedData = [];
+
+foreach ($diagnosa as $d) {
+    $d['jadwal_data'] = $jadwalById[$d['jadwal']] ?? null;
+
+    if ($d['jadwal_data']) {
+        $d['jadwal_data']['pendaftaran_data'] = $pendaftaranById[$d['jadwal_data']['pendaftaran']] ?? null;
+
+        if ($d['jadwal_data']['pendaftaran_data']) {
+            $d['jadwal_data']['pendaftaran_data']['pasien_data'] = $pasienById[$d['jadwal_data']['pendaftaran_data']['pasien']] ?? null;
         }
     }
 
-    $combinedData[] = $d; // Tambahkan data gabungan ke array hasil
+    $combinedData[] = $d;
 }
+
+
+
+
+
 ?>
 
 <!DOCTYPE html>
@@ -124,10 +131,10 @@ foreach ($diagnosa as $d) {
 
                         $no = 1;
                         foreach ($combinedData as $data) {
-                            if (isset($data['pendaftaran_data']['pasien_data']) && is_array($data['pendaftaran_data']['pasien_data'])) {
+                            if (isset($data['jadwal_data']['pendaftaran_data']['pasien_data']) && is_array($data['jadwal_data']['pendaftaran_data']['pasien_data'])) {
                                 $id = $data['id'];
-                                $namaPasien = $data['pendaftaran_data']['pasien_data']['nama_lengkap'];
-                                $idDokter = $data['pendaftaran_data']['dokter'];
+                                $namaPasien = $data['jadwal_data']['pendaftaran_data']['pasien_data']['nama_lengkap'];
+                                $idDokter = $data['jadwal_data']['pendaftaran_data']['dokter'];
                                 $jenisLayanan = $data['jenis_layanan'];
                                 $jenisPemeriksaan = $data['jenis_pemeriksaan'];
                                 $kodeDiag = $data['kode_diagnosis'];
