@@ -40,7 +40,6 @@
         <div class="p-4">
             <div class="flex items-center justify-between">
                 <h1>Daftar Layanan</h1>
-                <a href="layanan_create.php" class="bg-blues opacity-95 text-black btn hover:bg-blues hover:opacity-100">Tambah Layanan</a>
             </div>
             <div class="overflow-x-auto shadow-lg">
                 <table class="table text-center border border-grey">
