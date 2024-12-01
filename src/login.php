@@ -52,7 +52,7 @@
             </form>
             <!-- Footer -->
             <p class="text-center text-sm text-gray-500 mt-6">
-                &copy; 2024 Sistem Admin. Semua Hak Dilindungi.
+                
             </p>
         </div>
         <!-- Right Column: Image -->
@@ -61,10 +61,6 @@
                  alt="Login Illustration" 
                  class="h-full w-full object-cover">
             <div class="absolute inset-0 bg-black bg-opacity-30"></div>
-            <div class="absolute bottom-4 left-4 text-white">
-                <h3 class="text-2xl font-semibold">Selamat Datang!</h3>
-                <p class="text-sm">Masuk ke akun admin Anda untuk mengelola sistem dengan mudah.</p>
-            </div>
         </div>
     </div>
 </body>
