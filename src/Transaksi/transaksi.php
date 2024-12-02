@@ -10,7 +10,7 @@ $responseDiagnosa = file_get_contents($apiDiagnosaUrl);
 $responseJadwal = file_get_contents($apiJadwalUrl);
 $responsePendaftaran = file_get_contents($apiPendaftaranUrl);
 $responsePasien = file_get_contents($apiPasienUrl);
-
+    
 // Mengonversi JSON response menjadi array PHP
 $dataDiagnosa = json_decode($responseDiagnosa, true);
 $dataJadwal = json_decode($responseJadwal, true);
@@ -197,7 +197,6 @@ foreach ($diagnosa as $d) {
                                     <td>' . $row['tanggal'] . '</td>
                                     <td>' . $row['waktu'] . '</td>
                                     <td>' . $row['total_harga'] . '</td>
-                                   
                                 </tr>';
                                 $no++;
                             }
