@@ -28,6 +28,12 @@ SET time_zone = "+00:00";
 -- Table structure for table `dokter`
 --
 
+CREATE TABLE user (
+    `id` INT AUTO_INCREMENT PRIMARY KEY, 
+    `username` VARCHAR(50) NOT NULL UNIQUE,     
+	`password` VARCHAR(255) NOT NULL, 
+);
+
 CREATE TABLE `dokter` (
   `id_dokter` int(11) NOT NULL,
   `nama` varchar(100) NOT NULL,
