@@ -1,23 +1,15 @@
 <?php
 include('../database/database.php');
 
-$apiUrlLayanan = "https://wabw.chasterise.fun/api/layanan";
 
-$responseLayanan = file_get_contents($apiUrlLayanan);
+$apiUrl = "https://wabw.chasterise.fun/api/layanan";
 
-if ($responseLayanan === false) {
-    echo '<div>Error: Tidak dapat mengakses API layanan.</div>';
-    $itemsLayanan = [];
-} else {
+// Mengambil data dari API pasien
+$response = file_get_contents($apiUrl);
 
-    $dataLayanan = json_decode($responseLayanan, true);
-
-    if (isset($dataLayanan['payload']) && is_array($dataLayanan['payload'])) {
-        $itemsLayanan = $dataLayanan['payload'];
-    } else {
-        $itemsLayanan = [];
-    }
-}
+// Mengonversi JSON response menjadi array PHP
+$data = json_decode($response, true);
+$items = $data['payload'];
 ?>
 
 <!DOCTYPE html>
@@ -75,26 +67,18 @@ if ($responseLayanan === false) {
                     </thead>
                     <tbody>
                         <?php
-                        if (!empty($itemsLayanan)) {
-                            $no = 1;
-                            foreach ($itemsLayanan as $layanan) {
-                                if (isset($layanan['id_layanan']) && isset($layanan['nama_layanan'])) {
-                                    echo '
+                        $no = 1;
+                        foreach ($items as $item) {
+                            echo '
                                     <tr>
                                         <th>' . $no . '</th>
-                                        <td>' . $layanan['nama_layanan'] . '</td>
-                                        <td>' . number_format($layanan['biaya_layanan']) . '</td>
+                                        <td>' . $item['nama_layanan'] . '</td>
+                                        <td>' . number_format($item['biaya_layanan']) . '</td>
                                     </tr>';
-                                    $no++;
-                                } else {
-                                    echo '<tr><td colspan="3">Error: Data layanan tidak lengkap.</td></tr>';
-                                }
-                            }
-                        } else {
-                            echo '<tr><td colspan="3">Error: Data layanan tidak tersedia.</td></tr>';
+                            $no++;
                         }
                         ?>
-                      
+
                     </tbody>
                 </table>
             </div>

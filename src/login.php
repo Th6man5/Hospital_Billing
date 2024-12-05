@@ -19,7 +19,7 @@
                 </div>
             <?php endif; ?>
             <!-- Form -->
-            <form action="login_process.php" method="POST" class="space-y-6">
+            <form method="POST" class="space-y-6">
                 <!-- Username -->
                 <div>
                     <label for="username" class="block text-sm font-medium text-gray-700">Username</label>
